@@ -1,0 +1,29 @@
+import { Injectable } from '@angular/core';
+import { Post } from '../app.component';
+
+@Injectable({
+  providedIn: 'root'
+})
+
+export class DataService {
+  public accessToken = '';
+  public error = '';
+  public dane: Post;
+  public lng = 0;
+  public lat = 0;
+  public newEventId: number;
+  constructor() { }
+
+
+  checkSyntax(data: Post): string { // Sprawdzanie czy formularz eventu zostal poprawnie uzupelniony.
+    if (data.geographicCoordinate.latitude === 0 && data.geographicCoordinate.longitude === 0) {
+      return 'Pick cords on map...';
+    } else if (data.name.length < 5) {
+      return 'Name is to short...';
+    } else if (data.description.length < 50) {
+      return 'Desc. min. 50...';
+    } else if (data.place.length < 5) {
+      return 'Place is to short...';
+    } else { return ''; }
+  }
+}

@@ -1,0 +1,9 @@
+<div *ngIf=tf.navigation_c_show_buttons>
+  <button (click)="add_n_button()">Add new event</button>
+  <button (click)="edit_button()">Edit event</button>
+  <button>More</button>
+</div>
+<div>
+  <app-add-new-event *ngIf=tf.navigation_c_add></app-add-new-event>
+  <app-edit *ngIf=tf.eddit_show1></app-edit>
+</div>

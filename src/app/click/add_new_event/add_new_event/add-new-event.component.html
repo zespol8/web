@@ -1,0 +1,28 @@
+<div>
+  <div *ngIf="tf.add_point_show2" class="container">
+    <div>
+      Dodaj nowy event:
+    </div>
+    <div>
+      <input [(ngModel)]="data.name" placeholder="Name">
+    </div>
+    <div>
+      <textarea maxlength="60" [(ngModel)]="data.description" placeholder="Description"></textarea>
+    </div>
+    <div>
+      <input [(ngModel)]="data.place" placeholder="Place">
+    </div>
+      <div> 
+        {{this.cords.error}}
+      </div>
+    <button (click)="onButtonClick(1)">Add</button>
+    <button (click)="onButtonClick(2)">Back</button>
+  </div>
+  <div *ngIf="tf.add_point_show1" class="container">
+    New event: <br>
+    Name: {{data.name}}<br>
+    Description: {{data.description}}<br>
+    Place: {{data.place}}<br>
+    <app-points></app-points>
+  </div>
+</div>

@@ -1,0 +1,25 @@
+<div>
+  Dodaje punty eventu numer {{data.newEventId}}:
+  <div>
+    <input [(ngModel)]="point.name" placeholder="Point Name">
+  </div>
+  <div>
+    <textarea [(ngModel)]="point.description" placeholder="Point Description"></textarea>
+  </div>
+  <div>
+    <input [(ngModel)]="point.place" placeholder="Point Place">
+  </div>
+  <div>
+    <button (click)="addPointToEvent()">Add point</button>
+    {{error}}
+  </div>
+  <div>
+    <li *ngFor="let i of pointList">
+      {{i.name}} <button (click)="deletePointFromList(i)">Delete</button>
+    </li>
+  </div>
+</div>
+<div>
+  <br>
+  <button (click)="addPointEventToServer()">Add to server</button>
+</div>
