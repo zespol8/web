@@ -11,7 +11,9 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class EditComponent implements OnInit {
   eventList: Array<Post> = [];
+  dateNew: Date;
   constructor(private tf: TrueFalseService, private http: HttpService, private data: DataService) {
+    this.dateNew = new Date(123456789);
   }
 
   lookButton() {
@@ -26,6 +28,7 @@ export class EditComponent implements OnInit {
   backButton() {
     this.tf.navigation_c_show_buttons = true;
     this.tf.eddit_show1 = false;
+    console.log(this.dateNew.getDay() + ' ' + this.dateNew.getFullYear() + ' ' + this.dateNew.getHours());
   }
 
   ngOnInit() {
