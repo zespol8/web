@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Post } from '../app.component';
+import { Post, HttpErrors } from '../app.component';
 import { Observable } from 'rxjs/internal/Observable';
 
 @Injectable()
 export class HttpService { // globalny servis do komunikacji z serverem
-
+  errors: HttpErrors = {};
   constructor(private http: HttpClient) { // Konstruktor tworzy obiekt http i obiekt login
+    this.errors.status = 0;
   }
 
   getPointsUser(): Observable<Post> {
@@ -29,16 +30,24 @@ export class HttpService { // globalny servis do komunikacji z serverem
     return this.http.post<Post>('https://team8-server.herokuapp.com/admin/point?accessToken=' + accessToken + '', log);
   }
 
-  // JESZCZE NIE UZYWANE
-  getPointsAdmin(): Observable<Post> {
-    return this.http.get<Post>('http://team8-server.herokuapp.com/admin/event/1');
+  postEventDelete(id: number, accessToken: string): Observable<Post> {
+    // Usuwanie Eventu
+    const post: Post = {};
+    return this.http.post<Post>('https://team8-server.herokuapp.com/admin/event/' + id + '/delete?accessToken=' + accessToken, null);
   }
 
   getEventsAdmin(accessToken: string): Observable<Array<Post>> {
+    // Pobieranie eventów admina
     return this.http.get<Array<Post>>('http://team8-server.herokuapp.com/admin/events?accessToken=' + accessToken);
   }
 
-  isActive(accessToken: string): Observable<Post> { // Metotda sprawdza czy jestes aktywny
-    return this.http.get('https://team8-server.herokuapp.com/admin/active?accessToken=' + accessToken );
+  getEventsPointsAdmin(accessToken: string, id: number): Observable<Array<Post>> {
+    // Pobieranie punktów eventu o danym id
+    return this.http.get<Array<Post>>('http://team8-server.herokuapp.com/admin/' + id + '/points?accessToken=' + accessToken);
+  }
+
+  isActive(accessToken: string): Observable<Post> {
+    // Metotda sprawdza czy jestes aktywny
+    return this.http.get<Post>('https://team8-server.herokuapp.com/admin/active?accessToken=' + accessToken);
   }
 }

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
 import { Post } from 'src/app/app.component';
 import { HttpService } from 'src/app/services/http.service';
-import { post } from 'selenium-webdriver/http';
 import { TrueFalseService } from 'src/app/services/true-false.service';
 
 @Component({
@@ -27,6 +26,7 @@ export class PointsComponent implements OnInit {
     if (this.error === '') {
       this.pointList.push(this.point);
       this.resetPoint();
+      this.cords.clearCords();
     }
   }
   deletePointFromList(point1: Post) {

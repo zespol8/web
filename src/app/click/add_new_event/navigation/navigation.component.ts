@@ -10,14 +10,15 @@ export class NavigationComponent implements OnInit {
 
   constructor(private tf: TrueFalseService) { }
 
-  add_n_button() {
+  add_n_button() { // Przycisk do dodawania eventow wraz z punktami
     this.tf.navigation_c_add = true;
     this.tf.navigation_c_show_buttons = false;
     this.tf.add_point_show2 = true;
   }
-  edit_button() { // Dorobienie edycji
+  edit_button() { // Przycisk do edycji eventow
     this.tf.navigation_c_show_buttons = false;
-    this.tf.eddit_show1 = true;
+    this.tf.eddit_nav_show = true;
+    this.tf.edit_event_show1 = true;
   }
 
   ngOnInit() {

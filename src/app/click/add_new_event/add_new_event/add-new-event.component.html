@@ -1,5 +1,5 @@
 <div>
-  <div *ngIf="tf.add_point_show2" class="container">
+  <div *ngIf="tf.add_point_show2">
     <div>
       Dodaj nowy event:
     </div>
@@ -18,7 +18,7 @@
     <button (click)="onButtonClick(1)">Add</button>
     <button (click)="onButtonClick(2)">Back</button>
   </div>
-  <div *ngIf="tf.add_point_show1" class="container">
+  <div *ngIf="tf.add_point_show1">
     New event: <br>
     Name: {{data.name}}<br>
     Description: {{data.description}}<br>

@@ -1,12 +1,11 @@
-<li *ngFor="let i of eventList">
-    {{i}}
-</li>
 <button (click)="lookButton()">Check</button>
 <button (click)="backButton()">Back</button>
 <div>
-    <div *ngIf="this.tf.eddit_show2">
+    <div>
         <li *ngFor="let i of eventList">
-            {{this.i.name}}
+            {{this.i.name}} {{this.i.id}}
+            <button (click)="editEvent(this.i.id)">Edit</button>
+            <button (click)="deleteEvent(this.i.id)">Delete</button>
         </li>
     </div>
 </div>

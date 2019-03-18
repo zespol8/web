@@ -14,4 +14,8 @@ export class TrueFalseService {
   add_point_show2 = true;
   eddit_show1 = false;
   eddit_show2 = false;
+
+  eddit_nav_show = false;
+  edit_event_show1 = false;
+  edit_event_show2 = false;
 }

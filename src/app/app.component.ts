@@ -14,13 +14,15 @@ export class AppComponent {
 
   isActive() {
     const accessToken = this.acces.accessToken;
-    this.http.isActive(accessToken).subscribe(i => {
-        console.log('i.statusText');
-        console.log(i);
-        console.log('i.statusText');
-      });
+    this.http.isActive(accessToken).subscribe(i => { },
+      error => {
+        this.http.errors = error;
+        console.log('HttpError status = ' + this.http.errors.status);
+      }
+    );
   }
 }
+
 export interface Post {
   email?: string;
   password?: string;
@@ -43,11 +45,14 @@ export interface Post {
 
   status?: number;
   statusText?: string;
+  url?: string;
 }
 export interface Cords {
   lng?: number;
   lat?: number;
 }
 
-
-
+export interface HttpErrors {
+  error?: string;
+  status?: number;
+}

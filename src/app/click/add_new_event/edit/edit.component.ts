@@ -11,24 +11,38 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class EditComponent implements OnInit {
   eventList: Array<Post> = [];
-  dateNew: Date;
+  pointList: Array<Post> = [];
+  accesToken = this.data.accessToken;
   constructor(private tf: TrueFalseService, private http: HttpService, private data: DataService) {
-    this.dateNew = new Date(123456789);
   }
 
   lookButton() {
-    const accesToken = this.data.accessToken;
-    this.http.getEventsAdmin(accesToken).subscribe(i => {
+    console.log('Nowa lista');
+    this.http.getEventsAdmin(this.accesToken).subscribe(i => {
       this.eventList = i;
     });
-    console.log(this.eventList);
-    this.tf.eddit_show2 = true;
+  }
+
+  deleteEvent(id: number) {
+    this.http.postEventDelete(id, this.accesToken).subscribe(i => {
+      console.log(i);
+    });
+    setTimeout(() => this.lookButton(), 2000); // Poprawić timeout czekania na nowa liste.
+  }
+
+  editEvent(id: number): void {
+    this.http.getEventsPointsAdmin(this.accesToken, id).subscribe(i => {
+      this.pointList = i;
+      this.tf.edit_event_show2 = true;
+      this.tf.edit_event_show1 = false;
+    });
   }
 
   backButton() {
     this.tf.navigation_c_show_buttons = true;
-    this.tf.eddit_show1 = false;
-    console.log(this.dateNew.getDay() + ' ' + this.dateNew.getFullYear() + ' ' + this.dateNew.getHours());
+    this.tf.eddit_nav_show = false;
+    this.tf.edit_event_show1 = false;
+    this.tf.edit_event_show2 = false;
   }
 
   ngOnInit() {

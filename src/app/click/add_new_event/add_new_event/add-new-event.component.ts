@@ -25,8 +25,7 @@ export class AddNewEventComponent implements OnInit {
         this.http.postAddEventAdmin(this.data, accessToken).subscribe(i => {
           this.cords.newEventId = i.newEventId;
         });
-        this.cords.lat = 0;
-        this.cords.lng = 0;
+        this.cords.clearCords();
         this.tf.add_point_show1 = true;
         this.tf.add_point_show2 = false;
       }

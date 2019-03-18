@@ -1,6 +1,7 @@
-<div class="container">
+<div>
     <app-map *ngIf=tf.map_c_show id="map"> </app-map>
-    <app-click class="container"></app-click>
-    <button class="button1" (click)="isActive()">Czy aktywny</button>
+    <app-click></app-click>
+    <button class="button1" (click)="isActive()">Czy aktywny</button> <br>
+    {{this.http.errors.status}}
 </div>
 
