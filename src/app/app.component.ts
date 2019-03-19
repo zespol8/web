@@ -17,6 +17,8 @@ export class AppComponent {
     this.http.isActive(accessToken).subscribe(i => { },
       error => {
         this.http.errors = error;
+        console.log(error);
+        console.log(this.http.errors.error);
         console.log('HttpError status = ' + this.http.errors.status);
       }
     );
@@ -27,6 +29,10 @@ export interface Post {
   email?: string;
   password?: string;
   accessToken?: string;
+  firstName?: string;
+  lastName?: string;
+  companyName?: string;
+
 
   id?: number;
   name?: string;

@@ -1,0 +1,10 @@
+<button (click)="registerButton()">Register</button>
+
+<div *ngIf="tf.register_show2">
+  <input placeholder="Email" [(ngModel)]="this.dane.email"> {{this.dane.email}}<br>
+  <input placeholder="Password" [(ngModel)]="this.dane.password"><br>
+  <input placeholder="First name" [(ngModel)]="this.dane.firstName"><br>
+  <input placeholder="Last name" [(ngModel)]="this.dane.lastName"><br>
+  <input placeholder="Company" [(ngModel)]="this.danecompanyName"><br>
+  <button (click)="dodaj()">Add admin</button>
+</div>

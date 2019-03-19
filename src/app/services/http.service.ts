@@ -20,6 +20,11 @@ export class HttpService { // globalny servis do komunikacji z serverem
     return this.http.post<Post>('https://team8-server.herokuapp.com/admin/login', log);
   }
 
+  postRegisterAdmin(log: Post): Observable<Post> {
+    // Logowanie do servera przu uzyciu interfejsu Login zawierajacej haslo i emai, powinno zwrocic accessToken
+    return this.http.post<Post>('https://team8-server.herokuapp.com/admin/register', log);
+  }
+
   postAddEventAdmin(log: Post, accessToken: string): Observable<Post> {
     // Dodawanie eventu
     return this.http.post<Post>('https://team8-server.herokuapp.com/admin/event?accessToken=' + accessToken, log);

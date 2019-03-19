@@ -7,8 +7,12 @@ import { DataService } from '../services/data.service';
   styleUrls: ['./map.component.css']
 })
 export class MapComponent {
+
   lng: number;
   lat: number;
+  zoom = 12;
+  inputValue = '';
+
   constructor(private cords: DataService) {
     this.lng = 18.598043358450923;
     this.lat = 53.01371393719378;

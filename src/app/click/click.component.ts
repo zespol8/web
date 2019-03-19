@@ -18,7 +18,6 @@ export class ClickComponent implements OnInit {
     this.tf.click_c_show2 = false;
   }
   loginButton() { // Przycisk do logowania
-
     const log: Post = ({
       email: 'g@gmail.com',
       password: '2a1218f8f9e392fe6284a3790094fff7',

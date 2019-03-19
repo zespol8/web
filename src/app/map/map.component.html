@@ -1,3 +1,7 @@
 <div class="map">
-    <agm-map [longitude]="lng" [latitude]="lat" (mapClick)="onChoseLocation($event)"> </agm-map>
+    <agm-map [longitude]="lng" [latitude]="lat" (mapClick)="onChoseLocation($event)" [zoom]="zoom">
+            <agm-marker [latitude]="lat" [longitude]="lng">
+            </agm-marker>
+    </agm-map>
+    <input [(ngModel)]="inputValue" placeholder="search...">
 </div>

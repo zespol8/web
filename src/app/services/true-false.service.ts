@@ -18,4 +18,8 @@ export class TrueFalseService {
   eddit_nav_show = false;
   edit_event_show1 = false;
   edit_event_show2 = false;
+
+  login_show = true;
+  register_show1 = true;
+  register_show2 = false;
 }

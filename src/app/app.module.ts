@@ -16,6 +16,8 @@ import { EditComponent } from './click/add_new_event/edit/edit.component';
 import { PointsComponent } from './click/add_new_event/add_new_event/points/points.component';
 import { EditEventComponent } from './click/add_new_event/edit/edit-event/edit-event.component';
 import { EditNavComponent } from './click/add_new_event/edit/edit-nav/edit-nav.component';
+import { LoginComponent } from './click/login/login.component';
+import { RegisterComponent } from './click/register/register.component';
 
 
 @NgModule({
@@ -29,6 +31,8 @@ import { EditNavComponent } from './click/add_new_event/edit/edit-nav/edit-nav.c
     PointsComponent,
     EditEventComponent,
     EditNavComponent,
+    LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
