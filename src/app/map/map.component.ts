@@ -7,7 +7,6 @@ import { DataService } from '../services/data.service';
   styleUrls: ['./map.component.css']
 })
 export class MapComponent {
-
   lng: number;
   lat: number;
   zoom = 12;
@@ -22,6 +21,7 @@ export class MapComponent {
     this.lat = event.coords.lat;
     this.cords.lng = this.lng;
     this.cords.lat = this.lat;
-    console.log('Lng: ' + this.cords.lng + ' Lat: ' + this.cords.lat);
+    console.log('onMapClick Lng: ' + this.cords.lng + ' Lat: ' + this.cords.lat);
   }
+
 }

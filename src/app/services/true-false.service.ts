@@ -22,4 +22,9 @@ export class TrueFalseService {
   login_show = true;
   register_show1 = true;
   register_show2 = false;
+
+  /// app-edit-event
+  edit_picked_event = false;
+  edit_picked_event_points = false;
+  edit_one_point = false;
 }

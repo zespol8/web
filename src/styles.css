@@ -24,9 +24,6 @@ li {
     list-style-type: square;
 }
 
-.map {
-    padding: 10px;
-}
 body {
     position: relative;
     background-color: whitesmoke;

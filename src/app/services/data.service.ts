@@ -21,7 +21,7 @@ export class DataService {
     } else if (data.name.length < 5) {
       return 'Name is to short...';
     } else if (data.description.length < 10) {
-      return 'Desc. min. 50...';
+      return 'Desc. min. 10...';
     } else if (data.place.length < 5) {
       return 'Place is to short...';
     } else { return ''; }

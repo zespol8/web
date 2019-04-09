@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TrueFalseService } from 'src/app/services/true-false.service';
 import { Post } from 'src/app/app.component';
 import { HttpService } from 'src/app/services/http.service';
@@ -10,6 +10,7 @@ import { DataService } from 'src/app/services/data.service';
   styleUrls: ['./edit.component.css']
 })
 export class EditComponent implements OnInit {
+
   eventList: Array<Post> = [];
   pointList: Array<Post> = [];
   accesToken = this.data.accessToken;
@@ -31,11 +32,10 @@ export class EditComponent implements OnInit {
   }
 
   editEvent(id: number): void {
-    this.http.getEventsPointsAdmin(this.accesToken, id).subscribe(i => {
-      this.pointList = i;
-      this.tf.edit_event_show2 = true;
-      this.tf.edit_event_show1 = false;
-    });
+    this.data.newEventId = id;
+    this.tf.edit_event_show2 = true;
+    this.tf.edit_event_show1 = false;
+    this.tf.edit_picked_event = true;
   }
 
   backButton() {
@@ -46,6 +46,9 @@ export class EditComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('Nowa lista');
+    this.http.getEventsAdmin(this.accesToken).subscribe(i => {
+      this.eventList = i;
+    });
   }
-
 }

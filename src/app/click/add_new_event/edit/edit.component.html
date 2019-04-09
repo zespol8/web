@@ -1,8 +1,6 @@
-<button (click)="lookButton()">Check</button>
-<button (click)="backButton()">Back</button>
 <div>
     <div>
-        This is list of your events: <br>
+        Lista twoich eventów: <br>
         <li *ngFor="let i of eventList">
             {{this.i.name}}, {{this.i.id}}
             <button (click)="editEvent(this.i.id)">Edit</button>
@@ -10,3 +8,6 @@
         </li>
     </div>
 </div>
+
+<br>
+<button (click)="backButton()">Back</button>

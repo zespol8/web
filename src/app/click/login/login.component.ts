@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   log: Post = {};
   error = '';
   constructor(private data: DataService, private http: HttpService, private tf: TrueFalseService) {
-    this.log.email = 'g@gmail.com';
+    this.log.email = 'gruszkojados@gmail.com';
     this.log.password = 'razdwatrzy12';
   }
 

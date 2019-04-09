@@ -40,7 +40,7 @@ import { RegisterComponent } from './click/register/register.component';
     HttpClientModule,
     FormsModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyBfdC85nv1ggTT8Bth4YKBERWyLYhWHdhU' // Klucz do google maps
+      apiKey: 'AIzaSyDTJaL1N7hFGC2MrUwhHbp_Mx29ecmT3nk' // Klucz do google maps
     })
   ],
   providers: [HttpService, DataService, TrueFalseService],
