@@ -10,7 +10,7 @@ import { HttpService } from 'src/app/services/http.service';
 })
 export class RegisterComponent implements OnInit {
   dane: Post = {};
-  constructor(private tf: TrueFalseService, private http: HttpService) {
+  constructor(public tf: TrueFalseService, private http: HttpService) {
   }
 
   ngOnInit() {

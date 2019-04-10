@@ -8,7 +8,7 @@ import { TrueFalseService } from 'src/app/services/true-false.service';
 })
 export class EditNavComponent implements OnInit {
 
-  constructor(private tf: TrueFalseService) { }
+  constructor(public tf: TrueFalseService) { }
 
   ngOnInit() {
   }

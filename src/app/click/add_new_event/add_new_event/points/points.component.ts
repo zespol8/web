@@ -13,7 +13,7 @@ export class PointsComponent implements OnInit {
   point: Post;
   pointList: Array<Post> = [];
   error: string;
-  constructor(private data: DataService, private cords: DataService, private http: HttpService, private tf: TrueFalseService) {
+  constructor(public data: DataService, private cords: DataService, private http: HttpService, public tf: TrueFalseService) {
     this.resetPoint();
     this.error = '';
   }

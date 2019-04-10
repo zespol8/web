@@ -15,7 +15,7 @@ export class EditEventComponent implements OnInit {
   onePoint: Post = {};
   pointList: Array<Post> = [];
   nr: number;
-  constructor(private tf: TrueFalseService, private data: DataService, private http: HttpService) { }
+  constructor(public tf: TrueFalseService, private data: DataService, private http: HttpService) { }
 
   ngOnInit() {
     this.http.getEventAdminById(this.data.accessToken, this.data.newEventId).subscribe(i => {

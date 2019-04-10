@@ -12,7 +12,7 @@ import { TrueFalseService } from 'src/app/services/true-false.service';
 export class AddNewEventComponent implements OnInit {
   data: Post = ({name: '', description: '', place: '', geographicCoordinate: {}, endDate: 1, startDate: 1 });
 
-  constructor(private cords: DataService, private http: HttpService, private tf: TrueFalseService) { }
+  constructor(private cords: DataService, private http: HttpService, public tf: TrueFalseService) { }
   ngOnInit() {
   }
   onButtonClick(x): void {

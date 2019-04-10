@@ -8,7 +8,7 @@ import { TrueFalseService } from 'src/app/services/true-false.service';
 })
 export class NavigationComponent implements OnInit {
 
-  constructor(private tf: TrueFalseService) { }
+  constructor(public tf: TrueFalseService) { }
 
   add_n_button() { // Przycisk do dodawania eventow wraz z punktami
     this.tf.navigation_c_add = true;

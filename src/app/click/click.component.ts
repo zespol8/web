@@ -13,7 +13,7 @@ export class ClickComponent implements OnInit {
   show1: boolean;
   show2: boolean;
 
-  constructor(private http: HttpService, public accessToken: DataService, private tf: TrueFalseService) {
+  constructor(private http: HttpService, public accessToken: DataService, public tf: TrueFalseService) {
     this.tf.click_c_show1 = true;
     this.tf.click_c_show2 = false;
   }

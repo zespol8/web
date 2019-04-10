@@ -10,7 +10,7 @@ import { TrueFalseService } from './services/true-false.service';
 })
 export class AppComponent {
 
-  constructor(private http: HttpService, private acces: DataService, private tf: TrueFalseService) { }
+  constructor(public http: HttpService, private acces: DataService, public tf: TrueFalseService) { }
 
   isActive() {
     const accessToken = this.acces.accessToken;

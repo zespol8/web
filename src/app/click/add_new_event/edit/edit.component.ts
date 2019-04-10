@@ -14,7 +14,7 @@ export class EditComponent implements OnInit {
   eventList: Array<Post> = [];
   pointList: Array<Post> = [];
   accesToken = this.data.accessToken;
-  constructor(private tf: TrueFalseService, private http: HttpService, private data: DataService) {
+  constructor(public tf: TrueFalseService, private http: HttpService, private data: DataService) {
   }
 
   lookButton() {
