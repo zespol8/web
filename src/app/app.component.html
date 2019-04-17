@@ -1,10 +1,11 @@
 <div>
     <app-map *ngIf=tf.map_c_show id="map"> </app-map>
     <app-click></app-click>
-
+    <br><br><br><br><br><br><br><br><br><br>
     <div class="activeButton">
-        <button class="button1" (click)="isActive()">Czy aktywny</button> <br>
-        {{this.http.errors.status}}
+        <button class="button1" (click)="isActive()">Czy aktywny</button>
+        {{this.http.errors.status}} <br>
+        <app-logout *ngIf=tf.logoutButtonShow></app-logout>
     </div>
     
 </div>

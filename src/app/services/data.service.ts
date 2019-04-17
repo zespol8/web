@@ -27,8 +27,31 @@ export class DataService {
     } else { return ''; }
   }
 
+  checkLoginError(errorCode: number): string {
+    if (errorCode === 200) {
+      return '';
+    } else if (errorCode === 401) {
+      return 'Unauthorized 401';
+    } else if (errorCode === 403) {
+      return 'Forbidden 403';
+    } else if (errorCode === 404) {
+      return 'Not Found 404';
+    } else if (errorCode === 406) {
+      return 'Not Found 406';
+    } else {
+      return 'Server error! Try again.';
+    }
+  }
+
   clearCords(): void { // Czyszczenie danych lng i lat podczasdodawania kolejnych punktów
     this.lat = 0;
     this.lng = 0;
+  }
+
+  resetData(): Post {
+    return {
+      name: '', description: '', place: '', geographicCoordinate: { latitude: 0, longitude: 0 },
+      endDate: 0, startDate: 0
+    };
   }
 }

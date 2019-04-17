@@ -25,27 +25,48 @@
         <button (click)="editPoint(i.id)">Edit</button>
         <button (click)="deletePoint(i.id)">Delete</button>
     </li>
+    <button (click)="addNewPointButton()">Add new</button>
+</div>
+
+<div *ngIf="this.tf.edit_picked_event_add_new_point">
+    <div>
+        Dodajesz nowy punkt do eventu {{this.event.id}}
+    </div>
+    <div>
+        <input [(ngModel)]="this.onePoint.name" placeholder="Name">
+    </div>
+    <div>
+        <textarea maxlength="60" [(ngModel)]="this.onePoint.description" placeholder="Description"></textarea>
+    </div>
+    <div>
+        <input [(ngModel)]="this.onePoint.place" placeholder="Place">
+    </div>
+    <div>
+        {{this.data.error}}
+    </div>
+    <button (click)="addNewPoint()">Dodaj</button>
+    <button (click)="cancelEditPoint()">Wróć</button>
 </div>
 
 <div *ngIf=this.tf.edit_one_point>
-        <div>
-            Edytujesz punkt {{this.nr}}: <br>
-        </div>
-        <div>
-            <input [(ngModel)]="this.onePoint.name" placeholder="Name">
-        </div>
-        <div>
-            <textarea maxlength="60" [(ngModel)]="this.onePoint.description" placeholder="Description"></textarea>
-        </div>
-        <div>
-            <input [(ngModel)]="this.onePoint.place" placeholder="Place">
-        </div>
-        <div>
-            {{this.data.error}}
-        </div>
-        <button (click)="editPointConfirm()">Confirm</button>
-        <button (click)="cancelEditPoint()">Back</button>
+    <div>
+        Edytujesz punkt {{this.nr}}: <br>
     </div>
+    <div>
+        <input [(ngModel)]="this.onePoint.name" placeholder="Name">
+    </div>
+    <div>
+        <textarea maxlength="60" [(ngModel)]="this.onePoint.description" placeholder="Description"></textarea>
+    </div>
+    <div>
+        <input [(ngModel)]="this.onePoint.place" placeholder="Place">
+    </div>
+    <div>
+        {{this.data.error}}
+    </div>
+    <button (click)="editPointConfirm()">Confirm</button>
+    <button (click)="cancelEditPoint()">Back</button>
+</div>
 <br>
 <br>
 <button (click)="backButton()">Exit edition</button>

@@ -15,6 +15,10 @@ export class HttpService { // globalny servis do komunikacji z serverem
     return this.http.post<Post>('https://team8-server.herokuapp.com/admin/login', log);
   }
 
+  postLogoutAdmin(accessToken: string): Observable<Post> {
+    return this.http.post<Post>('https://team8-server.herokuapp.com/admin/logout?accessToken=' + accessToken, null);
+  }
+
   postRegisterAdmin(log: Post): Observable<Post> {
     // Logowanie do servera przu uzyciu interfejsu Login zawierajacej haslo i emai, powinno zwrocic accessToken
     return this.http.post<Post>('https://team8-server.herokuapp.com/admin/register', log);
@@ -48,27 +52,28 @@ export class HttpService { // globalny servis do komunikacji z serverem
   postPointDelete(eventId: number, pointId: number, accessToken: string): Observable<Post> {
     // Usuwanie pojedynczego punktu
     return this.http.post<Post>('https://team8-server.herokuapp.com/admin/'
-     + eventId + '/point/' + pointId + '/delete?accessToken=' + accessToken, null);
+      + eventId + '/point/' + pointId + '/delete?accessToken=' + accessToken, null);
   }
 
   getEventsAdmin(accessToken: string): Observable<Array<Post>> {
     // Pobieranie eventów danego admina
-    return this.http.get<Array<Post>>('http://team8-server.herokuapp.com/admin/events?accessToken=' + accessToken);
+    return this.http.get<Array<Post>>('https://team8-server.herokuapp.com/admin/events?accessToken=' + accessToken);
   }
 
   getEventAdminById(accessToken: string, id: number): Observable<Post> {
     // Pobieranie pojedynczego eventu
-    return this.http.get<Post>('http://team8-server.herokuapp.com/admin/event/' + id + '/?accessToken=' + accessToken);
+    return this.http.get<Post>('https://team8-server.herokuapp.com/admin/event/' + id + '/?accessToken=' + accessToken);
   }
 
   getPointAdminById(eventId: number, pointId: number, accessToken: string): Observable<Post> {
     // Pobieranie pojedynczego punktu
-    return this.http.get<Post>('http://team8-server.herokuapp.com/admin/' + eventId + '/point/' + pointId + '/?accessToken=' + accessToken);
+    return this.http.get<Post>('https://team8-server.herokuapp.com/admin/'
+     + eventId + '/point/' + pointId + '/?accessToken=' + accessToken);
   }
 
   getEventsPointsAdmin(accessToken: string, id: number): Observable<Array<Post>> {
     // Pobieranie punktów eventu o danym id
-    return this.http.get<Array<Post>>('http://team8-server.herokuapp.com/admin/' + id + '/points?accessToken=' + accessToken);
+    return this.http.get<Array<Post>>('https://team8-server.herokuapp.com/admin/' + id + '/points?accessToken=' + accessToken);
   }
 
   isActive(accessToken: string): Observable<Post> {

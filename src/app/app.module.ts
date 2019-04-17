@@ -18,6 +18,7 @@ import { EditEventComponent } from './click/add_new_event/edit/edit-event/edit-e
 import { EditNavComponent } from './click/add_new_event/edit/edit-nav/edit-nav.component';
 import { LoginComponent } from './click/login/login.component';
 import { RegisterComponent } from './click/register/register.component';
+import { LogoutComponent } from './click/logout/logout.component';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { RegisterComponent } from './click/register/register.component';
     EditNavComponent,
     LoginComponent,
     RegisterComponent,
+    LogoutComponent,
   ],
   imports: [
     BrowserModule,

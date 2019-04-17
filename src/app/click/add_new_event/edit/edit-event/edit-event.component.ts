@@ -18,6 +18,7 @@ export class EditEventComponent implements OnInit {
   constructor(public tf: TrueFalseService, private data: DataService, private http: HttpService) { }
 
   ngOnInit() {
+
     this.http.getEventAdminById(this.data.accessToken, this.data.newEventId).subscribe(i => {
       this.event = i;
       console.log(this.data.newEventId);
@@ -71,25 +72,47 @@ export class EditEventComponent implements OnInit {
     if (this.data.error === '') {
       this.http.postPointEdit(this.onePoint.id, this.onePoint, this.data.accessToken).subscribe(i => {
         console.log('Edycja pojedynczego punktu zakonczona: ' + i);
+        this.look();
       });
-      setTimeout(() => this.look(), 2000);
+      // setTimeout(() => this.look(), 2000);
       this.tf.edit_one_point = false;
       this.tf.edit_picked_event_points = true;
+    }
+  }
+
+  addNewPoint() {
+    this.onePoint.eventId = this.event.id;
+    this.onePoint.geographicCoordinate.latitude = this.data.lat;
+    this.onePoint.geographicCoordinate.longitude = this.data.lng;
+    this.data.error = this.data.checkSyntax(this.onePoint);
+    if (this.data.error === '') {
+      this.http.postAddPointAdmin(this.onePoint, this.data.accessToken).subscribe(i => {
+        console.log(i);
+        this.look();
+      });
+      this.tf.edit_one_point = false;
+      this.tf.edit_picked_event_points = true;
+      this.tf.edit_picked_event_add_new_point = false;
     }
   }
 
   deletePoint(nr: number) { // Usuwanie wybranego punktu z wybranego eventu
     this.http.postPointDelete(this.data.newEventId, nr, this.data.accessToken).subscribe(i => {
       console.log('Usuwanie punktu: ' + i);
+      this.look();
     });
-    setTimeout(() => this.look(), 2000);
   }
 
-  addNewPoint() { }
+  addNewPointButton() {
+    this.onePoint = this.data.resetData();
+    this.tf.edit_picked_event_add_new_point = true;
+    this.tf.edit_picked_event_points = false;
+  }
 
   cancelEditPoint() {
     this.tf.edit_one_point = false;
     this.tf.edit_picked_event_points = true;
+    this.tf.edit_picked_event_add_new_point = false;
   }
 
   backButton() {
