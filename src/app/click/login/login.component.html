@@ -1,6 +1,8 @@
 <div>
   Login: <input placeholder="Email" [(ngModel)]="this.log.email"> <br>
-  Haslo: <input placeholder="Password" [(ngModel)]="this.log.password"> <br>
+  Haslo: <input type="password" placeholder="Password" [(ngModel)]="this.log.password"> <br>
   <button (click)="login()">Login</button>
-  {{this.loginError}}
-</div>
+  <div id="error">
+    {{this.loginError}}
+  </div>
+  </div>

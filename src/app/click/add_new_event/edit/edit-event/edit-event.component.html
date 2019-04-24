@@ -3,12 +3,15 @@
         Edytujesz event {{this.event.id}}: <br>
     </div>
     <div>
+        Nazwa eventu: <br>
         <input [(ngModel)]="this.event.name" placeholder="Name">
     </div>
     <div>
+        Opis eventu: <br>
         <textarea maxlength="60" [(ngModel)]="this.event.description" placeholder="Description"></textarea>
     </div>
     <div>
+        Miejsce gdzie odbędzie się event: <br>
         <input [(ngModel)]="this.event.place" placeholder="Place">
     </div>
     <div>
@@ -33,15 +36,18 @@
         Dodajesz nowy punkt do eventu {{this.event.id}}
     </div>
     <div>
+        Nazwa punktu: <br>
         <input [(ngModel)]="this.onePoint.name" placeholder="Name">
     </div>
     <div>
+        Opis punktu: <br>
         <textarea maxlength="60" [(ngModel)]="this.onePoint.description" placeholder="Description"></textarea>
     </div>
     <div>
+        Nazwa miejsca punktu: <br>
         <input [(ngModel)]="this.onePoint.place" placeholder="Place">
     </div>
-    <div>
+    <div id="error">
         {{this.data.error}}
     </div>
     <button (click)="addNewPoint()">Dodaj</button>
@@ -53,15 +59,18 @@
         Edytujesz punkt {{this.nr}}: <br>
     </div>
     <div>
+        Nazwa punktu: <br>
         <input [(ngModel)]="this.onePoint.name" placeholder="Name">
     </div>
     <div>
+        Opis punktu: <br>
         <textarea maxlength="60" [(ngModel)]="this.onePoint.description" placeholder="Description"></textarea>
     </div>
     <div>
+        Nazwa miejsca punktu: <br>
         <input [(ngModel)]="this.onePoint.place" placeholder="Place">
     </div>
-    <div>
+    <div id="error">
         {{this.data.error}}
     </div>
     <button (click)="editPointConfirm()">Confirm</button>

@@ -19,6 +19,10 @@ div {
     border: 10%;
 }
 
+#error {
+    color: red;
+}
+
 li {
     padding: 2px;
     list-style-type: square;

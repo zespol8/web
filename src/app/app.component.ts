@@ -61,4 +61,5 @@ export interface Cords {
 export interface HttpErrors {
   error?: string;
   status?: number;
+  message?: string;
 }

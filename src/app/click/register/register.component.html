@@ -1,10 +1,16 @@
-<button (click)="registerButton()">Register</button>
-
+<div *ngIf="tf.register_show3">
+  <button (click)="registerButton()">Register</button>
+</div>
 <div *ngIf="tf.register_show2">
-  <input placeholder="Email" [(ngModel)]="this.dane.email"> {{this.dane.email}}<br>
-  <input placeholder="Password" [(ngModel)]="this.dane.password"><br>
-  <input placeholder="First name" [(ngModel)]="this.dane.firstName"><br>
-  <input placeholder="Last name" [(ngModel)]="this.dane.lastName"><br>
-  <input placeholder="Company" [(ngModel)]="this.danecompanyName"><br>
+  Imię: <input placeholder="First name" [(ngModel)]="this.dane.firstName"><br>
+  Nazwisko: <input placeholder="Last name" [(ngModel)]="this.dane.lastName"><br>
+  Instytucja: <input placeholder="Company" [(ngModel)]="this.dane.companyName"><br>
+  Email: <input placeholder="Email" [(ngModel)]="this.dane.email"> {{this.dane.email}}<br>
+  Hasło: <input type="password" placeholder="Password" [(ngModel)]="this.dane.password">{{this.dane.password}}<br>
+  Powtórz hasło: <input type="password" placeholder="Password" [(ngModel)]="this.passCheck">{{this.passCheck}}<br>
+  <div id="error">
+    {{this.syntaxError}}
+  </div>
   <button (click)="dodaj()">Add admin</button>
+  <button (click)="back()">Back</button>
 </div>
