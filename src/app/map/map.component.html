@@ -1,6 +1,24 @@
 <div class="map">
     <agm-map [longitude]="lng" [latitude]="lat" (mapClick)="onChoseLocation($event)" [zoom]="zoom">
-            <agm-marker [latitude]="lat" [longitude]="lng">
+        <div>
+            <agm-marker [latitude]="this.cords.onePoint.geographicCoordinate.latitude" [longitude]="this.cords.onePoint.geographicCoordinate.longitude">
+                
             </agm-marker>
+        </div>
+        <div *ngIf="this.tf.showListOfPoints">
+            <div *ngFor="let i of cords.listOfAll">
+                <agm-marker [latitude]="i.geographicCoordinate.latitude" [longitude]="i.geographicCoordinate.longitude"
+                    [markerDraggable]=true (markerClick)="markerClick(i.id)" (dragEnd)="markerDrag($event, i.id)">
+                    <agm-info-window [isOpen]="checkMarkerId(i.id)" [latitude]="i.lat" [longitude]="i.lng">
+                        <a>
+                            {{i.name}} <br>
+                            {{i.place}} <br>
+                            {{i.id}}
+                        </a>
+                    </agm-info-window>
+
+                </agm-marker>
+            </div>
+        </div>
     </agm-map>
 </div>

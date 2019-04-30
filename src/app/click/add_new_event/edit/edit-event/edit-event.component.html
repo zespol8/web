@@ -1,6 +1,6 @@
 <div *ngIf="this.tf.edit_picked_event">
     <div>
-        Edytujesz event {{this.event.id}}: <br>
+        Edytujesz event {{this.data.newEventId}}: <br>
     </div>
     <div>
         Nazwa eventu: <br>
@@ -15,6 +15,10 @@
         <input [(ngModel)]="this.event.place" placeholder="Place">
     </div>
     <div>
+        Dodaj zdjęcie: 
+        <app-image-add></app-image-add>
+    </div>
+    <div>
         {{this.data.error}}
     </div>
     <button (click)="editEventButton()">Confirm&Back</button>
@@ -22,7 +26,7 @@
 </div>
 
 <div *ngIf="this.tf.edit_picked_event_points">
-    Edytujesz punkty eventu {{this.event.id}}: <br>
+    Edytujesz punkty eventu {{this.data.newEventId}}: <br>
     <li *ngFor="let i of pointList">
         {{i.name}}, {{i.id}}
         <button (click)="editPoint(i.id)">Edit</button>
@@ -70,6 +74,7 @@
         Nazwa miejsca punktu: <br>
         <input [(ngModel)]="this.onePoint.place" placeholder="Place">
     </div>
+
     <div id="error">
         {{this.data.error}}
     </div>
@@ -78,4 +83,5 @@
 </div>
 <br>
 <br>
+<button *ngIf="this.tf.edit_picked_event_points" (click)="confirmAndBackListOfAll()">Confirm&Back</button>
 <button (click)="backButton()">Exit edition</button>

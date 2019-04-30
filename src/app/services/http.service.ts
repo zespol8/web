@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Post, HttpErrors } from '../app.component';
 import { Observable } from 'rxjs/internal/Observable';
 
@@ -22,6 +22,12 @@ export class HttpService { // globalny servis do komunikacji z serverem
   postRegisterAdmin(log: Post): Observable<Post> {
     // Logowanie do servera przu uzyciu interfejsu Login zawierajacej haslo i emai, powinno zwrocic accessToken
     return this.http.post<Post>('https://team8-server.herokuapp.com/admin/register', log);
+  }
+
+  postImgAdd(accessToken: string, eventId: number, img: FormData) { // <<< =======
+    const head = new HttpHeaders({ 'Content-Type': 'multipart/form-data' });
+    return this.http.post('https://team8-server.herokuapp.com/admin/event/' + eventId + '/image?accessToken=' + accessToken, img,
+     { headers: head });
   }
 
   postAddEventAdmin(log: Post, accessToken: string): Observable<Post> {
@@ -68,7 +74,7 @@ export class HttpService { // globalny servis do komunikacji z serverem
   getPointAdminById(eventId: number, pointId: number, accessToken: string): Observable<Post> {
     // Pobieranie pojedynczego punktu
     return this.http.get<Post>('https://team8-server.herokuapp.com/admin/'
-     + eventId + '/point/' + pointId + '/?accessToken=' + accessToken);
+      + eventId + '/point/' + pointId + '/?accessToken=' + accessToken);
   }
 
   getEventsPointsAdmin(accessToken: string, id: number): Observable<Array<Post>> {

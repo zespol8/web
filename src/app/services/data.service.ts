@@ -12,8 +12,13 @@ export class DataService {
   public lng = 0;
   public lat = 0;
   public newEventId: number;
-  constructor() { }
+  public listOfAll: Array<Post>;
+  public onePoint: Post = {geographicCoordinate: {}};
 
+  constructor() {
+    this.onePoint.geographicCoordinate.latitude = 53.01371393719378;
+    this.onePoint.geographicCoordinate.longitude = 18.598043358450923;
+   }
 
   checkSyntax(data: Post): string { // Sprawdzanie czy formularz eventu lub punktu zostal poprawnie uzupelniony.
     if (data.geographicCoordinate.latitude === 0 && data.geographicCoordinate.longitude === 0) {

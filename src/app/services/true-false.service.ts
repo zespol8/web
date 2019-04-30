@@ -31,6 +31,8 @@ export class TrueFalseService {
   edit_one_point = false;
   edit_picked_event_add_new_point = false; // dodaj nowy punkt do eventu
 
+  showListOfPoints = false;
+
   logoutButtonShow = false;
 
   logoutFunction() {
@@ -60,5 +62,7 @@ export class TrueFalseService {
     this.logoutButtonShow = false;
 
     this.edit_picked_event_add_new_point = false;
+
+    this.showListOfPoints = false;
   }
 }

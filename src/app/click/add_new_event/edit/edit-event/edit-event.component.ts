@@ -52,21 +52,25 @@ export class EditEventComponent implements OnInit {
   look() { // Odswiezanie listy punktow dla danego eventu
     this.http.getEventsPointsAdmin(this.data.accessToken, this.data.newEventId).subscribe(i => {
       this.pointList = i;
+      this.data.listOfAll = this.pointList;
       console.log('Wczytanie punktów eventu: ' + this.data.newEventId);
     });
+    this.tf.showListOfPoints = true;
   }
 
   editPoint(id: number) { // Edycja danego punktu
+    this.tf.showListOfPoints = false;
     this.nr = id;
     this.http.getPointAdminById(this.data.newEventId, this.nr, this.data.accessToken).subscribe(i => {
       this.onePoint = i;
+      this.data.onePoint = this.onePoint;
       console.log('Wybrany punkt do edycji: ' + this.onePoint.name);
     });
     this.tf.edit_one_point = true;
     this.tf.edit_picked_event_points = false;
   }
 
-  editPointConfirm() {
+  editPointConfirm() { // Zatwierdzenie edycji wybranego punktu
     this.data.error = this.data.checkSyntax(this.onePoint);
     this.onePoint.eventId = this.event.id;
     if (this.data.error === '') {
@@ -74,7 +78,6 @@ export class EditEventComponent implements OnInit {
         console.log('Edycja pojedynczego punktu zakonczona: ' + i);
         this.look();
       });
-      // setTimeout(() => this.look(), 2000);
       this.tf.edit_one_point = false;
       this.tf.edit_picked_event_points = true;
     }
@@ -110,15 +113,34 @@ export class EditEventComponent implements OnInit {
   }
 
   cancelEditPoint() {
+    this.tf.showListOfPoints = true; // pokaż z powrotem punkty na mapie
+
     this.tf.edit_one_point = false;
     this.tf.edit_picked_event_points = true;
     this.tf.edit_picked_event_add_new_point = false;
   }
 
-  backButton() {
+  backButton() { // Cofa do wyboru eventu bez zatwierdzenia punków
+    this.tf.showListOfPoints = false;
     this.tf.edit_picked_event_points = false;
     this.tf.edit_event_show1 = true;
     this.tf.edit_event_show2 = false;
   }
 
+  confirmAndBackListOfAll() { // Cofa do wyboru eventu ale zatwierdza zmiany po przesunieciu punktów
+    this.data.listOfAll.forEach(element => {
+      element.eventId = this.data.newEventId;
+    });
+    this.data.listOfAll.forEach(element => {
+      this.http.postPointEdit(element.id, element, this.data.accessToken).subscribe(i => {
+        console.log(i);
+        this.data.error = '';
+      }, error => {
+        console.log(error);
+      });
+    });
+    this.tf.edit_picked_event_points = false;
+    this.tf.edit_event_show1 = true;
+    this.tf.edit_event_show2 = false;
+  }
 }
