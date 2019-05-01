@@ -21,7 +21,12 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  Powrot()
+  {
+  this.tf.login_show = false;
+   
+    
+  }
   login() {
     this.log.password = Md5.init(this.log.password);
     console.log(this.log);
@@ -32,7 +37,8 @@ export class LoginComponent implements OnInit {
       this.tf.login_show = false;
       this.tf.map_c_show = true;
       this.tf.register_show1 = false;
-
+      this.tf.login_show1 = false;
+      this.tf.opis_show1 = false;
       this.tf.logoutButtonShow = true;
     }, error => {
       this.http.errors = error;

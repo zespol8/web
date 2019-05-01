@@ -1,3 +1,4 @@
+<!--
 <div>
   Login: <input placeholder="Email" [(ngModel)]="this.log.email"> <br>
   Haslo: <input type="password" placeholder="Password" [(ngModel)]="this.log.password"> <br>
@@ -6,3 +7,18 @@
     {{this.loginError}}
   </div>
   </div>
+-->
+  <div class = "logowanie" *ngIf="tf.login_show" >
+    <!--<body style="background-color:#FFFFFF" size = "16" > -->
+      <h1>Panel logowania</h1>
+       <input placeholder="Email" [(ngModel)]="this.log.email"> <br>
+       <input type="password" placeholder="Hasło" [(ngModel)]="this.log.password"> <br>
+      
+      <div id="error">
+        {{this.loginError}}
+      </div>
+<!--</body>-->
+  <button  (click)="login()">Zaloguj</button>
+  <button (click)="Powrot()">Powrot</button>
+  {{error}}
+</div>

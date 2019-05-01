@@ -20,11 +20,12 @@ export class TrueFalseService {
   edit_event_show2 = false;
 
   /// logowanie i rejstracja
-  login_show = true;
+  login_show = false;
   register_show1 = true;
   register_show2 = false;
   register_show3 = true;
-
+  login_show1 = true;
+  opis_show1 = true;
   /// app-edit-event
   edit_picked_event = false;
   edit_picked_event_points = false;

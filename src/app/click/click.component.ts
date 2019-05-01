@@ -31,6 +31,11 @@ export class ClickComponent implements OnInit {
     this.tf.click_c_show2 = true;
     this.tf.map_c_show = true;
   }
-
+  Zaloguj()
+  {
+    this.tf.login_show = true;
+    //this.tf.register_show2 = false;
+    
+  }
   ngOnInit() {}
 }

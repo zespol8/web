@@ -29,9 +29,12 @@ li {
 }
 
 body {
-    position: relative;
-    background-color: whitesmoke;
-    margin: 20px;
+    background-image: url("2008.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: cover; 
+    
+    background-size: cover;
 }
 h1 {
     font-size: 17px;

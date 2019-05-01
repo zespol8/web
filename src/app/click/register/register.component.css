@@ -1,0 +1,70 @@
+.rejestracja {
+    /* display: flex;
+     position: absolute;
+     width: 100%;
+     height: 100%;
+    justify-content: center;
+     align-items: center;
+     flex-direction: column;
+    */
+ /* tyy   display: center;
+  position: absolute;
+  color:green;
+  
+  font-size: 4ex;
+  width:26%;
+  height: 14%;
+  left: 15cm;
+  top: 6cm;
+ justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+ 
+   /*box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);*/
+  /*font-size: 2ex;*/
+
+ /*
+     background-size: cover;
+ 
+     background-position:50% 50%; */
+     display: center;
+    position: absolute;
+   
+ background: url("1.jpg") repeat center center fixed; 
+    border-top-style: solid;
+    border-bottom-style:solid;
+    border-left-style:solid;
+    border-right-style:solid;
+    border-color:green;
+    border-width: medium;
+     max-width: 320px;
+     margin: 0 0 0px;
+    /*padding: 45px;
+     text-align: center;
+     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    font-size: 4ex;
+    */
+    text-align: center;
+    width:35%;
+    height: 35%;
+    font-family: cursive;
+   
+      
+    left: 15cm;
+    top: 6cm;
+   justify-content: center;
+    align-items: center;
+    flex-direction: column;
+ }
+ .button1{
+     display: center;
+     position: absolute;
+     width:11%;
+     height: 5%;
+     left: 32cm;
+     top: 0cm;
+    justify-content: center;
+     align-items: center;
+     flex-direction: column;
+ }

@@ -1,0 +1,92 @@
+.opis
+  {
+    display: center;
+    position: absolute;
+    font-family: cursive; 
+    font-size: 22pt;
+    left: 4cm;
+    top: 4cm;
+  }
+  .Logo
+  {
+    display: center;
+    position: absolute;
+    font-family: cursive;
+    color:green;
+    font-size: 35pt;
+    left: 1cm;
+    top: 0cm;
+   /* border-top-style: solid;
+ border-bottom-style:solid;
+ border-left-style:solid;
+ border-right-style:solid;
+ border-color:green;
+ border-width: medium;
+ */
+  }
+  .Czym
+{
+  
+  display: center;
+  position: absolute;
+  font-family: cursive;
+  color:green;
+  font-size: 35pt;
+  left: 13cm;
+  top: 15cm;
+}
+.jest
+{
+  display: center;
+  position: absolute;
+  font-family: cursive;
+  color:green;
+  font-size: 24pt;
+  left: 13cm;
+  top: 19cm;
+}
+  .zaloguj
+  {
+    display: center;
+    position: absolute;
+    width:11%;
+    height: 5%;
+    left: 27cm;
+    top: 0cm;
+   justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .logo
+  {
+    display: center;
+    position: absolute;
+    color: red;
+    background-color: bisque;
+    width:36%;
+    height: 8%;
+    left: 12cm;
+    top: 1cm;
+   justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+form {
+    display: flex;
+    position: center;
+    width: 200%;
+    height: 200%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:center;
+    padding: 40px;
+    background: #eee;
+    border-radius: 20px;
+}

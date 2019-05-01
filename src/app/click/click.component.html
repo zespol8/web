@@ -1,3 +1,4 @@
+<!--
 <div>
     <app-login *ngIf="tf.login_show"></app-login>
 </div>
@@ -7,3 +8,53 @@
 <div>
     <app-navigation *ngIf=tf.click_c_show2></app-navigation>
 </div>
+-->
+<div *ngIf="tf.login_show1">
+    <button class = zaloguj (click)="Zaloguj()">Zaloguj się</button>
+  </div>
+
+<div class="image">
+  
+  <!--<button class = "logo"> <b><font size = "22">Walk-Event</font></b></button>
+   <h2 class = "logo"> <b><font size = "42">Walk-e</font></b></h2> 
+  
+  -->
+  <div *ngIf="tf.opis_show1" >
+  <div  class="opis">
+   
+    <b><p>Papierowe przewodniki to przeszłość! </p> 
+                           <p>Dołącz do nas!</p>
+    </b>
+  </div>
+  
+    <div class="Czym">
+   
+        <b><p>Czym jest Walk-e? </p> 
+                              
+        </b>
+      </div>
+      <div class="jest">
+   
+          <b><p>Walk-e jest aplikacją, która... </p> 
+                                
+          </b>
+        </div>
+      </div>
+      <div class="Logo">
+   
+          <b><p>Walk-e </p> 
+                                
+          </b>
+        </div>
+<app-login *ngIf="tf.login_show"></app-login>
+
+<app-register *ngIf="tf.register_show1"></app-register>
+<app-navigation *ngIf=tf.click_c_show2></app-navigation>
+
+
+
+
+
+    
+    </div>
+ 

@@ -1,4 +1,4 @@
-<div *ngIf="tf.register_show3">
+<!--<div *ngIf="tf.register_show3">
   <button (click)="registerButton()">Register</button>
 </div>
 <div *ngIf="tf.register_show2">
@@ -13,4 +13,20 @@
   </div>
   <button (click)="dodaj()">Add admin</button>
   <button (click)="back()">Back</button>
+</div>
+-->
+<button class = "button1" (click)="registerButton()">Rejestracja</button> 
+<div class = "rejestracja" *ngIf="tf.register_show2">
+   <H1><b>Rejestracja</b></H1>
+  <input placeholder="Imię" [(ngModel)]="this.dane.firstName"><br>
+  <input placeholder="Nazwisko" [(ngModel)]="this.dane.lastName"><br>
+  <input placeholder="Instytucja" [(ngModel)]="this.dane.companyName"><br>
+  <input placeholder="Email" [(ngModel)]="this.dane.email"> {{this.dane.email}}<br>
+  <input type="password" placeholder="Hasło" [(ngModel)]="this.dane.password">{{this.dane.password}}<br>
+  <input type="password" placeholder="Powtórz hasło" [(ngModel)]="this.passCheck">{{this.passCheck}}<br>
+  <div id="error">
+    {{this.syntaxError}}
+  </div>
+  <button (click)="dodaj()">Zarejestruj</button>
+  <button (click)="powrot()">Powrot</button>
 </div>

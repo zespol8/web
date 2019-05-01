@@ -48,7 +48,12 @@ export class RegisterComponent implements OnInit {
     this.tf.register_show3 = true;
     this.syntaxError = '';
   }
-
+  powrot()
+  {
+   // this.tf.login_show = true;
+    this.tf.register_show2 = false;
+    
+  }
   checkSyntaxForRegistry(dane: Post, passCheck: string): string {
     console.log('Sprawdzam składnie...');
     if (dane.firstName.length < 2) {

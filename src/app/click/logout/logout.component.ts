@@ -21,6 +21,8 @@ export class LogoutComponent implements OnInit {
     }, logoutError => {
       console.log('Wylogowano');
       this.tf.logoutFunction();
+      this.tf.login_show1 = true;
+      this.tf.opis_show1 = true;
     });
   }
 
