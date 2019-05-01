@@ -15,7 +15,7 @@ export class MapComponent {
   zoom = 12;
   inputValue = '';
 
-  constructor(private cords: DataService, private tf: TrueFalseService) {
+  constructor(public cords: DataService, public tf: TrueFalseService) {
     this.lng = 18.598043358450923;
     this.lat = 53.01371393719378;
   }

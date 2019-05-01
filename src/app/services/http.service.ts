@@ -24,10 +24,10 @@ export class HttpService { // globalny servis do komunikacji z serverem
     return this.http.post<Post>('https://team8-server.herokuapp.com/admin/register', log);
   }
 
-  postImgAdd(accessToken: string, eventId: number, img: FormData) { // <<< =======
-    const head = new HttpHeaders({ 'Content-Type': 'multipart/form-data' });
-    return this.http.post('https://team8-server.herokuapp.com/admin/event/' + eventId + '/image?accessToken=' + accessToken, img,
-     { headers: head });
+  postImgAdd(accessToken: string, eventId: number, img: File) { // <<< =======
+    const formData: FormData = new FormData();
+    formData.append('file', img);
+    return this.http.post('https://team8-server.herokuapp.com/admin/event/' + eventId + '/image?accessToken=' + accessToken, formData);
   }
 
   postAddEventAdmin(log: Post, accessToken: string): Observable<Post> {
