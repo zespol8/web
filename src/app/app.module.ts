@@ -20,6 +20,10 @@ import { LoginComponent } from './click/login/login.component';
 import { RegisterComponent } from './click/register/register.component';
 import { LogoutComponent } from './click/logout/logout.component';
 import { ImageAddComponent } from './click/add_new_event/image-add/image-add.component';
+import { MainComponent } from './main/main.component';
+import { ProductComponent } from './product/product.component';
+import { EventsComponent } from './events/events.component';
+import { EventComponent } from './event/event.component';
 
 
 @NgModule({
@@ -37,6 +41,10 @@ import { ImageAddComponent } from './click/add_new_event/image-add/image-add.com
     RegisterComponent,
     LogoutComponent,
     ImageAddComponent,
+    MainComponent,
+    ProductComponent,
+    EventsComponent,
+    EventComponent
   ],
   imports: [
     BrowserModule,

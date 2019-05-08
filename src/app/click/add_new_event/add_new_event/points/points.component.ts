@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { DataService } from 'src/app/services/data.service';
-import { Post } from 'src/app/app.component';
-import { HttpService } from 'src/app/services/http.service';
-import { TrueFalseService } from 'src/app/services/true-false.service';
+import {Component, OnInit} from '@angular/core';
+import {DataService} from 'src/app/services/data.service';
+import {HttpService} from 'src/app/services/http.service';
+import {TrueFalseService} from 'src/app/services/true-false.service';
+import {Post} from '../../../../main/main.component';
 
 @Component({
   selector: 'app-points',
@@ -13,6 +13,7 @@ export class PointsComponent implements OnInit {
   point: Post;
   pointList: Array<Post> = [];
   error: string;
+
   constructor(public data: DataService, private cords: DataService, private http: HttpService, public tf: TrueFalseService) {
     this.resetPoint();
     this.error = '';
@@ -29,6 +30,7 @@ export class PointsComponent implements OnInit {
       this.cords.clearCords();
     }
   }
+
   deletePointFromList(point1: Post) {
     this.pointList = this.pointList.filter(e => e !== point1);
   }
@@ -52,7 +54,7 @@ export class PointsComponent implements OnInit {
   resetPoint() {
     this.point = ({
       name: '', description: '', place: '',
-      geographicCoordinate: { latitude: 0, longitude: 0 }, startDate: 1, endDate: 1, eventId: this.data.newEventId
+      geographicCoordinate: {latitude: 0, longitude: 0}, startDate: 1, endDate: 1, eventId: this.data.newEventId
     });
   }
 }

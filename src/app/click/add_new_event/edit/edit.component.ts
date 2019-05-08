@@ -1,8 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { TrueFalseService } from 'src/app/services/true-false.service';
-import { Post } from 'src/app/app.component';
-import { HttpService } from 'src/app/services/http.service';
-import { DataService } from 'src/app/services/data.service';
+import {Component, OnInit} from '@angular/core';
+import {TrueFalseService} from 'src/app/services/true-false.service';
+import {HttpService} from 'src/app/services/http.service';
+import {DataService} from 'src/app/services/data.service';
+import {Post} from '../../../main/main.component';
 
 @Component({
   selector: 'app-edit',
@@ -12,20 +12,19 @@ import { DataService } from 'src/app/services/data.service';
 export class EditComponent implements OnInit {
 
   eventList: Array<Post> = [];
-  pointList: Array<Post> = [];
-  accesToken = this.data.accessToken;
+
   constructor(public tf: TrueFalseService, private http: HttpService, private data: DataService) {
   }
 
   lookButton() {
     console.log('Nowa lista');
-    this.http.getEventsAdmin(this.accesToken).subscribe(i => {
+    this.http.getEventsAdmin(this.data.accessToken).subscribe(i => {
       this.eventList = i;
     });
   }
 
   deleteEvent(id: number) {
-    this.http.postEventDelete(id, this.accesToken).subscribe(i => {
+    this.http.postEventDelete(id, this.data.accessToken).subscribe(i => {
       console.log(i);
     });
     setTimeout(() => this.lookButton(), 2000); // Poprawić timeout czekania na nowa liste.
@@ -47,7 +46,7 @@ export class EditComponent implements OnInit {
 
   ngOnInit() {
     console.log('Nowa lista');
-    this.http.getEventsAdmin(this.accesToken).subscribe(i => {
+    this.http.getEventsAdmin(this.data.accessToken).subscribe(i => {
       this.eventList = i;
     });
   }

@@ -1,0 +1,20 @@
+<div class="d-flex justify-content-around flex-wrap">
+  <div class="card" *ngFor="let event of eventList">
+    <img src="..." class="card-img-top" alt="Image">
+    <div class="card-body">
+      <h5 class="card-title">{{event.name}}</h5>
+      <p class="card-text">{{event.shortDescription}}</p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">{{event.startDate}}</li>
+      <li class="list-group-item">{{event.startDate}}</li>
+      <li class="list-group-item">{{event.place}}</li>
+    </ul>
+    <div class="card-body">
+      <div class="buttons">
+        <button type="button" (click)="eventDetails(event.id)" class="btn btn-outline-primary btn-sm">Więcej</button>
+        <button type="button" (click)="deleteEvent(event.id)" class="btn btn-outline-danger btn-sm">Usuń</button>
+      </div>
+    </div>
+  </div>
+</div>

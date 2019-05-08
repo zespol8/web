@@ -1,24 +1,28 @@
-<!--
 <div>
-  Login: <input placeholder="Email" [(ngModel)]="this.log.email"> <br>
-  Haslo: <input type="password" placeholder="Password" [(ngModel)]="this.log.password"> <br>
-  <button (click)="login()">Login</button>
-  <div id="error">
-    {{this.loginError}}
+  <div class="person">
+    <img src="../../../assets/images/business-img.png">
   </div>
-  </div>
--->
-  <div class = "logowanie" *ngIf="tf.login_show" >
-    <!--<body style="background-color:#FFFFFF" size = "16" > -->
-      <h1>Panel logowania</h1>
-       <input placeholder="Email" [(ngModel)]="this.log.email"> <br>
-       <input type="password" placeholder="Hasło" [(ngModel)]="this.log.password"> <br>
-      
-      <div id="error">
+  <div class="login-form">
+    <div class="form">
+      <h2 class="text-center">Logowanie</h2>
+      <div class="form-group">
+        <input [(ngModel)]="this.log.email" type="text" class="form-control" placeholder="Email" required="required">
+      </div>
+      <div class="form-group">
+        <input [(ngModel)]="this.log.password" type="password" class="form-control" placeholder="Hasło"
+               required="required">
+      </div>
+      <div class="form-group">
+        <button (click)="login()" type="submit" class="btn btn-primary btn-block">Zaloguj</button>
+      </div>
+      <div class="clearfix">
+        <label class="pull-left checkbox-inline"><input type="checkbox"> Zapamiętaj mnie</label>
+        <a href="#" class="pull-right">Zapomniałeś hasła?</a>
+      </div>
+      <div *ngIf="loginError" class="error">
         {{this.loginError}}
       </div>
-<!--</body>-->
-  <button  (click)="login()">Zaloguj</button>
-  <button (click)="Powrot()">Powrot</button>
-  {{error}}
+    </div>
+    <p class="text-center"><a href="/register">Utwórz konto</a></p>
+  </div>
 </div>

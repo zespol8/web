@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { TrueFalseService } from 'src/app/services/true-false.service';
-import { Post } from 'src/app/app.component';
-import { DataService } from 'src/app/services/data.service';
-import { HttpService } from 'src/app/services/http.service';
+import {Component, OnInit} from '@angular/core';
+import {TrueFalseService} from 'src/app/services/true-false.service';
+import {DataService} from 'src/app/services/data.service';
+import {HttpService} from 'src/app/services/http.service';
+import {Post} from '../../../../main/main.component';
 
 
 @Component({
@@ -15,7 +15,9 @@ export class EditEventComponent implements OnInit {
   onePoint: Post = {};
   pointList: Array<Post> = [];
   nr: number;
-  constructor(public tf: TrueFalseService, private data: DataService, private http: HttpService) { }
+
+  constructor(public tf: TrueFalseService, private data: DataService, private http: HttpService) {
+  }
 
   ngOnInit() {
 

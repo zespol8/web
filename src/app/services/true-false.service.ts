@@ -20,7 +20,8 @@ export class TrueFalseService {
   edit_event_show2 = false;
 
   /// logowanie i rejstracja
-  login_show = false;
+  login_show = true;
+  register_show = true;
   register_show1 = true;
   register_show2 = false;
   register_show3 = true;

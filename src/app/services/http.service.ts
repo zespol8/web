@@ -1,11 +1,12 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Post, HttpErrors } from '../app.component';
-import { Observable } from 'rxjs/internal/Observable';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs/internal/Observable';
+import {HttpErrors, Post} from '../main/main.component';
 
 @Injectable()
 export class HttpService { // globalny servis do komunikacji z serverem
   errors: HttpErrors = {};
+
   constructor(private http: HttpClient) { // Konstruktor tworzy obiekt http i obiekt login
     this.errors.status = 0;
   }

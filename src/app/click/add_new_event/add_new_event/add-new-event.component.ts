@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Post } from 'src/app/app.component';
-import { DataService } from 'src/app/services/data.service';
-import { HttpService } from 'src/app/services/http.service';
-import { TrueFalseService } from 'src/app/services/true-false.service';
+import {Component, OnInit} from '@angular/core';
+import {DataService} from 'src/app/services/data.service';
+import {HttpService} from 'src/app/services/http.service';
+import {TrueFalseService} from 'src/app/services/true-false.service';
+import {Post} from '../../../main/main.component';
 
 @Component({
   selector: 'app-add-new-event',
@@ -10,11 +10,14 @@ import { TrueFalseService } from 'src/app/services/true-false.service';
   styleUrls: ['./add-new-event.component.css']
 })
 export class AddNewEventComponent implements OnInit {
-  data: Post = ({name: '', description: '', place: '', geographicCoordinate: {}, endDate: 1, startDate: 1 });
+  data: Post = ({name: '', description: '', place: '', geographicCoordinate: {}, endDate: 1, startDate: 1});
 
-  constructor(private cords: DataService, private http: HttpService, public tf: TrueFalseService) { }
+  constructor(private cords: DataService, private http: HttpService, public tf: TrueFalseService) {
+  }
+
   ngOnInit() {
   }
+
   onButtonClick(x): void {
     if (x === 1) {
       this.data.geographicCoordinate.latitude = this.cords.lat;
