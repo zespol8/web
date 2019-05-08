@@ -17,9 +17,12 @@ export class LoginComponent implements OnInit {
   loginError: string;
 
   constructor(private data: DataService, private http: HttpService, public tf: TrueFalseService, private router: Router, private route: ActivatedRoute) {
+    console.log('tutaj 1');
     if (this.data.isLoggedIn()) {
+      console.log('tutaj 2');
       this.router.navigate(['/main'], {relativeTo: this.route});
     }
+    console.log('tutaj 3');
     this.log.email = 'gruszkojados@gmail.com';
     this.log.password = 'razdwatrzy12';
     this.loginError = '';
