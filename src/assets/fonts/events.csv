@@ -1,0 +1,7 @@
+Typ,Id,Nazwa,Krótki opis,Opis,Data rozpoczęcia,Data zakończenia,Godziny otwarcia,Miejsce,Cena,Minimalny wiek,Szerokość geograficzna,Długość geograficzna
+Wydarzenie,17,Bella Skyway 2012,string,Długi opis basjdbasdjbasjdbajbsajda,1970-01-01T01:00,1970-01-01T01:00,PON-PT 15:00-19:00,Toruń,144PLN,6,52.0,18.0
+Punkt,19,Drugi punkt,,asdadsannkkasdndsaknnkkasadskads,1970-01-01T01:00,1970-01-01T01:00,asddasdas,Toruń,12321,1,52.0,18.0
+Punkt,18,Pierwszy punkt,,asdadsannkkasdndsaknnkkasadskads,1970-01-01T01:00,1970-01-01T01:00,,Toruń,,,52.0,18.0
+Wydarzenie,2,Bella Skyway 2019,string,Długi opis basjdbasdjbasjdbajbsajda,1970-01-01T01:00,1970-01-01T01:00,PON-PT 15:00-19:00,Toruń,20PLN,6,52.0,18.0
+Punkt,16,Drugi punkt,,asdadsannkkasdndsaknnkkasadskads,1970-01-01T01:00,1970-01-01T01:00,asddasdas,Toruń,12321,1,52.0,18.0
+Punkt,3,Pierwszy punkt,,asdadsannkkasdndsaknnkkasadskads,1970-01-01T01:00,1970-01-01T01:00,,Toruń,,,52.0,18.0

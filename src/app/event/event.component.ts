@@ -8,7 +8,7 @@ import {HttpService} from '../services/http.service';
 @Component({
   selector: 'app-event',
   templateUrl: './event.component.html',
-  styleUrls: ['./event.component.css']
+  styleUrls: ['../../../node_modules/bootstrap/dist/css/bootstrap.min.css', './event.component.css']
 })
 export class EventComponent implements OnInit {
 
