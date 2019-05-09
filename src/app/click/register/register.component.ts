@@ -8,7 +8,7 @@ import {HttpErrorResponse} from '@angular/common/http';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css', '../../../../node_modules/bootstrap/dist/css/bootstrap.min.css']
 })
 export class RegisterComponent implements OnInit {
   dane: Post;

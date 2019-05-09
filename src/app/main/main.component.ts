@@ -32,6 +32,19 @@ export class MainComponent {
 
   logout() {
     this.acces.removeAccessToken();
+    this.router.navigate(['/login'], {relativeTo: this.route});
+  }
+
+  openNewEvent() {
+    this.router.navigate(['/event/new'], {relativeTo: this.route});
+  }
+
+  importCSV() {
+
+  }
+
+  exportCSV() {
+
   }
 }
 

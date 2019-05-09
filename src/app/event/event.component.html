@@ -3,16 +3,16 @@
     <h1>{{this.event.name || 'Nowe wydarzenie'}}</h1>
     <ul class="nav justify-content-center">
       <li class="nav-item">
-        <a class="nav-link" href="" (click)="addEvent()">Zapisz zmiany</a>
+        <button type="button" class="btn btn-outline-dark btn-sm" (click)="addEvent()">Zapisz zmiany</button>
       </li>
       <li class="nav-item" *ngIf="!isNew">
-        <a class="nav-link" href="#">Usuń</a>
+        <button type="button" class="btn btn-outline-dark btn-sm">Usuń</button>
       </li>
       <li class="nav-item" *ngIf="!isNew">
-        <a class="nav-link" href="#">Dodaj zdjęcie</a>
+        <button type="button" class="btn btn-outline-dark btn-sm">Dodaj zdjęcie</button>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="main">Powrót</a>
+        <button type="button" class="btn btn-outline-dark btn-sm" (click)="back()">Powrót</button>
       </li>
     </ul>
   </div>

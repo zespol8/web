@@ -9,3 +9,7 @@
   text-align: center;
   margin: 30px auto;
 }
+
+li {
+  margin-right: 5px;
+}

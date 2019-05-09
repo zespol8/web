@@ -55,4 +55,8 @@ export class EventComponent implements OnInit {
       });
     }
   }
+
+  back() {
+    this.router.navigate(['/main'], {relativeTo: this.route});
+  }
 }
