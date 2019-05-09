@@ -87,4 +87,16 @@ export class HttpService { // globalny servis do komunikacji z serverem
     // Metotda sprawdza czy jestes aktywny
     return this.http.get<Post>('https://team8-server.herokuapp.com/admin/active?accessToken=' + accessToken);
   }
+
+  downloadEventsInCSV(accessToken: string): string {
+    // Pobieranie CSV
+    return 'https://team8-server.herokuapp.com/events.csv?accessToken=' + accessToken;
+  }
+
+  uploadCsv(accessToken: string, csv: File) {
+    // Import csv
+    const formData: FormData = new FormData();
+    formData.append('file', csv);
+    return this.http.post('https://team8-server.herokuapp.com/events.csv?accessToken=' + accessToken, formData);
+  }
 }

@@ -22,7 +22,7 @@ export class ImageAddComponent implements OnInit {
   uploadImage() {
     console.log('Img event id: ' + this.data.newEventId);
     console.log(this.selectedFile);
-    this.http.postImgAdd(this.data.accessToken, this.data.newEventId, this.selectedFile).subscribe(i => {
+    this.http.postImgAdd(this.data.getAccessToken(), this.data.newEventId, this.selectedFile).subscribe(i => {
       console.log(i);
     }, error => {
       console.log(error);

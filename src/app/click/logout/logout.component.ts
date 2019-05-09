@@ -16,7 +16,7 @@ export class LogoutComponent implements OnInit {
   }
 
   logoutButton() {
-    this.http.postLogoutAdmin(this.data.accessToken).subscribe(i => {
+    this.http.postLogoutAdmin(this.data.getAccessToken()).subscribe(i => {
       console.log('Wylogowano: ' + i);
     }, logoutError => {
       console.log('Wylogowano');

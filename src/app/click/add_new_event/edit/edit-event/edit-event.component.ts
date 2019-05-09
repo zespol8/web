@@ -21,7 +21,7 @@ export class EditEventComponent implements OnInit {
 
   ngOnInit() {
 
-    this.http.getEventAdminById(this.data.accessToken, this.data.newEventId).subscribe(i => {
+    this.http.getEventAdminById(this.data.getAccessToken(), this.data.newEventId).subscribe(i => {
       this.event = i;
       console.log(this.data.newEventId);
       console.log(this.event);
@@ -31,7 +31,7 @@ export class EditEventComponent implements OnInit {
   editEventButton() { // Zawtierdznie edycji danego eventu bez edycji punktów
     this.data.error = this.data.checkSyntax(this.event);
     if (this.data.error === '') {
-      this.http.postEventEdit(this.data.newEventId, this.event, this.data.accessToken).subscribe(i => {
+      this.http.postEventEdit(this.data.newEventId, this.event, this.data.getAccessToken()).subscribe(i => {
         console.log('Edycja eventu bez edycji punktów: ' + i);
       });
       this.tf.edit_event_show1 = true;
@@ -42,7 +42,7 @@ export class EditEventComponent implements OnInit {
   editPointsButton() { // Zatwierdzenie edycji eventu i edycje jego punktów
     this.data.error = this.data.checkSyntax(this.event);
     if (this.data.error === '') {
-      this.http.postEventEdit(this.data.newEventId, this.event, this.data.accessToken).subscribe(i => {
+      this.http.postEventEdit(this.data.newEventId, this.event, this.data.getAccessToken()).subscribe(i => {
         console.log('Edycja eventu z punktami: ' + i);
         this.tf.edit_picked_event = false;
         this.tf.edit_picked_event_points = true;
@@ -52,7 +52,7 @@ export class EditEventComponent implements OnInit {
   }
 
   look() { // Odswiezanie listy punktow dla danego eventu
-    this.http.getEventsPointsAdmin(this.data.accessToken, this.data.newEventId).subscribe(i => {
+    this.http.getEventsPointsAdmin(this.data.getAccessToken(), this.data.newEventId).subscribe(i => {
       this.pointList = i;
       this.data.listOfAll = this.pointList;
       console.log('Wczytanie punktów eventu: ' + this.data.newEventId);
@@ -63,7 +63,7 @@ export class EditEventComponent implements OnInit {
   editPoint(id: number) { // Edycja danego punktu
     this.tf.showListOfPoints = false;
     this.nr = id;
-    this.http.getPointAdminById(this.data.newEventId, this.nr, this.data.accessToken).subscribe(i => {
+    this.http.getPointAdminById(this.data.newEventId, this.nr, this.data.getAccessToken()).subscribe(i => {
       this.onePoint = i;
       this.data.onePoint = this.onePoint;
       console.log('Wybrany punkt do edycji: ' + this.onePoint.name);
@@ -76,7 +76,7 @@ export class EditEventComponent implements OnInit {
     this.data.error = this.data.checkSyntax(this.onePoint);
     this.onePoint.eventId = this.event.id;
     if (this.data.error === '') {
-      this.http.postPointEdit(this.onePoint.id, this.onePoint, this.data.accessToken).subscribe(i => {
+      this.http.postPointEdit(this.onePoint.id, this.onePoint, this.data.getAccessToken()).subscribe(i => {
         console.log('Edycja pojedynczego punktu zakonczona: ' + i);
         this.look();
       });
@@ -91,7 +91,7 @@ export class EditEventComponent implements OnInit {
     this.onePoint.geographicCoordinate.longitude = this.data.lng;
     this.data.error = this.data.checkSyntax(this.onePoint);
     if (this.data.error === '') {
-      this.http.postAddPointAdmin(this.onePoint, this.data.accessToken).subscribe(i => {
+      this.http.postAddPointAdmin(this.onePoint, this.data.getAccessToken()).subscribe(i => {
         console.log(i);
         this.look();
       });
@@ -102,7 +102,7 @@ export class EditEventComponent implements OnInit {
   }
 
   deletePoint(nr: number) { // Usuwanie wybranego punktu z wybranego eventu
-    this.http.postPointDelete(this.data.newEventId, nr, this.data.accessToken).subscribe(i => {
+    this.http.postPointDelete(this.data.newEventId, nr, this.data.getAccessToken()).subscribe(i => {
       console.log('Usuwanie punktu: ' + i);
       this.look();
     });
@@ -134,7 +134,7 @@ export class EditEventComponent implements OnInit {
       element.eventId = this.data.newEventId;
     });
     this.data.listOfAll.forEach(element => {
-      this.http.postPointEdit(element.id, element, this.data.accessToken).subscribe(i => {
+      this.http.postPointEdit(element.id, element, this.data.getAccessToken()).subscribe(i => {
         console.log(i);
         this.data.error = '';
       }, error => {

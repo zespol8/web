@@ -22,7 +22,7 @@ export class AddNewEventComponent implements OnInit {
     if (x === 1) {
       this.data.geographicCoordinate.latitude = this.cords.lat;
       this.data.geographicCoordinate.longitude = this.cords.lng;
-      const accessToken = this.cords.accessToken;
+      const accessToken = this.cords.getAccessToken();
       this.cords.error = this.cords.checkSyntax(this.data); //  SPRAWDZANIE POPRAWNOSCI W INPUTACH
       if (this.cords.error === '') {
         this.http.postAddEventAdmin(this.data, accessToken).subscribe(i => {

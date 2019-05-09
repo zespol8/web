@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {isNumber} from 'util';
 import {Post} from '../main/main.component';
 import {TrueFalseService} from '../services/true-false.service';
 import {DataService} from '../services/data.service';
@@ -9,7 +8,7 @@ import {HttpService} from '../services/http.service';
 @Component({
   selector: 'app-event',
   templateUrl: './event.component.html',
-  styleUrls: ['../../../node_modules/bootstrap/dist/css/bootstrap.min.css', './event.component.css']
+  styleUrls: ['./event.component.css']
 })
 export class EventComponent implements OnInit {
 
@@ -37,7 +36,7 @@ export class EventComponent implements OnInit {
   }
 
   private loadEventData(id: number) {
-    this.http.getEventAdminById(this.data.accessToken, id).subscribe(i => {
+    this.http.getEventAdminById(this.data.getAccessToken(), id).subscribe(i => {
       console.log(i);
       this.event = i;
     });
@@ -46,7 +45,7 @@ export class EventComponent implements OnInit {
   addEvent() {
     this.event.geographicCoordinate.latitude = this.data.lat;
     this.event.geographicCoordinate.longitude = this.data.lng;
-    const accessToken = this.data.accessToken;
+    const accessToken = this.data.getAccessToken();
     this.data.error = this.data.checkSyntax(this.data); //  SPRAWDZANIE POPRAWNOSCI W INPUTACH
     if (this.data.error === '') {
       this.http.postAddEventAdmin(this.data, accessToken).subscribe(i => {

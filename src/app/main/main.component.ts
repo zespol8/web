@@ -10,15 +10,17 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./main.component.css', '../../../node_modules/bootstrap/dist/css/bootstrap.min.css']
 })
 export class MainComponent {
+  public isCollapsed = true;
+  selectedFile: File = null;
 
-  constructor(public http: HttpService, private acces: DataService, public tf: TrueFalseService, private router: Router, private route: ActivatedRoute) {
-    if (!this.acces.isLoggedIn()) {
+  constructor(public http: HttpService, private data: DataService, public tf: TrueFalseService, private router: Router, private route: ActivatedRoute) {
+    if (!this.data.isLoggedIn()) {
       this.router.navigate(['/login'], {relativeTo: this.route});
     }
   }
 
   isActive() {
-    const accessToken = this.acces.accessToken;
+    const accessToken = this.data.getAccessToken();
     this.http.isActive(accessToken).subscribe(i => {
       },
       error => {
@@ -31,7 +33,7 @@ export class MainComponent {
   }
 
   logout() {
-    this.acces.removeAccessToken();
+    this.data.removeAccessToken();
     this.router.navigate(['/login'], {relativeTo: this.route});
   }
 
@@ -39,12 +41,22 @@ export class MainComponent {
     this.router.navigate(['/event/new'], {relativeTo: this.route});
   }
 
-  importCSV() {
-
+  exportCSV() {
+    window.open(this.http.downloadEventsInCSV(this.data.getAccessToken()));
   }
 
-  exportCSV() {
+  fileAdd(event) {
+    this.selectedFile = <File>event.target.files[0];
+    console.log(this.selectedFile);
+  }
 
+  importCSV() {
+    console.log(this.selectedFile);
+    this.http.uploadCsv(this.data.getAccessToken(), this.selectedFile).subscribe(i => {
+      console.log(i);
+    }, error => {
+      console.log(error);
+    });
   }
 }
 

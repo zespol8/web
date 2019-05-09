@@ -14,7 +14,7 @@ export class EventsComponent implements OnInit {
 
   eventList: Array<Post> = [];
   pointList: Array<Post> = [];
-  accesToken = this.data.accessToken;
+  accesToken = this.data.getAccessToken();
 
   constructor(public tf: TrueFalseService, private http: HttpService, private data: DataService, private router: Router, private route: ActivatedRoute) {
     if (!data.isLoggedIn()) {

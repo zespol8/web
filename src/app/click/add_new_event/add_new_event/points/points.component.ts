@@ -36,7 +36,7 @@ export class PointsComponent implements OnInit {
   }
 
   addPointEventToServer() {
-    const accessToken = this.data.accessToken;
+    const accessToken = this.data.getAccessToken();
     for (this.point of this.pointList) {
       console.log(this.point);
       this.http.postAddPointAdmin(this.point, accessToken).subscribe(i => {

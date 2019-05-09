@@ -10,7 +10,7 @@ import {HttpErrorResponse} from '@angular/common/http';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css', '../../../../node_modules/bootstrap/dist/css/bootstrap.min.css']
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
   log: Post = {};
@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
     console.log(this.log);
     this.http.postLoginAdmin(this.log).subscribe(i => {
       this.data.saveAccessToken(i.accessToken);
-      console.log(this.data.accessToken);
+      console.log(this.data.getAccessToken());
       this.router.navigate(['/main'], {relativeTo: this.route});
     }, error => {
       this.http.errors = error;

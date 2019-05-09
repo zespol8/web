@@ -6,7 +6,8 @@
         <button type="button" class="btn btn-outline-dark btn-sm" (click)="openNewEvent()">Dodaj wydarzenie</button>
       </li>
       <li class="nav-item">
-        <button type="button" class="btn btn-outline-dark btn-sm" (click)="importCSV()">Importuj z CSV</button>
+        <button type="button" class="btn btn-outline-dark btn-sm" (click)="isCollapsed = !isCollapsed"
+                [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">Importuj z CSV</button>
       </li>
       <li class="nav-item">
         <button type="button" class="btn btn-outline-dark btn-sm" (click)="exportCSV()">Exportuj do CSV</button>
@@ -16,6 +17,21 @@
       </li>
     </ul>
   </div>
+  <div id="collapseExample" [ngbCollapse]="isCollapsed">
+    <div class="card">
+      <div class="card-body">
+        <div class="input-group">
+          <div class="custom-file">
+            <input type="file" (change)="fileAdd($event)" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
+            <label class="custom-file-label" for="inputGroupFile04">Wybierz plik</label>
+          </div>
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button" (click)="importCSV()" id="inputGroupFileAddon04">Wyślij</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div><br>
   <app-events></app-events>
 <!--  <app-map *ngIf=tf.map_c_show id="map"> </app-map>-->
 <!--  <app-click></app-click>-->

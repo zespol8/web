@@ -18,13 +18,13 @@ export class EditComponent implements OnInit {
 
   lookButton() {
     console.log('Nowa lista');
-    this.http.getEventsAdmin(this.data.accessToken).subscribe(i => {
+    this.http.getEventsAdmin(this.data.getAccessToken()).subscribe(i => {
       this.eventList = i;
     });
   }
 
   deleteEvent(id: number) {
-    this.http.postEventDelete(id, this.data.accessToken).subscribe(i => {
+    this.http.postEventDelete(id, this.data.getAccessToken()).subscribe(i => {
       console.log(i);
     });
     setTimeout(() => this.lookButton(), 2000); // Poprawić timeout czekania na nowa liste.
@@ -46,7 +46,7 @@ export class EditComponent implements OnInit {
 
   ngOnInit() {
     console.log('Nowa lista');
-    this.http.getEventsAdmin(this.data.accessToken).subscribe(i => {
+    this.http.getEventsAdmin(this.data.getAccessToken()).subscribe(i => {
       this.eventList = i;
     });
   }

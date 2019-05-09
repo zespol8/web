@@ -7,7 +7,6 @@ import {isNullOrUndefined} from 'util';
 })
 
 export class DataService {
-  public accessToken = '';
   public error = '';
   public dane: Post;
   public lng = 0;
@@ -26,7 +25,6 @@ export class DataService {
   }
 
   public saveAccessToken(accessToken: string) {
-    this.accessToken = accessToken;
     sessionStorage.setItem('token', accessToken);
   }
 
