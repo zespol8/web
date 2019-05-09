@@ -13,7 +13,8 @@ export class MainComponent {
   public isCollapsed = true;
   selectedFile: File = null;
 
-  constructor(public http: HttpService, private data: DataService, public tf: TrueFalseService, private router: Router, private route: ActivatedRoute) {
+  constructor(public http: HttpService, private data: DataService, public tf: TrueFalseService,
+    private router: Router, private route: ActivatedRoute) {
     if (!this.data.isLoggedIn()) {
       this.router.navigate(['/login'], {relativeTo: this.route});
     }

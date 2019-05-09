@@ -40,6 +40,7 @@ export class EventComponent implements OnInit {
     this.http.getEventAdminById(this.data.getAccessToken(), id).subscribe(i => {
       console.log(i);
       this.event = i;
+      this.data.isMarkerVisible = true;
     });
   }
 
@@ -51,6 +52,7 @@ export class EventComponent implements OnInit {
     if (this.data.error === '') {
       console.log(this.event);
       this.http.postAddEventAdmin(this.event, accessToken).subscribe(i => {
+        console.log('Dodano nowy event o ID: ' + i.eventId);
         this.data.newEventId = i.newEventId;
         this.router.navigate(['/event/' + i.newEventId], {relativeTo: this.route});
       }, error => {
