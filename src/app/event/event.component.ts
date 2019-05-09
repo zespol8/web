@@ -57,7 +57,7 @@ export class EventComponent implements OnInit {
       if (!(this.isNew)) { // jeśli true to edycja eventu
         this.http.postEventEdit(this.event.id, this.event, accessToken).subscribe(i => {
           console.log('Edycja eventu: ' + i);
-          this.router.navigate(['/event/' + this.event.id], { relativeTo: this.route });
+          window.open(window.location.origin + '/event/' + this.event.id,"_self");
         }, error => {
           console.log(error);
         });
@@ -66,7 +66,7 @@ export class EventComponent implements OnInit {
           console.log('Dodano nowy event o ID: ' + i.newEventId);
           console.log(i);
           this.data.newEventId = i.newEventId;
-          this.router.navigate(['/event/' + i.newEventId], { relativeTo: this.route });
+          window.open(window.location.origin + '/event/' + i.newEventId,"_self");
         }, error => {
           console.log(error);
         });
