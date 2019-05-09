@@ -78,6 +78,16 @@ export class EventComponent implements OnInit {
     console.log('Edycja punktów');
   }
 
+  deleteEvent() {
+    const accessToken = this.data.getAccessToken();
+    this.http.postEventDelete(this.event.id, accessToken).subscribe(i => {
+      console.log('Usunięto event: ' + this.event.id);
+      this.router.navigate(['/main'], { relativeTo: this.route });
+    }, error => {
+      console.log(error);
+    });
+  }
+
   back() {
     this.router.navigate(['/main'], { relativeTo: this.route });
   }

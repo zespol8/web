@@ -9,7 +9,7 @@
         <button type="button" class="btn btn-outline-dark btn-sm" (click)="editPoints()">Punkty wydarzenia</button>
       </li>
       <li class="nav-item" *ngIf="!isNew">
-        <button type="button" class="btn btn-outline-dark btn-sm">Usuń</button>
+        <button type="button" class="btn btn-outline-dark btn-sm" (click)="deleteEvent()">Usuń</button>
       </li>
       <li class="nav-item" *ngIf="!isNew">
         <button type="button" class="btn btn-outline-dark btn-sm">Dodaj zdjęcie</button>
