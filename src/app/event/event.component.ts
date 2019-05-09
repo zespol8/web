@@ -17,7 +17,7 @@ export class EventComponent implements OnInit {
   pointList: Array<Post> = [];
   isNew = false;
 
-  constructor(public tf: TrueFalseService, private data: DataService, private http: HttpService,
+  constructor(public tf: TrueFalseService, public data: DataService, private http: HttpService,
     private route: ActivatedRoute, private router: Router) {
     if (!data.isLoggedIn()) {
       this.router.navigate(['/login'], { relativeTo: this.route });
