@@ -16,7 +16,8 @@ export class EventsComponent implements OnInit {
   pointList: Array<Post> = [];
   accesToken = this.data.getAccessToken();
 
-  constructor(public tf: TrueFalseService, private http: HttpService, private data: DataService, private router: Router, private route: ActivatedRoute) {
+  constructor(public tf: TrueFalseService, private http: HttpService, private data: DataService,
+    private router: Router, private route: ActivatedRoute) {
     if (!data.isLoggedIn()) {
       this.router.navigate(['/login'], {relativeTo: this.route});
     }
@@ -35,6 +36,7 @@ export class EventsComponent implements OnInit {
   deleteEvent(id: number) {
     this.http.postEventDelete(id, this.accesToken).subscribe(i => {
       console.log(i);
+      this.loadEvents();
     });
   }
 

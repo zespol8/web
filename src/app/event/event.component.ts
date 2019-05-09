@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Post} from '../main/main.component';
-import {TrueFalseService} from '../services/true-false.service';
-import {DataService} from '../services/data.service';
-import {HttpService} from '../services/http.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Post } from '../main/main.component';
+import { TrueFalseService } from '../services/true-false.service';
+import { DataService } from '../services/data.service';
+import { HttpService } from '../services/http.service';
 
 @Component({
   selector: 'app-event',
@@ -20,27 +20,31 @@ export class EventComponent implements OnInit {
   constructor(public tf: TrueFalseService, private data: DataService, private http: HttpService,
     private route: ActivatedRoute, private router: Router) {
     if (!data.isLoggedIn()) {
-      this.router.navigate(['/login'], {relativeTo: this.route});
+      this.router.navigate(['/login'], { relativeTo: this.route });
     }
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');
       if (id === 'new') {
         this.isNew = true;
+        console.log('isNew: ' + this.isNew);
       } else {
         this.loadEventData(Number(id));
+        console.log('isNew: ' + this.isNew);
       }
     });
   }
 
   ngOnInit() {
-
+    console.log('oninit');
   }
+
+
 
   private loadEventData(id: number) {
     this.http.getEventAdminById(this.data.getAccessToken(), id).subscribe(i => {
-      console.log(i);
       this.event = i;
       this.data.isMarkerVisible = true;
+      console.log('Load Event');
     });
   }
 
@@ -50,18 +54,31 @@ export class EventComponent implements OnInit {
     const accessToken = this.data.getAccessToken();
     this.data.error = this.data.checkSyntax(this.event); //  SPRAWDZANIE POPRAWNOSCI W INPUTACH
     if (this.data.error === '') {
-      console.log(this.event);
-      this.http.postAddEventAdmin(this.event, accessToken).subscribe(i => {
-        console.log('Dodano nowy event o ID: ' + i.eventId);
-        this.data.newEventId = i.newEventId;
-        this.router.navigate(['/event/' + i.newEventId], {relativeTo: this.route});
-      }, error => {
-        console.log(error);
-      });
+      if (!(this.isNew)) { // jeśli true to edycja eventu
+        this.http.postEventEdit(this.event.id, this.event, accessToken).subscribe(i => {
+          console.log('Edycja eventu: ' + i);
+          this.router.navigate(['/event/' + this.event.id], { relativeTo: this.route });
+        }, error => {
+          console.log(error);
+        });
+      } else { //// jeśli false to nowy event
+        this.http.postAddEventAdmin(this.event, accessToken).subscribe(i => {
+          console.log('Dodano nowy event o ID: ' + i.newEventId);
+          console.log(i);
+          this.data.newEventId = i.newEventId;
+          this.router.navigate(['/event/' + i.newEventId], { relativeTo: this.route });
+        }, error => {
+          console.log(error);
+        });
+      }
     }
   }
 
+  editPoints() {
+    console.log('Edycja punktów');
+  }
+
   back() {
-    this.router.navigate(['/main'], {relativeTo: this.route});
+    this.router.navigate(['/main'], { relativeTo: this.route });
   }
 }

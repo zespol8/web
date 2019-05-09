@@ -6,6 +6,9 @@
         <button type="button" class="btn btn-outline-dark btn-sm" (click)="addEvent()">Zapisz zmiany</button>
       </li>
       <li class="nav-item" *ngIf="!isNew">
+        <button type="button" class="btn btn-outline-dark btn-sm" (click)="editPoints()">Punkty wydarzenia</button>
+      </li>
+      <li class="nav-item" *ngIf="!isNew">
         <button type="button" class="btn btn-outline-dark btn-sm">Usuń</button>
       </li>
       <li class="nav-item" *ngIf="!isNew">
@@ -15,7 +18,7 @@
         <button type="button" class="btn btn-outline-dark btn-sm" (click)="back()">Powrót</button>
       </li>
     </ul>
-    <div style="color: red">
+    <div style="color: green">
       {{this.data.error}}
     </div>
   </div>
