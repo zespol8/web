@@ -1,6 +1,6 @@
-import {Injectable} from '@angular/core';
-import {Post} from '../main/main.component';
-import {isNullOrUndefined} from 'util';
+import { Injectable } from '@angular/core';
+import { Post } from '../main/main.component';
+import { isNullOrUndefined } from 'util';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ export class DataService {
   public lat = 0;
   public newEventId: number;
   public listOfAll: Array<Post>;
-  public onePoint: Post = {geographicCoordinate: {}};
+  public onePoint: Post = { geographicCoordinate: {} };
 
   constructor() {
     this.onePoint.geographicCoordinate.latitude = 53.01371393719378;
@@ -38,14 +38,24 @@ export class DataService {
   }
 
   checkSyntax(data: Post): string { // Sprawdzanie czy formularz eventu lub punktu zostal poprawnie uzupelniony.
-    if (data.geographicCoordinate.latitude === 0 && data.geographicCoordinate.longitude === 0) {
-      return 'Pick cords on map...';
-    } else if (data.name.length < 5) {
-      return 'Name is to short...';
+    if (data.geographicCoordinate.latitude === 0 || data.geographicCoordinate.longitude === 0) {
+      return 'Wybierze lokalizację na mapie.';
+    } else if (data.name.length < 3) {
+      return 'Nazwa minimum 3 znaki.';
     } else if (data.description.length < 10) {
-      return 'Desc. min. 10...';
-    } else if (data.place.length < 5) {
-      return 'Place is to short...';
+      return 'Opis minimum 10 znaków.';
+    } else if (data.place.length < 3) {
+      return 'Miejsce minimum 3 znaki.';
+    } else if (data.startDate == null) {
+      return 'Podaj datę rozpoczęcia.';
+    } else if (data.endDate == null) {
+      return 'Podaj datę zakończenia.';
+    } else if (data.openingHours == null) {
+      return 'Podaj godziny otwarcia.';
+    } else if (data.price == null) {
+      return 'Podaj cenę wstępu.';
+    } else if (data.startDate == null) {
+      return 'Podaj minimalny wiek udziału.';
     } else {
       return '';
     }
@@ -74,8 +84,8 @@ export class DataService {
 
   resetData(): Post {
     return {
-      name: '', description: '', place: '', geographicCoordinate: {latitude: 0, longitude: 0},
-      endDate: 0, startDate: 0
+      name: '', description: '', shortDescription: '', place: '', geographicCoordinate: { latitude: 0, longitude: 0 },
+      endDate: null, startDate: null, openingHours: null, price: null, minAge: null
     };
   }
 }

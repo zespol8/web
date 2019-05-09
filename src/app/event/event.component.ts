@@ -12,12 +12,13 @@ import {HttpService} from '../services/http.service';
 })
 export class EventComponent implements OnInit {
 
-  event: Post = {};
+  event = this.data.resetData();
   onePoint: Post = {};
   pointList: Array<Post> = [];
   isNew = false;
 
-  constructor(public tf: TrueFalseService, private data: DataService, private http: HttpService, private route: ActivatedRoute, private router: Router) {
+  constructor(public tf: TrueFalseService, private data: DataService, private http: HttpService,
+    private route: ActivatedRoute, private router: Router) {
     if (!data.isLoggedIn()) {
       this.router.navigate(['/login'], {relativeTo: this.route});
     }
@@ -46,9 +47,9 @@ export class EventComponent implements OnInit {
     this.event.geographicCoordinate.latitude = this.data.lat;
     this.event.geographicCoordinate.longitude = this.data.lng;
     const accessToken = this.data.getAccessToken();
-    this.data.error = this.data.checkSyntax(this.data); //  SPRAWDZANIE POPRAWNOSCI W INPUTACH
+    this.data.error = this.data.checkSyntax(this.event); //  SPRAWDZANIE POPRAWNOSCI W INPUTACH
     if (this.data.error === '') {
-      this.http.postAddEventAdmin(this.data, accessToken).subscribe(i => {
+      this.http.postAddEventAdmin(this.event, accessToken).subscribe(i => {
         this.data.newEventId = i.newEventId;
         this.router.navigate(['/event/' + i.newEventId], {relativeTo: this.route});
       });
