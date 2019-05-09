@@ -1,7 +1,7 @@
 <div class="map">
     <agm-map [longitude]="lng" [latitude]="lat" (mapClick)="onChoseLocation($event)" [zoom]="zoom">
-        <div>
-            <agm-marker [latitude]="this.cords.onePoint.geographicCoordinate.latitude" [longitude]="this.cords.onePoint.geographicCoordinate.longitude">
+        <div *ngIf="this.cords.isMarkerVisible">
+            <agm-marker [latitude]="this.lat" [longitude]="this.lng" [markerDraggable]=true (dragEnd)="dragOneMarker($event)">
                 
             </agm-marker>
         </div>

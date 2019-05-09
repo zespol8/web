@@ -14,6 +14,7 @@ export class DataService {
   public newEventId: number;
   public listOfAll: Array<Post>;
   public onePoint: Post = { geographicCoordinate: {} };
+  public isMarkerVisible = false;
 
   constructor() {
     this.onePoint.geographicCoordinate.latitude = 53.01371393719378;
@@ -44,6 +45,8 @@ export class DataService {
       return 'Nazwa minimum 3 znaki.';
     } else if (data.description.length < 10) {
       return 'Opis minimum 10 znaków.';
+    } else if (data.shortDescription.length < 5) {
+      return 'Krótki opis minimum 5 znaków.';
     } else if (data.place.length < 3) {
       return 'Miejsce minimum 3 znaki.';
     } else if (data.startDate == null) {
@@ -54,7 +57,7 @@ export class DataService {
       return 'Podaj godziny otwarcia.';
     } else if (data.price == null) {
       return 'Podaj cenę wstępu.';
-    } else if (data.startDate == null) {
+    } else if (data.minAge == null) {
       return 'Podaj minimalny wiek udziału.';
     } else {
       return '';

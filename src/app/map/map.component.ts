@@ -20,12 +20,18 @@ export class MapComponent {
     this.lat = 53.01371393719378;
   }
   onChoseLocation(event) {
+    this.cords.isMarkerVisible = true;
     this.lng = event.coords.lng;
     this.lat = event.coords.lat;
     this.cords.lng = this.lng;
     this.cords.lat = this.lat;
     this.cords.onePoint.geographicCoordinate.latitude = this.lat;
     this.cords.onePoint.geographicCoordinate.longitude = this.lng;
+    console.log('onMapClick Lng: ' + this.cords.lng + ' Lat: ' + this.cords.lat);
+  }
+  dragOneMarker(event) {
+    this.cords.lat = event.coords.lat;
+    this.cords.lng = event.coords.lng;
     console.log('onMapClick Lng: ' + this.cords.lng + ' Lat: ' + this.cords.lat);
   }
   markerDrag(event, id: number) {

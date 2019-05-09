@@ -49,9 +49,12 @@ export class EventComponent implements OnInit {
     const accessToken = this.data.getAccessToken();
     this.data.error = this.data.checkSyntax(this.event); //  SPRAWDZANIE POPRAWNOSCI W INPUTACH
     if (this.data.error === '') {
+      console.log(this.event);
       this.http.postAddEventAdmin(this.event, accessToken).subscribe(i => {
         this.data.newEventId = i.newEventId;
         this.router.navigate(['/event/' + i.newEventId], {relativeTo: this.route});
+      }, error => {
+        console.log(error);
       });
     }
   }
