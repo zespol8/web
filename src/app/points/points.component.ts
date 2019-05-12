@@ -31,6 +31,9 @@ export class PointsComponent {
       console.log(i);
     });
   }
+  openNevPoint() {
+    console.log('New point');
+  }
   back() {
     this.router.navigate(['/event/' + this.eventId], { relativeTo: this.route });
   }
