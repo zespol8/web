@@ -1,7 +1,7 @@
 <div class="d-flex justify-content-around flex-wrap">
   <div class="card" *ngFor="let event of eventList">
     <div class="card-image">
-      <img [src]="eventsFirstImages[event.id] | safe" alt="Image">
+      <img [src]="eventsFirstImages[event.id] | safe" alt="BRAK ZDJĘĆ" (error)="altImage(event.id)">
     </div>
     <div class="card-body">
       <h5 class="card-title">{{event.name}}</h5>
