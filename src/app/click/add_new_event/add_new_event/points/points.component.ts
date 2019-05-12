@@ -9,7 +9,8 @@ import {Post} from '../../../../main/main.component';
   templateUrl: './points.component.html',
   styleUrls: ['./points.component.css']
 })
-export class PointsComponent implements OnInit {
+// tslint:disable-next-line:component-class-suffix
+export class PointsComponentOld implements OnInit {
   point: Post;
   pointList: Array<Post> = [];
   error: string;

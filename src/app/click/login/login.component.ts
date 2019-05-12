@@ -16,7 +16,8 @@ export class LoginComponent implements OnInit {
   log: Post = {};
   loginError: string;
 
-  constructor(private data: DataService, private http: HttpService, public tf: TrueFalseService, private router: Router, private route: ActivatedRoute) {
+  constructor(private data: DataService, private http: HttpService,
+    public tf: TrueFalseService, private router: Router, private route: ActivatedRoute) {
     if (this.data.isLoggedIn()) {
       this.router.navigate(['/main'], {relativeTo: this.route});
     }
