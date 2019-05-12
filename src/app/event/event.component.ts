@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Post} from '../main/main.component';
-import {TrueFalseService} from '../services/true-false.service';
-import {DataService} from '../services/data.service';
-import {HttpService} from '../services/http.service';
-import {NgbTimepickerConfig} from '@ng-bootstrap/ng-bootstrap';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Post } from '../main/main.component';
+import { TrueFalseService } from '../services/true-false.service';
+import { DataService } from '../services/data.service';
+import { HttpService } from '../services/http.service';
+import { NgbTimepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-event',
@@ -13,22 +13,10 @@ import {NgbTimepickerConfig} from '@ng-bootstrap/ng-bootstrap';
 })
 export class EventComponent implements OnInit {
 
-  event = this.data.resetData();
-  onePoint: Post = {};
-  pointList: Array<Post> = [];
-  isNew = false;
-  public isCollapsed = true;
-  selectedFile: File = null;
-  imagesToShow = [];
-  startDate = {'year': 2019, 'month': 5, 'day': 9};
-  startTime = {'hour': 13, 'minute': 30, 'second': 0};
-  endDate = {'year': 2019, 'month': 5, 'day': 9};
-  endTime = {'hour': 13, 'minute': 30, 'second': 0};
-
   constructor(public tf: TrueFalseService, public data: DataService, private http: HttpService,
-              private route: ActivatedRoute, private router: Router, config: NgbTimepickerConfig) {
+    private route: ActivatedRoute, private router: Router, config: NgbTimepickerConfig) {
     if (!data.isLoggedIn()) {
-      this.router.navigate(['/login'], {relativeTo: this.route});
+      this.router.navigate(['/login'], { relativeTo: this.route });
     }
     config.seconds = true;
     config.spinners = false;
@@ -44,6 +32,25 @@ export class EventComponent implements OnInit {
     });
   }
 
+  event = this.data.resetData();
+  onePoint: Post = {};
+  pointList: Array<Post> = [];
+  isNew = false;
+  public isCollapsed = true;
+  selectedFile: File = null;
+  imagesToShow = [];
+  startDate = { 'year': 2019, 'month': 5, 'day': 9 };
+  startTime = { 'hour': 13, 'minute': 30, 'second': 0 };
+  endDate = { 'year': 2019, 'month': 5, 'day': 9 };
+  endTime = { 'hour': 13, 'minute': 30, 'second': 0 };
+
+  static addLeadingZero(x: number): string {
+    if (x < 10) {
+      return '0' + x;
+    }
+    return x.toString();
+  }
+
   ngOnInit() {
     console.log('oninit');
   }
@@ -56,10 +63,10 @@ export class EventComponent implements OnInit {
       this.data.isMarkerVisible = true;
       const startDate = this.getDateFromMillis(i.startDate);
       const endDate = this.getDateFromMillis(i.endDate);
-      this.startDate = {year: startDate.year, month: startDate.month, day: startDate.day};
-      this.startTime = {hour: startDate.hour, minute: startDate.minute, second: startDate.second};
-      this.endDate = {year: endDate.year, month: endDate.month, day: endDate.day};
-      this.endTime = {hour: endDate.hour, minute: endDate.minute, second: endDate.second};
+      this.startDate = { year: startDate.year, month: startDate.month, day: startDate.day };
+      this.startTime = { hour: startDate.hour, minute: startDate.minute, second: startDate.second };
+      this.endDate = { year: endDate.year, month: endDate.month, day: endDate.day };
+      this.endTime = { hour: endDate.hour, minute: endDate.minute, second: endDate.second };
       console.log(this.startDate);
       console.log(this.endDate);
       console.log('Load Event');
@@ -117,7 +124,9 @@ export class EventComponent implements OnInit {
   }
 
   private getDateAsUTC(date: { month: number; year: number; day: number }, time: { hour: number; minute: number; second: number }) {
-    return date.year + '-' + EventComponent.addLeadingZero(date.month + 1) + '-' + EventComponent.addLeadingZero(date.day) + 'T' + EventComponent.addLeadingZero(time.hour) + ':' + EventComponent.addLeadingZero(time.minute) + ':' + EventComponent.addLeadingZero(time.second);
+    return date.year + '-' + EventComponent.addLeadingZero(date.month + 1) + '-' + EventComponent.addLeadingZero(date.day) +
+      'T' + EventComponent.addLeadingZero(time.hour) + ':' + EventComponent.addLeadingZero(time.minute)
+      + ':' + EventComponent.addLeadingZero(time.second);
   }
 
   private getDateFromMillis(millis: number): { month: number; year: number; day: number; hour: number; minute: number; second: number } {
@@ -148,31 +157,25 @@ export class EventComponent implements OnInit {
   }
 
   editPoints() {
-    console.log('Edycja punktów');
+    console.log('Point eddit/add init: ' + this.event.id);
+    this.router.navigate(['/points/' + this.event.id], { relativeTo: this.route });
   }
 
   deleteEvent() {
     const accessToken = this.data.getAccessToken();
     this.http.postEventDelete(this.event.id, accessToken).subscribe(i => {
       console.log('Usunięto event: ' + this.event.id);
-      this.router.navigate(['/main'], {relativeTo: this.route});
+      this.router.navigate(['/main'], { relativeTo: this.route });
     }, error => {
       console.log(error);
     });
   }
 
   back() {
-    this.router.navigate(['/main'], {relativeTo: this.route});
+    this.router.navigate(['/main'], { relativeTo: this.route });
   }
 
   getDate(date: { month: number; year: number; day: number }) {
     return date.year + '-' + EventComponent.addLeadingZero(date.month + 1) + '-' + EventComponent.addLeadingZero(date.day);
-  }
-
-  static addLeadingZero(x: number): string {
-    if (x < 10) {
-      return '0' + x;
-    }
-    return x.toString();
   }
 }

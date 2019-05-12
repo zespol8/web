@@ -5,6 +5,7 @@ import {LoginComponent} from './click/login/login.component';
 import {MainComponent} from './main/main.component';
 import {RegisterComponent} from './click/register/register.component';
 import {EventComponent} from './event/event.component';
+import {PointsComponent} from './points/points.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -12,8 +13,9 @@ const routes: Routes = [
   {path: 'product', component: ProductComponent},
   {path: 'main', component: MainComponent},
   {path: 'event/:id', component: EventComponent},
+  {path: 'points/:id', component: PointsComponent},
   {path: '', redirectTo: '/product', pathMatch: 'full'},
-  {path: '**', redirectTo: '/product', pathMatch: 'full'}
+  {path: '**', redirectTo: '/product', pathMatch: 'full'},
 ];
 
 @NgModule({

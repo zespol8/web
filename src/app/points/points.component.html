@@ -1,0 +1,36 @@
+<div class="container main-box">
+  <div class="titles">
+  <h1>Punkty wydarzenia</h1>
+    <ul class="nav justify-content-center">
+      <li class="nav-item">
+        <button type="button" class="btn btn-outline-dark btn-sm" (click)="openNewEvent()">Dodaj nowy punkt</button>
+      </li>
+      <li class="nav-item">
+        <button type="button" class="btn btn-outline-dark btn-sm" (click)="back()">Wróć</button>
+      </li>
+    </ul>
+  </div>
+  <app-map></app-map>
+  <div class="d-flex justify-content-around flex-wrap">
+    <div class="card" *ngFor="let point of pointsList">
+      <div class="card-body">
+        <h5 class="card-title">{{point.name}}</h5>
+        <p class="card-text">{{point.shortDescription}}</p>
+      </div>
+      <ul class="list-group list-group-flush">
+  
+        <li class="list-group-item"><label>Miejsce: </label> {{point.place}}</li>
+      </ul>
+      <div class="card-body">
+        <div class="buttons">
+          <button type="button" (click)="pointDetails(point.id)" class="btn btn-outline-primary btn-sm">Więcej</button>
+          <button type="button" (click)="deletePoint(point.id)" class="btn btn-outline-danger btn-sm">Usuń</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+

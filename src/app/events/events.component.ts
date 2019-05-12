@@ -67,7 +67,9 @@ export class EventsComponent implements OnInit {
 
   getDate(millis: number) {
     const date = new Date(millis);
-    return date.getFullYear() + '-' + EventComponent.addLeadingZero(date.getMonth() + 1) + '-' + EventComponent.addLeadingZero(date.getDay()) + ' ' + EventComponent.addLeadingZero(date.getHours()) + ':' + EventComponent.addLeadingZero(date.getMinutes());
+    return date.getFullYear() + '-' + EventComponent.addLeadingZero(date.getMonth() + 1) + '-' +
+     EventComponent.addLeadingZero(date.getDay()) + ' ' + EventComponent.addLeadingZero(date.getHours())
+      + ':' + EventComponent.addLeadingZero(date.getMinutes());
   }
 
 }

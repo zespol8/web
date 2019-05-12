@@ -13,7 +13,7 @@ import {AddNewEventComponent} from './click/add_new_event/add_new_event/add-new-
 import {NavigationComponent} from './click/add_new_event/navigation/navigation.component';
 import {TrueFalseService} from './services/true-false.service';
 import {EditComponent} from './click/add_new_event/edit/edit.component';
-import {PointsComponent} from './click/add_new_event/add_new_event/points/points.component';
+import {PointsComponent} from './points/points.component';
 import {EditEventComponent} from './click/add_new_event/edit/edit-event/edit-event.component';
 import {EditNavComponent} from './click/add_new_event/edit/edit-nav/edit-nav.component';
 import {LoginComponent} from './click/login/login.component';

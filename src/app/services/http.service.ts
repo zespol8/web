@@ -79,7 +79,7 @@ export class HttpService { // globalny servis do komunikacji z serverem
       + eventId + '/point/' + pointId + '/?accessToken=' + accessToken);
   }
 
-  getEventsPointsAdmin(accessToken: string, id: number): Observable<Array<Post>> {
+  getEventsPointsAdmin(accessToken: string, id: string): Observable<Array<Post>> {
     // Pobieranie punktów eventu o danym id
     return this.http.get<Array<Post>>('https://team8-server.herokuapp.com/admin/' + id + '/points?accessToken=' + accessToken);
   }
@@ -112,11 +112,13 @@ export class HttpService { // globalny servis do komunikacji z serverem
     // Dodaj zdjęcie do punktu
     const formData: FormData = new FormData();
     formData.append('file', image);
-    return this.http.post('https://team8-server.herokuapp.com/admin/' + eventId + '/point/' + pointId + '/image?accessToken=' + accessToken, formData);
+    return this.http.post('https://team8-server.herokuapp.com/admin/' + eventId
+     + '/point/' + pointId + '/image?accessToken=' + accessToken, formData);
   }
 
   getEventImage(accessToken: string, eventId: number, imageNumber: number): Observable<any> {
-    return this.http.get('https://team8-server.herokuapp.com/admin/event/' + eventId + '/image/' + imageNumber + '?accessToken=' + accessToken, {responseType: 'blob'});
+    return this.http.get('https://team8-server.herokuapp.com/admin/event/' + eventId +
+     '/image/' + imageNumber + '?accessToken=' + accessToken, {responseType: 'blob'});
   }
 
 }

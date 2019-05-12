@@ -52,11 +52,6 @@ export class EditEventComponent implements OnInit {
   }
 
   look() { // Odswiezanie listy punktow dla danego eventu
-    this.http.getEventsPointsAdmin(this.data.getAccessToken(), this.data.newEventId).subscribe(i => {
-      this.pointList = i;
-      this.data.listOfAll = this.pointList;
-      console.log('Wczytanie punktów eventu: ' + this.data.newEventId);
-    });
     this.tf.showListOfPoints = true;
   }
 
