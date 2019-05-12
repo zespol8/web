@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Observable} from 'rxjs/internal/Observable';
 import {HttpErrors, Post} from '../main/main.component';
+import {TrueFalseService} from './true-false.service';
 
 @Injectable()
 export class HttpService { // globalny servis do komunikacji z serverem
@@ -83,9 +84,9 @@ export class HttpService { // globalny servis do komunikacji z serverem
     return this.http.get<Array<Post>>('https://team8-server.herokuapp.com/admin/' + id + '/points?accessToken=' + accessToken);
   }
 
-  isActive(accessToken: string): Observable<Post> {
+  isActive(accessToken: string): Observable<any> {
     // Metotda sprawdza czy jestes aktywny
-    return this.http.get<Post>('https://team8-server.herokuapp.com/admin/active?accessToken=' + accessToken);
+    return this.http.get('https://team8-server.herokuapp.com/admin/active?accessToken=' + accessToken);
   }
 
   downloadEventsInCSV(accessToken: string): string {
@@ -98,5 +99,32 @@ export class HttpService { // globalny servis do komunikacji z serverem
     const formData: FormData = new FormData();
     formData.append('file', csv);
     return this.http.post('https://team8-server.herokuapp.com/events.csv?accessToken=' + accessToken, formData);
+  }
+
+  addImageToEvent(accessToken: string, eventId: number, image: File) {
+    // Dodaj zdjęcie do eventu
+    const formData: FormData = new FormData();
+    formData.append('file', image);
+    return this.http.post('https://team8-server.herokuapp.com/admin/event/' + eventId + '/image?accessToken=' + accessToken, formData);
+  }
+
+  addImageToPoint(accessToken: string, eventId: number, pointId: number, image: File) {
+    // Dodaj zdjęcie do punktu
+    const formData: FormData = new FormData();
+    formData.append('file', image);
+    return this.http.post('https://team8-server.herokuapp.com/admin/' + eventId + '/point/' + pointId + '/image?accessToken=' + accessToken, formData);
+  }
+
+  getEventImage(accessToken: string, eventId: number, imageNumber: number): Observable<any> {
+    return this.http.get('https://team8-server.herokuapp.com/admin/event/' + eventId + '/image/' + imageNumber + '?accessToken=' + accessToken, {responseType: 'blob'});
+  }
+
+}
+
+export class BooleanWrapper {
+  b: boolean;
+
+  constructor(b: boolean) {
+    this.b = b;
   }
 }

@@ -6,7 +6,7 @@ import {AppComponent} from './app.component';
 import {AgmCoreModule} from '@agm/core';
 import {MapComponent} from './map/map.component';
 import {HttpService} from './services/http.service';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {ClickComponent} from './click/click.component';
 import {DataService} from './services/data.service';
 import {AddNewEventComponent} from './click/add_new_event/add_new_event/add-new-event.component';
@@ -25,6 +25,9 @@ import {ProductComponent} from './product/product.component';
 import {EventsComponent} from './events/events.component';
 import {EventComponent} from './event/event.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { SafePipe } from './safe.pipe';
+import {IsActiveInterceptor} from './is-active-interceptor';
+import { TwoDigitsPipe } from './two-digits.pipe';
 
 @NgModule({
   declarations: [
@@ -44,7 +47,9 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     MainComponent,
     ProductComponent,
     EventsComponent,
-    EventComponent
+    EventComponent,
+    SafePipe,
+    TwoDigitsPipe
   ],
   imports: [
     BrowserModule,
@@ -56,7 +61,9 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     }),
     NgbModule
   ],
-  providers: [HttpService, DataService, TrueFalseService],
+  providers: [HttpService, DataService, TrueFalseService,
+    { provide: HTTP_INTERCEPTORS, useClass: IsActiveInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -14,7 +14,7 @@ export class MainComponent {
   selectedFile: File = null;
 
   constructor(public http: HttpService, private data: DataService, public tf: TrueFalseService,
-    private router: Router, private route: ActivatedRoute) {
+              private router: Router, private route: ActivatedRoute) {
     if (!this.data.isLoggedIn()) {
       this.router.navigate(['/login'], {relativeTo: this.route});
     }
@@ -87,6 +87,7 @@ export interface Post {
     latitude?: number;
     longitude?: number;
   };
+  imagesNumber?: number;
 
   status?: number;
   statusText?: string;

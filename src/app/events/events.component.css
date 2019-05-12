@@ -9,3 +9,15 @@
   display: flex;
   justify-content: space-around;
 }
+
+
+.card-image {
+  height: 250px;
+  margin: auto;
+  width: 100%;
+  text-align: center;
+}
+
+.card-image img {
+  height: 250px;
+}

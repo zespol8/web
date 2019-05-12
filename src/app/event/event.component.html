@@ -12,12 +12,34 @@
         <button type="button" class="btn btn-outline-dark btn-sm" (click)="deleteEvent()">Usuń</button>
       </li>
       <li class="nav-item" *ngIf="!isNew">
-        <button type="button" class="btn btn-outline-dark btn-sm">Dodaj zdjęcie</button>
+        <button type="button" class="btn btn-outline-dark btn-sm" (click)="isCollapsed = !isCollapsed"
+                [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">Dodaj zdjęcie
+        </button>
       </li>
       <li class="nav-item">
         <button type="button" class="btn btn-outline-dark btn-sm" (click)="back()">Powrót</button>
       </li>
     </ul>
+    <div id="collapseExample" [ngbCollapse]="isCollapsed">
+      <div class="card">
+        <div class="card-body">
+          <div class="input-group">
+            <div class="custom-file text-center">
+              <input type="file" (change)="fileAdd($event)" class="custom-file-input" id="inputGroupFile04"
+                     aria-describedby="inputGroupFileAddon04">
+              <label class="custom-file-label" for="inputGroupFile04">Wybierz plik</label>
+            </div>
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" type="button" (click)="addImage()" id="inputGroupFileAddon04">
+                Wyślij
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+
     <div style="color: green">
       {{this.data.error}}
     </div>
@@ -58,36 +80,54 @@
     <div class="form-row">
       <div class="form-group col-md-6">
         <label>Data rozpoczęcia</label>
-        <input [(ngModel)]="event.startDate" type='text' class="form-control" placeholder="...">
+        <div class="form-inline">
+          <div class="form-group">
+            <div class="input-group">
+              <input class="form-control" [placeholder]="getDate(startDate)"
+                     name="dp" [(ngModel)]="startDate" ngbDatepicker #ds="ngbDatepicker">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary calendar" (click)="ds.toggle()" type="button">Otwórz</button>
+              </div>
+            </div>
+          </div>
+          <div class="form-group time-picker">
+            <input type="number" placeholder="13" max="24" min="0" class="form-control" [(ngModel)]="startTime.hour"/>
+            <span class="time-split">:</span>
+            <input type="number" placeholder="30" max="60" min="0" class="form-control" [(ngModel)]="startTime.minute"/>
+          </div>
+        </div>
       </div>
       <div class="form-group col-md-6">
         <label>Data zakończenia</label>
-        <input [(ngModel)]="event.endDate" type='text' class="form-control" placeholder="...">
+        <div class="form-inline">
+          <div class="form-group">
+            <div class="input-group">
+              <input class="form-control" [placeholder]="getDate(endDate)"
+                     name="dp" [(ngModel)]="endDate" ngbDatepicker #d="ngbDatepicker">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button">Otwórz</button>
+              </div>
+            </div>
+          </div>
+          <div class="form-group time-picker">
+            <input type="number" placeholder="13" max="24" min="0" class="form-control" [(ngModel)]="endTime.hour"/>
+            <span class="time-split">:</span>
+            <input type="number" placeholder="30" max="60" min="0" class="form-control" [(ngModel)]="endTime.minute"/>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+  <label>Wybierz miejsce na mapie</label>
   <app-map></app-map>
-  <div *ngIf="!isNew">
-    <div id="carouselExampleFade" class="images carousel slide carousel-fade w-50" data-ride="carousel">
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img src="assets/images/empty-image.png" class="d-block w-100" alt="...">
-        </div>
-        <div class="carousel-item">
-          <img src="assets/images/empty-image.png" class="d-block w-100" alt="...">
-        </div>
-        <div class="carousel-item">
-          <img src="assets/images/empty-image.png" class="d-block w-100" alt="...">
-        </div>
+  <div class="gallery-container" *ngIf="imagesToShow.length > 0">
+    <div class="gallery-title">
+      <h1>Galeria zdjęć</h1>
+    </div>
+    <div class="gallery">
+      <div class="gallery-item" *ngFor="let image of imagesToShow">
+        <img class="gallery-image" [src]="image | safe" alt="...">
       </div>
-      <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Poprzedni</span>
-      </a>
-      <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Następny</span>
-      </a>
     </div>
   </div>
 </div>

@@ -1,10 +1,14 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TrueFalseService {
-  constructor() { }
+  constructor() {
+  }
+
+  isActive = false;
+
   click_c_show1 = true;
   click_c_show2 = false;
   map_c_show = false;

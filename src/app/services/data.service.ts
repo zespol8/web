@@ -1,6 +1,8 @@
-import { Injectable } from '@angular/core';
-import { Post } from '../main/main.component';
-import { isNullOrUndefined } from 'util';
+import {Injectable} from '@angular/core';
+import {Post} from '../main/main.component';
+import {isNullOrUndefined} from 'util';
+import {HttpService} from './http.service';
+import {TrueFalseService} from './true-false.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,16 +15,20 @@ export class DataService {
   public lat = 0;
   public newEventId: number;
   public listOfAll: Array<Post>;
-  public onePoint: Post = { geographicCoordinate: {} };
+  public onePoint: Post = {geographicCoordinate: {}};
   public isMarkerVisible = false;
 
-  constructor() {
+  constructor(private http: HttpService, private trueFalseService: TrueFalseService) {
     this.onePoint.geographicCoordinate.latitude = 53.01371393719378;
     this.onePoint.geographicCoordinate.longitude = 18.598043358450923;
   }
 
-  public getAccessToken(): string {
-    return sessionStorage.getItem('token');
+  getAccessToken(): string {
+    const accessToken = sessionStorage.getItem('token');
+    if (isNullOrUndefined(accessToken) || accessToken === '') {
+      return '';
+    }
+    return accessToken;
   }
 
   public saveAccessToken(accessToken: string) {
@@ -87,7 +93,7 @@ export class DataService {
 
   resetData(): Post {
     return {
-      name: '', description: '', shortDescription: '', place: '', geographicCoordinate: { latitude: 0, longitude: 0 },
+      name: '', description: '', shortDescription: '', place: '', geographicCoordinate: {latitude: 0, longitude: 0},
       endDate: null, startDate: null, openingHours: null, price: null, minAge: null
     };
   }
