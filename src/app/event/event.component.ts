@@ -106,7 +106,7 @@ export class EventComponent implements OnInit {
       if (!(this.isNew)) { // jeśli true to edycja eventu
         this.http.postEventEdit(this.event.id, this.event, accessToken).subscribe(i => {
           console.log('Edycja eventu: ' + i);
-          window.open(window.location.origin + '/event/' + this.event.id, '_self');
+          window.open(window.location.origin + '/web/event/' + this.event.id, '_self');
         }, error => {
           console.log(error);
         });
