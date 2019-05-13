@@ -115,7 +115,7 @@ export class EventComponent implements OnInit {
           console.log('Dodano nowy event o ID: ' + i.newEventId);
           console.log(i);
           this.data.newEventId = i.newEventId;
-          window.open(window.location.origin + '/event/' + i.newEventId, '_self');
+          window.open(window.location.origin + '/web/event/' + i.newEventId, '_self');
         }, error => {
           console.log(error);
         });
