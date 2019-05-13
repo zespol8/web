@@ -32,7 +32,7 @@ export class PointComponent {
     return x.toString();
   }
 
-  constructor(private data: DataService, private http: HttpService,
+  constructor(public data: DataService, private http: HttpService,
     private router: Router, private route: ActivatedRoute, config: NgbTimepickerConfig) {
       if (!data.isLoggedIn()) {
         this.router.navigate(['/login'], { relativeTo: this.route });
@@ -66,6 +66,11 @@ export class PointComponent {
 
   getDate(date: { month: number; year: number; day: number }) {
     return date.year + '-' + PointComponent.addLeadingZero(date.month + 1) + '-' + PointComponent.addLeadingZero(date.day);
+  }
+
+  fileAdd(event) {
+    this.selectedFile = <File>event.target.files[0];
+    console.log(this.selectedFile);
   }
 
 }
