@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from '../services/data.service';
 import { Post } from '../main/main.component';
 import { HttpService } from '../services/http.service';
 import { NgbTimepickerConfig } from '@ng-bootstrap/ng-bootstrap';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-points',
@@ -11,7 +11,7 @@ import { NgbTimepickerConfig } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./points.component.css', '../../../node_modules/bootstrap/dist/css/bootstrap.min.css']
 })
 export class PointsComponent {
-  eventId: string;
+  eventId: number;
   pointsList: Array<Post>;
 
   constructor(private data: DataService, private http: HttpService,
@@ -20,7 +20,7 @@ export class PointsComponent {
       this.router.navigate(['/login'], { relativeTo: this.route });
     }
     this.route.paramMap.subscribe(params => {
-      this.eventId = params.get('id');
+      this.eventId = Number(params.get('id'));
       console.log('points component: ' + this.eventId);
     });
     this.loadPoints();
@@ -31,9 +31,20 @@ export class PointsComponent {
       console.log(i);
     });
   }
-  openNevPoint() {
-    console.log('New point');
+  openNewPoint() {
+    this.router.navigate(['/point/' + this.eventId + '/new'], { relativeTo: this.route});
   }
+
+  deletePoint(id: number) {
+    console.log('Delete point ' + id);
+    this.http.postPointDelete(this.eventId, id, this.data.getAccessToken()).subscribe(i => {
+      console.log(i);
+      this.loadPoints();
+    }, error => {
+      console.log(error);
+    });
+  }
+
   back() {
     this.router.navigate(['/event/' + this.eventId], { relativeTo: this.route });
   }

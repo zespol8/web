@@ -28,6 +28,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { SafePipe } from './safe.pipe';
 import {IsActiveInterceptor} from './is-active-interceptor';
 import { TwoDigitsPipe } from './two-digits.pipe';
+import { PointComponent } from './point/point.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { TwoDigitsPipe } from './two-digits.pipe';
     EventsComponent,
     EventComponent,
     SafePipe,
-    TwoDigitsPipe
+    TwoDigitsPipe,
+    PointComponent
   ],
   imports: [
     BrowserModule,

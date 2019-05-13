@@ -1,0 +1,130 @@
+<div class="container main-box">
+  <div class="titles">
+    <h1>{{this.onePoint.name || 'Nowy punkt do wydarzenia'}}</h1>
+    <ul class="nav justify-content-center">
+      <li class="nav-item">
+        <button type="button" class="btn btn-outline-dark btn-sm">Zapisz zmiany</button>
+      </li>
+      <li class="nav-item" *ngIf="!isNew">
+        <button type="button" class="btn btn-outline-dark btn-sm">Usuń</button>
+      </li>
+      <li class="nav-item" *ngIf="!isNew">
+        <button type="button" class="btn btn-outline-dark btn-sm" (click)="isCollapsed = !isCollapsed"
+                [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">Dodaj zdjęcie
+        </button>
+      </li>
+      <li class="nav-item">
+        <button type="button" class="btn btn-outline-dark btn-sm">Powrót</button>
+      </li>
+    </ul>
+    <div id="collapseExample" [ngbCollapse]="isCollapsed">
+      <div class="card">
+        <div class="card-body">
+          <div class="input-group">
+            <div class="custom-file text-center">
+              <input type="file" (change)="fileAdd($event)" class="custom-file-input" id="inputGroupFile04"
+                     aria-describedby="inputGroupFileAddon04">
+              <label class="custom-file-label" for="inputGroupFile04">Wybierz plik</label>
+            </div>
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">
+                Wyślij
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+
+    <div style="color: green">
+      {{this.data.error}}
+    </div>
+  </div>
+  <div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label>Nazwa</label>
+        <input [(ngModel)]="onePoint.name" type="text" class="form-control" placeholder="Super wydarzenie">
+      </div>
+      <div class="form-group col-md-6">
+        <label>Miejsce</label>
+        <input [(ngModel)]="onePoint.place" type="text" class="form-control" placeholder="Toruń">
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Krótki opis</label>
+      <input [(ngModel)]="onePoint.shortDescription" type="text" class="form-control" placeholder="...">
+    </div>
+    <div class="form-group">
+      <label>Opis</label>
+      <input [(ngModel)]="onePoint.description" type="textarea" class="form-control" placeholder="...">
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label>Godziny otwarcia</label>
+        <input [(ngModel)]="onePoint.openingHours" type="text" class="form-control" placeholder="PON-PT 10:00 - 15:00">
+      </div>
+      <div class="form-group col-md-4">
+        <label>Cena</label>
+        <input [(ngModel)]="onePoint.price" type="text" class="form-control" placeholder="20PLN">
+      </div>
+      <div class="form-group col-md-2">
+        <label>Minimalny wiek</label>
+        <input [(ngModel)]="onePoint.minAge" type="number" class="form-control" placeholder="6">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label>Data rozpoczęcia</label>
+        <div class="form-inline">
+          <div class="form-group">
+            <div class="input-group">
+              <input class="form-control" [placeholder]="getDate(startDate)"
+                     name="dp" [(ngModel)]="startDate" ngbDatepicker #ds="ngbDatepicker">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary calendar" (click)="ds.toggle()" type="button">Otwórz</button>
+              </div>
+            </div>
+          </div>
+          <div class="form-group time-picker">
+            <input type="number" placeholder="13" max="24" min="0" class="form-control" [(ngModel)]="startTime.hour"/>
+            <span class="time-split">:</span>
+            <input type="number" placeholder="30" max="60" min="0" class="form-control" [(ngModel)]="startTime.minute"/>
+          </div>
+        </div>
+      </div>
+      <div class="form-group col-md-6">
+        <label>Data zakończenia</label>
+        <div class="form-inline">
+          <div class="form-group">
+            <div class="input-group">
+              <input class="form-control" [placeholder]="getDate(endDate)"
+                     name="dp" [(ngModel)]="endDate" ngbDatepicker #d="ngbDatepicker">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button">Otwórz</button>
+              </div>
+            </div>
+          </div>
+          <div class="form-group time-picker">
+            <input type="number" placeholder="13" max="24" min="0" class="form-control" [(ngModel)]="endTime.hour"/>
+            <span class="time-split">:</span>
+            <input type="number" placeholder="30" max="60" min="0" class="form-control" [(ngModel)]="endTime.minute"/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <label>Wybierz miejsce na mapie</label>
+  <app-map></app-map>
+  <div class="gallery-container" *ngIf="imagesToShow.length > 0">
+    <div class="gallery-title">
+      <h1>Galeria zdjęć</h1>
+    </div>
+    <div class="gallery">
+      <div class="gallery-item" *ngFor="let image of imagesToShow">
+        <img class="gallery-image" [src]="image | safe" alt="...">
+      </div>
+    </div>
+  </div>
+</div>

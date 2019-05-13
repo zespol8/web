@@ -79,7 +79,7 @@ export class HttpService { // globalny servis do komunikacji z serverem
       + eventId + '/point/' + pointId + '/?accessToken=' + accessToken);
   }
 
-  getEventsPointsAdmin(accessToken: string, id: string): Observable<Array<Post>> {
+  getEventsPointsAdmin(accessToken: string, id: number): Observable<Array<Post>> {
     // Pobieranie punktów eventu o danym id
     return this.http.get<Array<Post>>('https://team8-server.herokuapp.com/admin/' + id + '/points?accessToken=' + accessToken);
   }

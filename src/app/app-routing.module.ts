@@ -6,6 +6,7 @@ import {MainComponent} from './main/main.component';
 import {RegisterComponent} from './click/register/register.component';
 import {EventComponent} from './event/event.component';
 import {PointsComponent} from './points/points.component';
+import {PointComponent} from './point/point.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -14,6 +15,7 @@ const routes: Routes = [
   {path: 'main', component: MainComponent},
   {path: 'event/:id', component: EventComponent},
   {path: 'points/:id', component: PointsComponent},
+  {path: 'point/:eventId/:pointId', component: PointComponent},
   {path: '', redirectTo: '/product', pathMatch: 'full'},
   {path: '**', redirectTo: '/product', pathMatch: 'full'},
 ];

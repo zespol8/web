@@ -97,10 +97,6 @@ export class EditEventComponent implements OnInit {
   }
 
   deletePoint(nr: number) { // Usuwanie wybranego punktu z wybranego eventu
-    this.http.postPointDelete(this.data.newEventId, nr, this.data.getAccessToken()).subscribe(i => {
-      console.log('Usuwanie punktu: ' + i);
-      this.look();
-    });
   }
 
   addNewPointButton() {
