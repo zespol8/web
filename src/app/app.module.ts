@@ -29,6 +29,9 @@ import { SafePipe } from './safe.pipe';
 import {IsActiveInterceptor} from './is-active-interceptor';
 import { TwoDigitsPipe } from './two-digits.pipe';
 import { PointComponent } from './point/point.component';
+import { RegisterSuccessComponent } from './landing-pages/register-success/register-success.component';
+import { RegisterFailureComponent } from './landing-pages/register-failure/register-failure.component';
+import { ConfirmRegistrationComponent } from './landing-pages/confirm-registration/confirm-registration.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +54,10 @@ import { PointComponent } from './point/point.component';
     EventComponent,
     SafePipe,
     TwoDigitsPipe,
-    PointComponent
+    PointComponent,
+    RegisterSuccessComponent,
+    RegisterFailureComponent,
+    ConfirmRegistrationComponent
   ],
   imports: [
     BrowserModule,

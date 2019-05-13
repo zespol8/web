@@ -35,7 +35,7 @@ export class MainComponent {
 
   logout() {
     this.data.removeAccessToken();
-    this.router.navigate(['/login'], {relativeTo: this.route});
+    this.router.navigate(['/product'], {relativeTo: this.route});
   }
 
   openNewEvent() {

@@ -4,6 +4,7 @@ import {HttpService} from 'src/app/services/http.service';
 import {DataService} from 'src/app/services/data.service';
 import {HttpErrors, Post} from '../../main/main.component';
 import {HttpErrorResponse} from '@angular/common/http';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -16,19 +17,15 @@ export class RegisterComponent implements OnInit {
   syntaxError = '';
   error: HttpErrors;
 
-  constructor(public tf: TrueFalseService, private http: HttpService, private data: DataService) {
+  constructor(public tf: TrueFalseService, private http: HttpService, private data: DataService,
+              private router: Router, private route: ActivatedRoute) {
     this.dane = {firstName: '', lastName: '', email: '', companyName: '', password: ''};
+    if (!data.isLoggedIn()) {
+      this.router.navigate(['/login'], {relativeTo: this.route});
+    }
   }
 
   ngOnInit() {
-  }
-
-  registerButton() {
-    this.dane = {firstName: '', lastName: '', email: '', companyName: '', password: ''};
-    this.passCheck = '';
-    this.tf.login_show = false;
-    this.tf.register_show2 = true;
-    this.tf.register_show3 = false;
   }
 
   dodaj() {
@@ -37,6 +34,7 @@ export class RegisterComponent implements OnInit {
     if (this.syntaxError === '') {
       this.http.postRegisterAdmin(this.dane).subscribe(i => {
         console.log(i);
+        this.router.navigate(['/register/confirm'], {relativeTo: this.route});
       }, error => {
         console.log(error);
         this.syntaxError = (error as HttpErrorResponse).error;
@@ -52,12 +50,6 @@ export class RegisterComponent implements OnInit {
     this.tf.register_show2 = false;
     this.tf.register_show3 = true;
     this.syntaxError = '';
-  }
-
-  powrot() {
-    // this.tf.login_show = true;
-    this.tf.register_show2 = false;
-
   }
 
   checkSyntaxForRegistry(dane: Post, passCheck: string): string {

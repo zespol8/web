@@ -22,7 +22,7 @@
     <div class="form-group">
       <button (click)="dodaj()" type="submit" class="btn btn-primary btn-block">Zarejestruj</button>
     </div>
-    <div *ngIf="syntaxError" class="error">
+    <div *ngIf="syntaxError !== ''" class="error">
       {{this.syntaxError}}
     </div>
   </div>
