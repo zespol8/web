@@ -20,9 +20,6 @@ export class RegisterComponent implements OnInit {
   constructor(public tf: TrueFalseService, private http: HttpService, private data: DataService,
               private router: Router, private route: ActivatedRoute) {
     this.dane = {firstName: '', lastName: '', email: '', companyName: '', password: ''};
-    if (!data.isLoggedIn()) {
-      this.router.navigate(['/login'], {relativeTo: this.route});
-    }
   }
 
   ngOnInit() {
