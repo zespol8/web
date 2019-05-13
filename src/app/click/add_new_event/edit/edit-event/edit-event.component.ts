@@ -71,10 +71,7 @@ export class EditEventComponent implements OnInit {
     this.data.error = this.data.checkSyntax(this.onePoint);
     this.onePoint.eventId = this.event.id;
     if (this.data.error === '') {
-      this.http.postPointEdit(this.onePoint.id, this.onePoint, this.data.getAccessToken()).subscribe(i => {
-        console.log('Edycja pojedynczego punktu zakonczona: ' + i);
         this.look();
-      });
       this.tf.edit_one_point = false;
       this.tf.edit_picked_event_points = true;
     }
@@ -123,14 +120,6 @@ export class EditEventComponent implements OnInit {
   confirmAndBackListOfAll() { // Cofa do wyboru eventu ale zatwierdza zmiany po przesunieciu punktów
     this.data.listOfAll.forEach(element => {
       element.eventId = this.data.newEventId;
-    });
-    this.data.listOfAll.forEach(element => {
-      this.http.postPointEdit(element.id, element, this.data.getAccessToken()).subscribe(i => {
-        console.log(i);
-        this.data.error = '';
-      }, error => {
-        console.log(error);
-      });
     });
     this.tf.edit_picked_event_points = false;
     this.tf.edit_event_show1 = true;

@@ -89,6 +89,8 @@ export interface Post {
   };
   imagesNumber?: number;
 
+  newPointId?: string;
+
   status?: number;
   statusText?: string;
   url?: string;

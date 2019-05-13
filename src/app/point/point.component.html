@@ -3,10 +3,10 @@
     <h1>{{this.onePoint.name || 'Nowy punkt do wydarzenia'}}</h1>
     <ul class="nav justify-content-center">
       <li class="nav-item">
-        <button type="button" class="btn btn-outline-dark btn-sm">Zapisz zmiany</button>
+        <button type="button" class="btn btn-outline-dark btn-sm" (click)="addPoint()">Zapisz zmiany</button>
       </li>
       <li class="nav-item" *ngIf="!isNew">
-        <button type="button" class="btn btn-outline-dark btn-sm">Usuń</button>
+        <button type="button" class="btn btn-outline-dark btn-sm" (click)="deletePoint()">Usuń</button>
       </li>
       <li class="nav-item" *ngIf="!isNew">
         <button type="button" class="btn btn-outline-dark btn-sm" (click)="isCollapsed = !isCollapsed"
@@ -14,7 +14,7 @@
         </button>
       </li>
       <li class="nav-item">
-        <button type="button" class="btn btn-outline-dark btn-sm">Powrót</button>
+        <button type="button" class="btn btn-outline-dark btn-sm" (click)="back()">Powrót</button>
       </li>
     </ul>
     <div id="collapseExample" [ngbCollapse]="isCollapsed">
@@ -27,7 +27,7 @@
               <label class="custom-file-label" for="inputGroupFile04">Wybierz plik</label>
             </div>
             <div class="input-group-append">
-              <button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">
+              <button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04" (click)="addImage()">
                 Wyślij
               </button>
             </div>

@@ -47,7 +47,7 @@ export class HttpService { // globalny servis do komunikacji z serverem
     return this.http.post<Post>('https://team8-server.herokuapp.com/admin/event/' + id + '/edit?accessToken=' + accessToken, event);
   }
 
-  postPointEdit(id: number, point: Post, accessToken: string): Observable<Post> {
+  postPointEdit(id: string, point: Post, accessToken: string): Observable<Post> {
     // Edycja pojedynczego punktu
     return this.http.post<Post>('https://team8-server.herokuapp.com/admin/point/' + id + '/edit?accessToken=' + accessToken, point);
   }
@@ -118,6 +118,11 @@ export class HttpService { // globalny servis do komunikacji z serverem
 
   getEventImage(accessToken: string, eventId: number, imageNumber: number): Observable<any> {
     return this.http.get('https://team8-server.herokuapp.com/admin/event/' + eventId +
+     '/image/' + imageNumber + '?accessToken=' + accessToken, {responseType: 'blob'});
+  }
+
+  getPointImage(accessToken: string, eventId: number, pointId: string, imageNumber: number): Observable<any> {
+    return this.http.get('https://team8-server.herokuapp.com/admin/' + eventId + '/point/' + pointId +
      '/image/' + imageNumber + '?accessToken=' + accessToken, {responseType: 'blob'});
   }
 

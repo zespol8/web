@@ -32,7 +32,7 @@ export class PointsComponent {
     });
   }
   openNewPoint() {
-    this.router.navigate(['/point/' + this.eventId + '/new'], { relativeTo: this.route});
+    this.router.navigate(['/point/' + this.eventId + '/new'], { relativeTo: this.route });
   }
 
   deletePoint(id: number) {
@@ -43,6 +43,10 @@ export class PointsComponent {
     }, error => {
       console.log(error);
     });
+  }
+
+  pointDetails(id: number) {
+    this.router.navigate(['/point/' + this.eventId + '/' + id], {relativeTo: this.route });
   }
 
   back() {
