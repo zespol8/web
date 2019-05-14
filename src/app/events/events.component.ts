@@ -14,9 +14,6 @@ import {compareNumbers} from '@angular/compiler-cli/src/diagnostics/typescript_v
 })
 export class EventsComponent implements OnInit {
 
-  eventList: Array<Post> = [];
-  eventsFirstImages = [];
-
   constructor(public tf: TrueFalseService, private http: HttpService, private data: DataService,
               private router: Router, private route: ActivatedRoute) {
     if (!data.isLoggedIn()) {
@@ -25,9 +22,22 @@ export class EventsComponent implements OnInit {
     this.loadEvents();
   }
 
+  eventList: Array<Post> = [];
+  eventsFirstImages = [];
+
+  public static compareDates(date1: number, date2: number) {
+    if (date1 > date2) {
+      return 1;
+    }
+    if (date1 < date2) {
+      return -1;
+    }
+    return 0;
+  }
+
   async loadEvents() {
     await this.http.getEventsAdmin(this.data.getAccessToken()).subscribe(i => {
-      this.eventList = i.sort((a, b) => compareNumbers([a.startDate], [b.startDate]));
+      this.eventList = i.sort((a, b) => EventsComponent.compareDates(a.startDate, b.startDate));
       this.loadEventsFirstImages();
     });
   }

@@ -25,7 +25,6 @@ export class DataService {
 
   getAccessToken(): string {
     const accessToken = sessionStorage.getItem('token');
-    console.log(accessToken);
     if (isNullOrUndefined(accessToken) || accessToken === '') {
       return '';
     }

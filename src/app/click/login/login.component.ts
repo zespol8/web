@@ -5,7 +5,6 @@ import {Md5} from 'md5-typescript';
 import {TrueFalseService} from 'src/app/services/true-false.service';
 import {Post} from '../../main/main.component';
 import {ActivatedRoute, Router} from '@angular/router';
-import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +16,7 @@ export class LoginComponent implements OnInit {
   loginError: string;
 
   constructor(private data: DataService, private http: HttpService,
-    public tf: TrueFalseService, private router: Router, private route: ActivatedRoute) {
+              public tf: TrueFalseService, private router: Router, private route: ActivatedRoute) {
     if (this.data.isLoggedIn()) {
       this.router.navigate(['/main'], {relativeTo: this.route});
     }

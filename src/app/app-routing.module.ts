@@ -10,6 +10,8 @@ import {PointComponent} from './point/point.component';
 import {RegisterSuccessComponent} from './landing-pages/register-success/register-success.component';
 import {RegisterFailureComponent} from './landing-pages/register-failure/register-failure.component';
 import {ConfirmRegistrationComponent} from './landing-pages/confirm-registration/confirm-registration.component';
+import {ResetPasswordStartComponent} from './landing-pages/reset-password-start/reset-password-start.component';
+import {ResetPasswordChangeComponent} from './landing-pages/reset-password-change/reset-password-change.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -22,6 +24,8 @@ const routes: Routes = [
   {path: 'register/success', component: RegisterSuccessComponent},
   {path: 'register/failure', component: RegisterFailureComponent},
   {path: 'register/confirm', component: ConfirmRegistrationComponent},
+  {path: 'resetPassword/start', component: ResetPasswordStartComponent},
+  {path: 'resetPassword/change/:hash', component: ResetPasswordChangeComponent},
   {path: '', redirectTo: '/product', pathMatch: 'full'},
   {path: '**', redirectTo: '/product', pathMatch: 'full'},
 ];

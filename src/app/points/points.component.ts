@@ -37,7 +37,6 @@ export class PointsComponent {
         this.pointsList = j;
         this.map.setEventId(this.eventId.toString());
         if (this.pointsList.length === 0) {
-          console.log('event nie ma punktow');
           this.map.markerMove(this.eventPoint.geographicCoordinate.latitude, this.eventPoint.geographicCoordinate.longitude);
         } else {
           this.map.markerMove(this.eventPoint.geographicCoordinate.latitude, this.eventPoint.geographicCoordinate.longitude);

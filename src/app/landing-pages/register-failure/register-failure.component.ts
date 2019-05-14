@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, isDevMode, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
@@ -18,8 +18,9 @@ export class RegisterFailureComponent implements OnInit {
       this.error = params['error'];
     });
     setTimeout(() => {
-      this.router.navigate(['/product'], {relativeTo: this.route});
-    }, 5000);
+      window.open(window.location.origin + (!isDevMode() ? '/web' : '') + '/product', '_self');
+
+    }, 7500);
   }
 
 }

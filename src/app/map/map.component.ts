@@ -67,7 +67,6 @@ export class MapComponent {
   }
 
   pointDetails(id: number) {
-    console.log('edit');
     this.router.navigate(['/point/' + this.eventId + '/' + id], { relativeTo: this.route });
   }
 }

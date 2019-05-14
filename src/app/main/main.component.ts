@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, isDevMode} from '@angular/core';
 import {HttpService} from '../services/http.service';
 import {DataService} from '../services/data.service';
 import {TrueFalseService} from '../services/true-false.service';
@@ -32,7 +32,7 @@ export class MainComponent {
 
   logout() {
     this.data.removeAccessToken();
-    this.router.navigate(['/product'], {relativeTo: this.route});
+    window.open(window.location.origin + (!isDevMode() ? '/web' : '') + '/product', '_self');
   }
 
   openNewEvent() {
@@ -98,4 +98,16 @@ export interface HttpErrors {
   error?: string;
   status?: number;
   message?: string;
+}
+
+export class EndResetPasswordModel {
+  email: string;
+  newPassword: string;
+  resetHash: string;
+
+  constructor(email: string, newPassword: string, resetHash: string) {
+    this.email = email;
+    this.newPassword = newPassword;
+    this.resetHash = resetHash;
+  }
 }

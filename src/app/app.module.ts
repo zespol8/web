@@ -32,6 +32,8 @@ import { PointComponent } from './point/point.component';
 import { RegisterSuccessComponent } from './landing-pages/register-success/register-success.component';
 import { RegisterFailureComponent } from './landing-pages/register-failure/register-failure.component';
 import { ConfirmRegistrationComponent } from './landing-pages/confirm-registration/confirm-registration.component';
+import { ResetPasswordStartComponent } from './landing-pages/reset-password-start/reset-password-start.component';
+import { ResetPasswordChangeComponent } from './landing-pages/reset-password-change/reset-password-change.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +59,9 @@ import { ConfirmRegistrationComponent } from './landing-pages/confirm-registrati
     PointComponent,
     RegisterSuccessComponent,
     RegisterFailureComponent,
-    ConfirmRegistrationComponent
+    ConfirmRegistrationComponent,
+    ResetPasswordStartComponent,
+    ResetPasswordChangeComponent
   ],
   imports: [
     BrowserModule,
