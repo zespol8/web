@@ -29,22 +29,15 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  Powrot() {
-    this.tf.login_show = false;
-  }
-
   login() {
     this.log.password = Md5.init(this.log.password);
-    console.log(this.log);
     this.http.postLoginAdmin(this.log).subscribe(i => {
       this.data.saveAccessToken(i.accessToken);
-      console.log(this.data.getAccessToken());
       this.router.navigate(['/main'], {relativeTo: this.route});
     }, error => {
       this.http.errors = error;
-      console.log('HttpError status = ' + this.http.errors.status);
       this.loginError = this.data.checkLoginError(this.http.errors.status);
-      this.loginError = (error as HttpErrorResponse).error;
+      this.loginError = error;
     });
     this.log.password = '';
   }

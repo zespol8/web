@@ -27,12 +27,10 @@ export class MapComponent {
     this.cords.lat = this.lat;
     this.cords.onePoint.geographicCoordinate.latitude = this.lat;
     this.cords.onePoint.geographicCoordinate.longitude = this.lng;
-    console.log('onMapClick Lng: ' + this.cords.lng + ' Lat: ' + this.cords.lat);
   }
   dragOneMarker(event) {
     this.cords.lat = event.coords.lat;
     this.cords.lng = event.coords.lng;
-    console.log('onMapClick Lng: ' + this.cords.lng + ' Lat: ' + this.cords.lat);
   }
   markerDrag(event, id: number) {
     this.cords.listOfAll.forEach(element => {
@@ -47,6 +45,11 @@ export class MapComponent {
   }
   checkMarkerId(id: number): boolean {
     return this.markerNumber === id;
+  }
+
+  markerMove(lat: number, lng: number) {
+    this.lat = lat;
+    this.lng = lng;
   }
 
 }

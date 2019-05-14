@@ -40,7 +40,6 @@ export class DataService {
   }
 
   public isLoggedIn(): boolean {
-    console.log(this.getAccessToken());
     return this.getAccessToken() !== '' && !isNullOrUndefined(this.getAccessToken());
   }
 
@@ -65,6 +64,8 @@ export class DataService {
       return 'Podaj cenę wstępu.';
     } else if (data.minAge == null) {
       return 'Podaj minimalny wiek udziału.';
+    } else if (data.startDate >= data.endDate) {
+      return 'Data rozpoczęcia nie może być wcześniejsza niż data zakończenia.';
     } else {
       return '';
     }

@@ -5,6 +5,7 @@ import {HttpService} from '../services/http.service';
 import {DataService} from '../services/data.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {EventComponent} from '../event/event.component';
+import {compareNumbers} from '@angular/compiler-cli/src/diagnostics/typescript_version';
 
 @Component({
   selector: 'app-events',
@@ -26,16 +27,14 @@ export class EventsComponent implements OnInit {
 
   async loadEvents() {
     await this.http.getEventsAdmin(this.data.getAccessToken()).subscribe(i => {
-      this.eventList = i;
+      this.eventList = i.sort((a, b) => compareNumbers([a.startDate], [b.startDate]));
       this.loadEventsFirstImages();
     });
   }
 
   private loadEventsFirstImages() {
     this.eventList.forEach(post => {
-      console.log(post);
       this.http.getEventImage(this.data.getAccessToken(), post.id, 0).subscribe(success => {
-        console.log(success);
         this.createImageFromBlob(success, post.id);
       });
     });
@@ -56,7 +55,6 @@ export class EventsComponent implements OnInit {
 
   deleteEvent(id: number) {
     this.http.postEventDelete(id, this.data.getAccessToken()).subscribe(i => {
-      console.log(i);
       this.loadEvents();
     });
   }
@@ -68,7 +66,7 @@ export class EventsComponent implements OnInit {
   getDate(millis: number) {
     const date = new Date(millis);
     return date.getFullYear() + '-' + EventComponent.addLeadingZero(date.getMonth() + 1) + '-' +
-      EventComponent.addLeadingZero(date.getDay()) + ' ' + EventComponent.addLeadingZero(date.getHours())
+      EventComponent.addLeadingZero(date.getDate()) + ' ' + EventComponent.addLeadingZero(date.getHours())
       + ':' + EventComponent.addLeadingZero(date.getMinutes());
   }
 

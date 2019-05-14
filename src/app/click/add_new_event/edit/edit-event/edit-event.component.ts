@@ -23,8 +23,6 @@ export class EditEventComponent implements OnInit {
 
     this.http.getEventAdminById(this.data.getAccessToken(), this.data.newEventId).subscribe(i => {
       this.event = i;
-      console.log(this.data.newEventId);
-      console.log(this.event);
     });
   }
 
@@ -32,7 +30,6 @@ export class EditEventComponent implements OnInit {
     this.data.error = this.data.checkSyntax(this.event);
     if (this.data.error === '') {
       this.http.postEventEdit(this.data.newEventId, this.event, this.data.getAccessToken()).subscribe(i => {
-        console.log('Edycja eventu bez edycji punktów: ' + i);
       });
       this.tf.edit_event_show1 = true;
       this.tf.edit_event_show2 = false;
@@ -43,7 +40,6 @@ export class EditEventComponent implements OnInit {
     this.data.error = this.data.checkSyntax(this.event);
     if (this.data.error === '') {
       this.http.postEventEdit(this.data.newEventId, this.event, this.data.getAccessToken()).subscribe(i => {
-        console.log('Edycja eventu z punktami: ' + i);
         this.tf.edit_picked_event = false;
         this.tf.edit_picked_event_points = true;
       });
@@ -61,7 +57,6 @@ export class EditEventComponent implements OnInit {
     this.http.getPointAdminById(this.data.newEventId, this.nr, this.data.getAccessToken()).subscribe(i => {
       this.onePoint = i;
       this.data.onePoint = this.onePoint;
-      console.log('Wybrany punkt do edycji: ' + this.onePoint.name);
     });
     this.tf.edit_one_point = true;
     this.tf.edit_picked_event_points = false;
@@ -84,7 +79,6 @@ export class EditEventComponent implements OnInit {
     this.data.error = this.data.checkSyntax(this.onePoint);
     if (this.data.error === '') {
       this.http.postAddPointAdmin(this.onePoint, this.data.getAccessToken()).subscribe(i => {
-        console.log(i);
         this.look();
       });
       this.tf.edit_one_point = false;

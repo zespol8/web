@@ -21,14 +21,12 @@ export class PointsComponent {
     }
     this.route.paramMap.subscribe(params => {
       this.eventId = Number(params.get('id'));
-      console.log('points component: ' + this.eventId);
     });
     this.loadPoints();
   }
   async loadPoints() {
     await this.http.getEventsPointsAdmin(this.data.getAccessToken(), this.eventId).subscribe(i => {
       this.pointsList = i;
-      console.log(i);
     });
   }
   openNewPoint() {
@@ -36,12 +34,9 @@ export class PointsComponent {
   }
 
   deletePoint(id: number) {
-    console.log('Delete point ' + id);
     this.http.postPointDelete(this.eventId, id, this.data.getAccessToken()).subscribe(i => {
-      console.log(i);
       this.loadPoints();
     }, error => {
-      console.log(error);
     });
   }
 

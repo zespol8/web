@@ -26,9 +26,6 @@ export class MainComponent {
       },
       error => {
         this.http.errors = error;
-        console.log(error);
-        console.log(this.http.errors.error);
-        console.log('HttpError status = ' + this.http.errors.status);
       }
     );
   }
@@ -48,15 +45,11 @@ export class MainComponent {
 
   fileAdd(event) {
     this.selectedFile = <File>event.target.files[0];
-    console.log(this.selectedFile);
   }
 
   importCSV() {
-    console.log(this.selectedFile);
     this.http.uploadCsv(this.data.getAccessToken(), this.selectedFile).subscribe(i => {
-      console.log(i);
     }, error => {
-      console.log(error);
     });
   }
 }

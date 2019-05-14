@@ -30,11 +30,9 @@ export class RegisterComponent implements OnInit {
     this.syntaxError = this.checkSyntaxForRegistry(this.dane, this.passCheck);
     if (this.syntaxError === '') {
       this.http.postRegisterAdmin(this.dane).subscribe(i => {
-        console.log(i);
         this.router.navigate(['/register/confirm'], {relativeTo: this.route});
       }, error => {
-        console.log(error);
-        this.syntaxError = (error as HttpErrorResponse).error;
+        this.syntaxError = error;
       });
       this.tf.login_show = true;
       this.tf.register_show2 = false;
@@ -50,7 +48,6 @@ export class RegisterComponent implements OnInit {
   }
 
   checkSyntaxForRegistry(dane: Post, passCheck: string): string {
-    console.log('Sprawdzam składnie...');
     if (dane.firstName.length < 2) {
       return 'Wypełnij pole z imieniem.(min 2 znaki)';
     } else if (dane.lastName.length < 2) {
