@@ -39,10 +39,11 @@ export class EventComponent implements OnInit {
   public isCollapsed = true;
   selectedFile: File = null;
   imagesToShow = [];
-  startDate = {'year': 2019, 'month': 5, 'day': 9};
-  startTime = {'hour': 13, 'minute': 30, 'second': 0};
-  endDate = {'year': 2019, 'month': 5, 'day': 9};
-  endTime = {'hour': 13, 'minute': 30, 'second': 0};
+  currentDate = new Date();
+  startDate = {'year': this.currentDate.getFullYear(), 'month': this.currentDate.getMonth() + 1, 'day': this.currentDate.getDate()};
+  startTime = {'hour': this.currentDate.getHours(), 'minute': this.currentDate.getMinutes(), 'second': this.currentDate.getSeconds()};
+  endDate = {'year': this.currentDate.getFullYear(), 'month': this.currentDate.getMonth() + 1, 'day': this.currentDate.getDate()};
+  endTime = {'hour': this.currentDate.getHours(), 'minute': this.currentDate.getMinutes(), 'second': this.currentDate.getSeconds()};
   @ViewChild('map') map: MapComponent;
 
   static addLeadingZero(x: number): string {
