@@ -7,7 +7,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
-  styleUrls: ['./main.component.css', '../../../node_modules/bootstrap/dist/css/bootstrap.min.css']
+  styleUrls: ['./main.component.css', '../../../node_modules/bootstrap/dist/css/bootstrap.min.css', '../../assets/css/inputs.css']
 })
 export class MainComponent {
   public isCollapsed = true;
