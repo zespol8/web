@@ -1,3 +1,5 @@
+@import "../../assets/css/inputs.css";
+
 .main-box {
     margin: 5% auto;
     background: #f7f7f7;
@@ -91,4 +93,3 @@
     margin-right: 2px;
     font-weight: bold;
   }
-  

@@ -10,7 +10,7 @@ import { Post } from '../main/main.component';
 @Component({
   selector: 'app-point',
   templateUrl: './point.component.html',
-  styleUrls: ['./point.component.css', '../../../node_modules/bootstrap/dist/css/bootstrap.min.css']
+  styleUrls: ['../../../node_modules/bootstrap/dist/css/bootstrap.min.css', './point.component.css']
 })
 export class PointComponent {
   onePoint = this.data.resetData();
@@ -110,6 +110,8 @@ export class PointComponent {
       this.endDate = { year: endDate.year, month: endDate.month, day: endDate.day };
       this.endTime = { hour: endDate.hour, minute: endDate.minute, second: endDate.second };
       this.loadPointImage();
+      this.data.lat = i.geographicCoordinate.latitude;
+      this.data.lng = i.geographicCoordinate.longitude;
       this.map.markerMove(this.onePoint.geographicCoordinate.latitude, this.onePoint.geographicCoordinate.longitude);
     }, error => {
     });

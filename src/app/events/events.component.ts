@@ -5,7 +5,6 @@ import {HttpService} from '../services/http.service';
 import {DataService} from '../services/data.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {EventComponent} from '../event/event.component';
-import {compareNumbers} from '@angular/compiler-cli/src/diagnostics/typescript_version';
 
 @Component({
   selector: 'app-events',

@@ -1,94 +1,120 @@
+@import "../../assets/css/inputs.css";
+
 .main-box {
-    margin: 5% auto;
-    background: #f7f7f7;
-    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    padding-bottom: 30px;
-  }
-  
-  .titles {
-    text-align: center;
-    margin: 30px auto;
-  }
-  
-  .images {
-    margin: auto;
-  }
-  
-  li {
-    margin-right: 5px;
-  }
-  
-  #collapseExample {
-    margin-top: 30px;
-  }
-  
+  margin: 5% auto;
+  background: #f7f7f7;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  padding-bottom: 30px;
+}
+
+.titles {
+  text-align: center;
+  margin: 30px auto;
+}
+
+.images {
+  margin: auto;
+}
+
+li {
+  margin-right: 5px;
+}
+
+#collapseExample {
+  margin-top: 30px;
+}
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  /* Compensate for excess margin on outer gallery flex items */
+  margin: -1rem -1rem;
+}
+
+.gallery-item {
+  /* Minimum width of 24rem and grow to fit available space */
+  flex: 1 0 24rem;
+  /* Margin value should be half of grid-gap value as margins on flex items don't collapse */
+  margin: 1rem;
+  box-shadow: 0.3rem 0.4rem 0.4rem rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  max-width: 500px;
+}
+
+.gallery-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 400ms ease-out;
+}
+
+.gallery-image:hover {
+  transform: scale(1.15);
+}
+
+/*
+
+The following rule will only run if your browser supports CSS grid.
+
+Remove or comment-out the code block below to see how the browser will fall-back to flexbox styling.
+
+*/
+
+@supports (display: grid) {
   .gallery {
-    display: flex;
-    flex-wrap: wrap;
-    /* Compensate for excess margin on outer gallery flex items */
-    margin: -1rem -1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr));
+    grid-gap: 2rem;
   }
-  
+
+  .gallery,
   .gallery-item {
-    /* Minimum width of 24rem and grow to fit available space */
-    flex: 1 0 24rem;
-    /* Margin value should be half of grid-gap value as margins on flex items don't collapse */
-    margin: 1rem;
-    box-shadow: 0.3rem 0.4rem 0.4rem rgba(0, 0, 0, 0.4);
-    overflow: hidden;
-    max-width: 500px;
+    margin: 0;
   }
-  
-  .gallery-image {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 400ms ease-out;
-  }
-  
-  .gallery-image:hover {
-    transform: scale(1.15);
-  }
-  
-  /*
-  
-  The following rule will only run if your browser supports CSS grid.
-  
-  Remove or comment-out the code block below to see how the browser will fall-back to flexbox styling.
-  
-  */
-  
-  @supports (display: grid) {
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr));
-      grid-gap: 2rem;
-    }
-  
-    .gallery,
-    .gallery-item {
-      margin: 0;
-    }
-  }
-  
-  .gallery-container {
-    width: 100%;
-    margin-top: 50px;
-  }
-  
-  .gallery-title {
-    text-align: center;
-  }
-  
-  
-  .time-picker {
-    margin-left: 5px;
-  }
-  
-  .time-split {
-    margin-left: 2px;
-    margin-right: 2px;
-    font-weight: bold;
-  }
-  
+}
+
+.gallery-container {
+  width: 100%;
+  margin-top: 50px;
+}
+
+.gallery-title {
+  text-align: center;
+}
+
+
+.time-picker {
+  margin-left: 5px;
+}
+
+.time-split {
+  margin-left: 2px;
+  margin-right: 2px;
+  font-weight: bold;
+}
+
+.card {
+  width: 340px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.buttons {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+
+.card-image {
+  height: 250px;
+  margin: auto;
+  width: 100%;
+  text-align: center;
+}
+
+.card-image img {
+  height: 250px;
+}
+

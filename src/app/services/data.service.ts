@@ -50,20 +50,12 @@ export class DataService {
       return 'Nazwa minimum 3 znaki.';
     } else if (data.description.length < 10) {
       return 'Opis minimum 10 znaków.';
-    } else if (data.shortDescription.length < 5) {
-      return 'Krótki opis minimum 5 znaków.';
     } else if (data.place.length < 3) {
       return 'Miejsce minimum 3 znaki.';
     } else if (data.startDate == null) {
       return 'Podaj datę rozpoczęcia.';
     } else if (data.endDate == null) {
       return 'Podaj datę zakończenia.';
-    } else if (data.openingHours == null) {
-      return 'Podaj godziny otwarcia.';
-    } else if (data.price == null) {
-      return 'Podaj cenę wstępu.';
-    } else if (data.minAge == null) {
-      return 'Podaj minimalny wiek udziału.';
     } else if (data.startDate >= data.endDate) {
       return 'Data rozpoczęcia nie może być wcześniejsza niż data zakończenia.';
     } else {
