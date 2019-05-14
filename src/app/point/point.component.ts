@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, isDevMode, OnInit} from '@angular/core';
 import { NgbTimepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from '../services/data.service';
@@ -62,12 +62,12 @@ export class PointComponent {
     if (this.data.error === '') {
       if (!(this.isNew)) { // jeśli true to edycja eventu /// 'point/:eventId/:pointId'
         this.http.postPointEdit(this.pointId, this.onePoint, accessToken).subscribe(i => {
-          window.open(window.location.origin + '/point/' + this.eventId + '/' + this.pointId, '_self');
+          window.open(window.location.origin + (!isDevMode() ? '/web' : '') + '/point/' + this.eventId + '/' + this.pointId, '_self');
         }, error => {
         });
       } else { //// jeśli false to nowy event
         this.http.postAddPointAdmin(this.onePoint, accessToken).subscribe(i => {
-          window.open(window.location.origin + '/point/' + this.eventId + '/' + i.newPointId, '_self');
+          window.open(window.location.origin + (!isDevMode() ? '/web' : '') + '/point/' + this.eventId + '/' + i.newPointId, '_self');
         }, error => {
         });
       }
@@ -125,7 +125,7 @@ export class PointComponent {
   addImage() {
     const accessToken = this.data.getAccessToken();
     this.http.addImageToPoint(accessToken, this.eventId, Number(this.pointId), this.selectedFile).subscribe(i => {
-      window.open(window.location.origin + '/point/' + this.eventId + '/' + this.pointId, '_self');
+      window.open(window.location.origin + (!isDevMode() ? '/web' : '') + '/point/' + this.eventId + '/' + this.pointId, '_self');
     }, error => {
     });
   }

@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, isDevMode, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Post} from '../main/main.component';
 import {TrueFalseService} from '../services/true-false.service';
@@ -6,6 +6,7 @@ import {DataService} from '../services/data.service';
 import {HttpService} from '../services/http.service';
 import {NgbTimepickerConfig} from '@ng-bootstrap/ng-bootstrap';
 import {MapComponent} from '../map/map.component';
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-event',
@@ -120,13 +121,13 @@ export class EventComponent implements OnInit {
     if (this.data.error === '') {
       if (!(this.isNew)) { // jeśli true to edycja eventu
         this.http.postEventEdit(this.event.id, this.event, accessToken).subscribe(i => {
-          window.open(window.location.origin + '/event/' + this.event.id, '_self');
+          window.open(window.location.origin + (!isDevMode() ? '/web' : '') + '/event/' + this.event.id, '_self');
         }, error => {
         });
       } else { //// jeśli false to nowy event
         this.http.postAddEventAdmin(this.event, accessToken).subscribe(i => {
           this.data.newEventId = i.newEventId;
-          window.open(window.location.origin + '/event/' + i.newEventId, '_self');
+          window.open(window.location.origin + (!isDevMode() ? '/web' : '') + '/event/' + i.newEventId, '_self');
         }, error => {
         });
       }
@@ -139,7 +140,7 @@ export class EventComponent implements OnInit {
 
   addImage() {
     this.http.addImageToEvent(this.data.getAccessToken(), this.event.id, this.selectedFile).subscribe(i => {
-      window.open(window.location.origin + '/event/' + this.event.id, '_self');
+      window.open(window.location.origin + (!isDevMode() ? '/web' : '') + '/event/' + this.event.id, '_self');
     }, error => {
     });
   }
