@@ -2,11 +2,13 @@ import { Component } from '@angular/core';
 import { DataService } from '../services/data.service';
 import { TrueFalseService } from '../services/true-false.service';
 import { Post } from '../main/main.component';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NgbTimepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
-  styleUrls: ['./map.component.css']
+  styleUrls: ['./map.component.css', '../../../node_modules/bootstrap/dist/css/bootstrap.min.css']
 })
 
 export class MapComponent {
@@ -16,10 +18,11 @@ export class MapComponent {
   zoom = 10;
   inputValue = '';
   pointList: Array<Post> = [];
+  eventId: string;
   isListVisible = false;
   isMarkerVisible = true;
 
-  constructor(public cords: DataService, public tf: TrueFalseService) {
+  constructor(public cords: DataService, public tf: TrueFalseService, private router: Router, private route: ActivatedRoute) {
     this.lng = 18.598043358450923;
     this.lat = 53.01371393719378;
   }
@@ -35,6 +38,9 @@ export class MapComponent {
     this.pointList = list;
     this.isMarkerVisible = false;
     this.isListVisible = true;
+  }
+  setEventId (id: string) {
+    this.eventId = id;
   }
   dragOneMarker(event) {
     this.cords.lat = event.coords.lat;
@@ -60,4 +66,8 @@ export class MapComponent {
     this.lng = lng;
   }
 
+  pointDetails(id: number) {
+    console.log('edit');
+    this.router.navigate(['/point/' + this.eventId + '/' + id], { relativeTo: this.route });
+  }
 }

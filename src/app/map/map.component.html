@@ -11,18 +11,20 @@
                     [markerDraggable]=false (markerClick)="markerClick(i.id)" (dragEnd)="markerDrag($event, i.id)">
                     <agm-info-window [isOpen]="checkMarkerId(i.id)" [latitude]="i.lat" [longitude]="i.lng">
                         <a>
-                            <strong>
-                                <div style="color: black">
-                                    Nazwa: {{i.name}} <br>
-                                </div>
+                            <div class="d-flex justify-content-around flex-wrap">
 
-                                {{i.shortDescription}} <br>
-                                <div style="color: black">
-                                    Miejsce: {{i.place}} <br>
+                                <div class="card-body">
+                                    <h5 class="card-title">{{i.name}}</h5>
+                                    <p class="card-text">{{i.shortDescription}}</p>
+                                    <p class="list-group-item">Miejsce: {{i.place}}</p>
                                 </div>
-                                <!--<button>Więcej</button>
-                                <button>Usuń</button>-->
-                            </strong>
+                                <div class="card-body">
+                                    <div class="buttons">
+                                        <button type="button" (click)="pointDetails(i.id)"
+                                            class="btn btn-outline-primary btn-sm">Więcej</button>
+                                    </div>
+                                </div>
+                            </div>
                         </a>
                     </agm-info-window>
                 </agm-marker>
