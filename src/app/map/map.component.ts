@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { DataService } from '../services/data.service';
 import { TrueFalseService } from '../services/true-false.service';
+import { Post } from '../main/main.component';
 
 @Component({
   selector: 'app-map',
@@ -12,21 +13,28 @@ export class MapComponent {
   markerNumber: number = null;
   lng: number;
   lat: number;
-  zoom = 12;
+  zoom = 10;
   inputValue = '';
+  pointList: Array<Post> = [];
+  isListVisible = false;
+  isMarkerVisible = true;
 
   constructor(public cords: DataService, public tf: TrueFalseService) {
     this.lng = 18.598043358450923;
     this.lat = 53.01371393719378;
   }
   onChoseLocation(event) {
-    this.cords.isMarkerVisible = true;
     this.lng = event.coords.lng;
     this.lat = event.coords.lat;
     this.cords.lng = this.lng;
     this.cords.lat = this.lat;
     this.cords.onePoint.geographicCoordinate.latitude = this.lat;
     this.cords.onePoint.geographicCoordinate.longitude = this.lng;
+  }
+  setPointList(list: Array<Post>) {
+    this.pointList = list;
+    this.isMarkerVisible = false;
+    this.isListVisible = true;
   }
   dragOneMarker(event) {
     this.cords.lat = event.coords.lat;

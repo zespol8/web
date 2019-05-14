@@ -58,7 +58,8 @@ export class EventComponent implements OnInit {
       + ':' + EventComponent.addLeadingZero(time.second);
   }
 
-  public static getDateFromMillis(millis: number): { month: number; year: number; day: number; hour: number; minute: number; second: number } {
+  public static getDateFromMillis(millis: number): { month: number; year: number; day: number;
+     hour: number; minute: number; second: number } {
     const date = new Date(millis);
     return {
       month: date.getMonth() + 1,

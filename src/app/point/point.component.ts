@@ -1,9 +1,11 @@
-import {Component, isDevMode, OnInit} from '@angular/core';
+import {Component, isDevMode, ViewChild} from '@angular/core';
 import { NgbTimepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from '../services/data.service';
 import { HttpService } from '../services/http.service';
 import {EventComponent} from '../event/event.component';
+import {MapComponent} from '../map/map.component';
+import { Post } from '../main/main.component';
 
 @Component({
   selector: 'app-point',
@@ -12,6 +14,7 @@ import {EventComponent} from '../event/event.component';
 })
 export class PointComponent {
   onePoint = this.data.resetData();
+  eventData: Post; /// uzywany tylko do określania położenia eventu na mapie dla nowego punktu
   eventId: number;
   pointId: string;
   isNew = false;
@@ -23,13 +26,6 @@ export class PointComponent {
   startTime = { 'hour': 13, 'minute': 30, 'second': 0 };
   endDate = { 'year': 2019, 'month': 5, 'day': 9 };
   endTime = { 'hour': 13, 'minute': 30, 'second': 0 };
-
-  static addLeadingZero(x: number): string {
-    if (x < 10) {
-      return '0' + x;
-    }
-    return x.toString();
-  }
 
   constructor(public data: DataService, private http: HttpService,
     private router: Router, private route: ActivatedRoute, config: NgbTimepickerConfig) {
@@ -44,11 +40,22 @@ export class PointComponent {
       this.pointId = params.get('pointId');
       if (this.pointId === 'new') {
         this.isNew = true;
+        this.loadEventData();
       } else {
         this.loadPointData();
       }
     });
   }
+
+  @ViewChild('map') map: MapComponent;
+
+  static addLeadingZero(x: number): string {
+    if (x < 10) {
+      return '0' + x;
+    }
+    return x.toString();
+  }
+
   addPoint() {
     this.onePoint.geographicCoordinate.latitude = this.data.lat;
     this.onePoint.geographicCoordinate.longitude = this.data.lng;
@@ -86,6 +93,13 @@ export class PointComponent {
     this.router.navigate(['/points/' + this.eventId], { relativeTo: this.route });
   }
 
+  async loadEventData() {
+    await this.http.getEventAdminById(this.data.getAccessToken(), this.eventId).subscribe(i => {
+      this.eventData = i;
+      this.map.markerMove(this.eventData.geographicCoordinate.latitude, this.eventData.geographicCoordinate.longitude);
+    });
+  }
+
   async loadPointData() {
     await this.http.getPointAdminById(this.eventId, Number(this.pointId), this.data.getAccessToken()).subscribe(i => {
       this.onePoint = i;
@@ -96,6 +110,7 @@ export class PointComponent {
       this.endDate = { year: endDate.year, month: endDate.month, day: endDate.day };
       this.endTime = { hour: endDate.hour, minute: endDate.minute, second: endDate.second };
       this.loadPointImage();
+      this.map.markerMove(this.onePoint.geographicCoordinate.latitude, this.onePoint.geographicCoordinate.longitude);
     }, error => {
     });
   }
