@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {EndResetPasswordModel, HttpService} from '../../services/http.service';
+import {EndResetPasswordModel} from '../../main/main.component';
+import {HttpService} from '../../services/http.service';
 
 @Component({
   selector: 'app-reset-password-change',
