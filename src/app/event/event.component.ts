@@ -6,7 +6,6 @@ import {DataService} from '../services/data.service';
 import {HttpService} from '../services/http.service';
 import {NgbTimepickerConfig} from '@ng-bootstrap/ng-bootstrap';
 import {MapComponent} from '../map/map.component';
-import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-event',
@@ -59,8 +58,10 @@ export class EventComponent implements OnInit {
       + ':' + EventComponent.addLeadingZero(time.second);
   }
 
-  public static getDateFromMillis(millis: number): { month: number; year: number; day: number;
-     hour: number; minute: number; second: number } {
+  public static getDateFromMillis(millis: number): {
+    month: number; year: number; day: number;
+    hour: number; minute: number; second: number
+  } {
     const date = new Date(millis);
     return {
       month: date.getMonth() + 1,

@@ -3,7 +3,6 @@ import {TrueFalseService} from 'src/app/services/true-false.service';
 import {HttpService} from 'src/app/services/http.service';
 import {DataService} from 'src/app/services/data.service';
 import {HttpErrors, Post} from '../../main/main.component';
-import {HttpErrorResponse} from '@angular/common/http';
 import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
