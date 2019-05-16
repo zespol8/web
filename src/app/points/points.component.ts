@@ -33,7 +33,7 @@ export class PointsComponent implements OnInit {
   @ViewChild('map') map: MapComponent;
 
   async loadPoints() {
-    this.messages.setMessage('Trwa wczytawanie punktów...');
+    this.messages.setMessage('Trwa wczytywanie punktów...');
     await this.http.getEventAdminById(this.data.getAccessToken(), this.eventId).subscribe(i => {
       this.eventPoint = i;
       this.http.getEventsPointsAdmin(this.data.getAccessToken(), this.eventId).subscribe(j => {
@@ -45,6 +45,7 @@ export class PointsComponent implements OnInit {
           this.map.markerMove(this.eventPoint.geographicCoordinate.latitude, this.eventPoint.geographicCoordinate.longitude);
           this.map.setPointList(this.pointsList);
         }
+        this.messages.clearAll();
       });
     });
   }
