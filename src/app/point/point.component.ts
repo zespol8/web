@@ -1,4 +1,4 @@
-import {Component, isDevMode, ViewChild} from '@angular/core';
+import {Component, isDevMode, OnInit, ViewChild} from '@angular/core';
 import {NgbTimepickerConfig} from '@ng-bootstrap/ng-bootstrap';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DataService} from '../services/data.service';
@@ -13,7 +13,7 @@ import {MessagesComponent} from '../messages/messages.component';
   templateUrl: './point.component.html',
   styleUrls: ['../../../node_modules/bootstrap/dist/css/bootstrap.min.css', './point.component.css']
 })
-export class PointComponent {
+export class PointComponent implements OnInit{
   onePoint = this.data.resetData();
   eventData: Post; /// uzywany tylko do określania położenia eventu na mapie dla nowego punktu
   eventId: number;
@@ -38,16 +38,6 @@ export class PointComponent {
     /// 'point/:eventId/:pointId'
     config.seconds = true;
     config.spinners = false;
-    this.route.paramMap.subscribe(params => {
-      this.eventId = Number(params.get('eventId'));
-      this.pointId = params.get('pointId');
-      if (this.pointId === 'new') {
-        this.isNew = true;
-        this.loadEventData();
-      } else {
-        this.loadPointData();
-      }
-    });
   }
 
   @ViewChild('map') map: MapComponent;
@@ -171,6 +161,19 @@ export class PointComponent {
 
   getDate(date: { month: number; year: number; day: number }) {
     return date.year + '-' + PointComponent.addLeadingZero(date.month + 1) + '-' + PointComponent.addLeadingZero(date.day);
+  }
+
+  ngOnInit(): void {
+    this.route.paramMap.subscribe(params => {
+      this.eventId = Number(params.get('eventId'));
+      this.pointId = params.get('pointId');
+      if (this.pointId === 'new') {
+        this.isNew = true;
+        this.loadEventData();
+      } else {
+        this.loadPointData();
+      }
+    });
   }
 }
 

@@ -18,7 +18,6 @@ export class EventsComponent implements OnInit {
     if (!data.isLoggedIn()) {
       this.router.navigate(['/login'], {relativeTo: this.route});
     }
-    this.loadEvents();
   }
 
   eventList: Array<Post> = [];
@@ -60,6 +59,7 @@ export class EventsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loadEvents();
   }
 
   deleteEvent(id: number) {

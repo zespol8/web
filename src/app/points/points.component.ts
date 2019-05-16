@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {DataService} from '../services/data.service';
 import {Post} from '../main/main.component';
 import {HttpService} from '../services/http.service';
@@ -14,7 +14,7 @@ import {MessagesComponent} from '../messages/messages.component';
   templateUrl: './points.component.html',
   styleUrls: ['./points.component.css', '../../../node_modules/bootstrap/dist/css/bootstrap.min.css']
 })
-export class PointsComponent {
+export class PointsComponent implements OnInit {
   eventId: number;
   pointsList: Array<Post>;
   eventPoint: Post;
@@ -28,7 +28,6 @@ export class PointsComponent {
     this.route.paramMap.subscribe(params => {
       this.eventId = Number(params.get('id'));
     });
-    this.loadPoints();
   }
 
   @ViewChild('map') map: MapComponent;
@@ -78,5 +77,9 @@ export class PointsComponent {
     return date.getFullYear() + '-' + EventComponent.addLeadingZero(date.getMonth() + 1) + '-' +
       EventComponent.addLeadingZero(date.getDate()) + ' ' + EventComponent.addLeadingZero(date.getHours())
       + ':' + EventComponent.addLeadingZero(date.getMinutes());
+  }
+
+  ngOnInit(): void {
+    this.loadPoints();
   }
 }
