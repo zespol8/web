@@ -7,9 +7,9 @@ import {Component, OnInit} from '@angular/core';
 })
 export class MessagesComponent implements OnInit {
 
-  private error: string = null;
-  private success: string = null;
-  private message: string = null;
+  error: string = null;
+  success: string = null;
+  message: string = null;
 
   constructor() {
   }
