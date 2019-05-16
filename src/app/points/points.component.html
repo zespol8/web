@@ -1,6 +1,6 @@
 <div class="container main-box">
   <div class="titles">
-  <h1>Punkty wydarzenia</h1>
+    <h1>Punkty wydarzenia</h1>
     <ul class="nav justify-content-center">
       <li class="nav-item">
         <button type="button" class="btn btn-outline-dark btn-sm" (click)="openNewPoint()">Dodaj nowy punkt</button>
@@ -10,6 +10,9 @@
       </li>
     </ul>
   </div>
+
+  <app-messages #messages></app-messages>
+
   <app-map #map></app-map>
   <div class="d-flex justify-content-around flex-wrap">
     <div class="card" *ngFor="let point of pointsList">

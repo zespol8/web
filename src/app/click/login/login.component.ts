@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {DataService} from 'src/app/services/data.service';
 import {HttpService} from 'src/app/services/http.service';
 import {Md5} from 'md5-typescript';
 import {TrueFalseService} from 'src/app/services/true-false.service';
 import {Post} from '../../main/main.component';
 import {ActivatedRoute, Router} from '@angular/router';
+import {MessagesComponent} from '../../messages/messages.component';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   log: Post = {};
-  loginError: string;
+  @ViewChild('messages') messages: MessagesComponent;
 
   constructor(private data: DataService, private http: HttpService,
               public tf: TrueFalseService, private router: Router, private route: ActivatedRoute) {
@@ -22,22 +23,20 @@ export class LoginComponent implements OnInit {
     }
     this.log.email = 'gruszkojados@gmail.com';
     this.log.password = 'razdwatrzy12';
-    this.loginError = '';
   }
 
   ngOnInit() {
   }
 
   login() {
+    this.messages.setMessage('Trwa logowanie...');
     this.log.password = Md5.init(this.log.password);
     this.http.postLoginAdmin(this.log).subscribe(i => {
       this.data.saveAccessToken(i.accessToken);
       this.router.navigate(['/main'], {relativeTo: this.route});
     }, error => {
-      this.http.errors = error;
-      this.loginError = this.data.checkLoginError(this.http.errors.status);
-      this.loginError = error;
+      console.log(error);
+      this.messages.setError('Coś poszło nie tak!');
     });
-    this.log.password = '';
   }
 }

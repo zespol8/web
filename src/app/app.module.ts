@@ -34,6 +34,7 @@ import { RegisterFailureComponent } from './landing-pages/register-failure/regis
 import { ConfirmRegistrationComponent } from './landing-pages/confirm-registration/confirm-registration.component';
 import { ResetPasswordStartComponent } from './landing-pages/reset-password-start/reset-password-start.component';
 import { ResetPasswordChangeComponent } from './landing-pages/reset-password-change/reset-password-change.component';
+import { MessagesComponent } from './messages/messages.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { ResetPasswordChangeComponent } from './landing-pages/reset-password-cha
     RegisterFailureComponent,
     ConfirmRegistrationComponent,
     ResetPasswordStartComponent,
-    ResetPasswordChangeComponent
+    ResetPasswordChangeComponent,
+    MessagesComponent
   ],
   imports: [
     BrowserModule,

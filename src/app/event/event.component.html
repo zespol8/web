@@ -27,7 +27,8 @@
             <div class="custom-file text-center">
               <input type="file" (change)="fileAdd($event)" class="custom-file-input" id="inputGroupFile04"
                      aria-describedby="inputGroupFileAddon04">
-              <label class="custom-file-label" for="inputGroupFile04">{{(selectedFile != null ? selectedFile.name : null) || "Wybierz plik"}}</label>
+              <label class="custom-file-label"
+                     for="inputGroupFile04">{{(selectedFile != null ? selectedFile.name : null) || "Wybierz plik"}}</label>
             </div>
             <div class="input-group-append">
               <button class="btn btn-outline-secondary" type="button" (click)="addImage()" id="inputGroupFileAddon04">
@@ -40,9 +41,8 @@
     </div>
     <br>
 
-    <div class="color-red">
-      {{this.data.error}}
-    </div>
+    <app-messages #messages></app-messages>
+
   </div>
   <div>
     <div class="form-row">
@@ -61,7 +61,8 @@
     </div>
     <div class="form-group">
       <label>Opis*</label>
-      <textarea [(ngModel)]="event.description" class="form-control uneditable-input" placeholder="..." required></textarea>
+      <textarea [(ngModel)]="event.description" class="form-control uneditable-input" placeholder="..."
+                required></textarea>
     </div>
     <div class="form-row">
       <div class="form-group col-md-6">
@@ -91,9 +92,11 @@
             </div>
           </div>
           <div class="form-group time-picker">
-            <input type="number" placeholder="13" max="24" min="0" class="form-control" [(ngModel)]="startTime.hour" required/>
+            <input type="number" placeholder="13" max="24" min="0" class="form-control" [(ngModel)]="startTime.hour"
+                   required/>
             <span class="time-split">:</span>
-            <input type="number" placeholder="30" max="60" min="0" class="form-control" [(ngModel)]="startTime.minute" required/>
+            <input type="number" placeholder="30" max="60" min="0" class="form-control" [(ngModel)]="startTime.minute"
+                   required/>
           </div>
         </div>
       </div>
@@ -110,9 +113,11 @@
             </div>
           </div>
           <div class="form-group time-picker">
-            <input type="number" placeholder="13" max="24" min="0" class="form-control" [(ngModel)]="endTime.hour" required/>
+            <input type="number" placeholder="13" max="24" min="0" class="form-control" [(ngModel)]="endTime.hour"
+                   required/>
             <span class="time-split">:</span>
-            <input type="number" placeholder="30" max="60" min="0" class="form-control" [(ngModel)]="endTime.minute" required/>
+            <input type="number" placeholder="30" max="60" min="0" class="form-control" [(ngModel)]="endTime.minute"
+                   required/>
           </div>
         </div>
       </div>

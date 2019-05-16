@@ -1,6 +1,7 @@
-import {Component, isDevMode, OnInit} from '@angular/core';
+import {Component, isDevMode, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {HttpService} from '../../services/http.service';
+import {MessagesComponent} from '../../messages/messages.component';
 
 @Component({
   selector: 'app-reset-password-start',
@@ -10,8 +11,7 @@ import {HttpService} from '../../services/http.service';
 export class ResetPasswordStartComponent implements OnInit {
 
   email = '';
-  error = '';
-  success = '';
+  @ViewChild('messages') messages: MessagesComponent;
 
   constructor(private router: Router, private route: ActivatedRoute, private http: HttpService) {
   }
@@ -24,17 +24,17 @@ export class ResetPasswordStartComponent implements OnInit {
   }
 
   send() {
-    this.error = '';
     if (this.email === '') {
-      this.error = 'Pole email nie może pozostać puste.';
+      this.messages.setError('Pole email nie może pozostać puste.');
     } else if (!this.email.includes('@')) {
-      this.error = 'Email jest niepoprawny.';
+      this.messages.setError('Email jest niepoprawny.');
     } else {
+      this.messages.setMessage('Rozpoczynam resetowanie hasła...');
       this.http.startResetPassword(this.email).subscribe(success => {
-        this.success = 'Sprawdź maila.';
+        this.messages.setSuccess('Sprawdź maila.');
       }, error => {
-        this.error = 'Coś poszło nie tak, spróbuj ponownie później.';
         console.log(error);
+        this.messages.setError('Coś poszło nie tak!');
       });
     }
   }

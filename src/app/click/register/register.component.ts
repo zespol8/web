@@ -1,9 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {TrueFalseService} from 'src/app/services/true-false.service';
 import {HttpService} from 'src/app/services/http.service';
 import {DataService} from 'src/app/services/data.service';
-import {HttpErrors, Post} from '../../main/main.component';
+import {Post} from '../../main/main.component';
 import {ActivatedRoute, Router} from '@angular/router';
+import {MessagesComponent} from '../../messages/messages.component';
 
 @Component({
   selector: 'app-register',
@@ -13,8 +14,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class RegisterComponent implements OnInit {
   dane: Post;
   passCheck: string;
-  syntaxError = '';
-  error: HttpErrors;
+  @ViewChild('messages') messages: MessagesComponent;
+  syntaxError = null;
 
   constructor(public tf: TrueFalseService, private http: HttpService, private data: DataService,
               private router: Router, private route: ActivatedRoute) {
@@ -25,25 +26,19 @@ export class RegisterComponent implements OnInit {
   }
 
   dodaj() {
-    this.syntaxError = '';
+    this.syntaxError = null;
     this.syntaxError = this.checkSyntaxForRegistry(this.dane, this.passCheck);
     if (this.syntaxError === '') {
+      this.messages.setMessage('Trwa rejestracja...');
       this.http.postRegisterAdmin(this.dane).subscribe(i => {
         this.router.navigate(['/register/confirm'], {relativeTo: this.route});
       }, error => {
-        this.syntaxError = error;
+        console.log(error);
+        this.messages.setError('Coś poszło nie tak!');
       });
-      this.tf.login_show = true;
-      this.tf.register_show2 = false;
-      this.tf.register_show3 = true;
+    } else {
+      this.messages.setError(this.syntaxError);
     }
-  }
-
-  back() {
-    this.tf.login_show = true;
-    this.tf.register_show2 = false;
-    this.tf.register_show3 = true;
-    this.syntaxError = '';
   }
 
   checkSyntaxForRegistry(dane: Post, passCheck: string): string {

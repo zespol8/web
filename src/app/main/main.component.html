@@ -1,13 +1,14 @@
 <div class="container main-box">
   <div class="titles">
-  <h1>Panel administratora</h1>
+    <h1>Panel administratora</h1>
     <ul class="nav justify-content-center">
       <li class="nav-item">
         <button type="button" class="btn btn-outline-dark btn-sm" (click)="openNewEvent()">Dodaj wydarzenie</button>
       </li>
       <li class="nav-item">
         <button type="button" class="btn btn-outline-dark btn-sm" (click)="isCollapsed = !isCollapsed"
-                [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">Importuj z CSV</button>
+                [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">Importuj z CSV
+        </button>
       </li>
       <li class="nav-item">
         <button type="button" class="btn btn-outline-dark btn-sm" (click)="exportCSV()">Exportuj do CSV</button>
@@ -17,20 +18,28 @@
       </li>
     </ul>
   </div>
+
+  <app-messages #messages></app-messages>
+
   <div id="collapseExample" [ngbCollapse]="isCollapsed">
     <div class="card">
       <div class="card-body">
         <div class="input-group">
           <div class="custom-file text-center">
-            <input type="file" (change)="fileAdd($event)" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
-            <label class="custom-file-label" for="inputGroupFile04">{{(selectedFile != null ? selectedFile.name : null) || "Wybierz plik"}}</label>
+            <input type="file" (change)="fileAdd($event)" class="custom-file-input" id="inputGroupFile04"
+                   aria-describedby="inputGroupFileAddon04">
+            <label class="custom-file-label"
+                   for="inputGroupFile04">{{(selectedFile != null ? selectedFile.name : null) || "Wybierz plik"}}</label>
           </div>
           <div class="input-group-append">
-            <button class="btn btn-outline-secondary" type="button" (click)="importCSV()" id="inputGroupFileAddon04">Wyślij</button>
+            <button class="btn btn-outline-secondary" type="button" (click)="importCSV()" id="inputGroupFileAddon04">
+              Wyślij
+            </button>
           </div>
         </div>
       </div>
     </div>
-  </div><br>
+  </div>
+  <br>
   <app-events></app-events>
 </div>

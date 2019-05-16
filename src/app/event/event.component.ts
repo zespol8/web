@@ -6,6 +6,7 @@ import {DataService} from '../services/data.service';
 import {HttpService} from '../services/http.service';
 import {NgbTimepickerConfig} from '@ng-bootstrap/ng-bootstrap';
 import {MapComponent} from '../map/map.component';
+import {MessagesComponent} from '../messages/messages.component';
 
 @Component({
   selector: 'app-event',
@@ -21,19 +22,11 @@ export class EventComponent implements OnInit {
     }
     config.seconds = true;
     config.spinners = false;
-    this.route.paramMap.subscribe(params => {
-      const id = params.get('id');
-      if (id === 'new') {
-        this.isNew = true;
-      } else {
-        this.loadEventData(Number(id));
-      }
-    });
   }
 
+  @ViewChild('messages') messages: MessagesComponent;
   event = this.data.resetData();
   onePoint: Post = {};
-  pointList: Array<Post> = [];
   isNew = false;
   public isCollapsed = true;
   selectedFile: File = null;
@@ -74,10 +67,19 @@ export class EventComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.route.paramMap.subscribe(params => {
+      const id = params.get('id');
+      if (id === 'new') {
+        this.isNew = true;
+      } else {
+        this.loadEventData(Number(id));
+      }
+    });
   }
 
 
   async loadEventData(id: number) {
+    this.messages.setMessage('Trwa ładowanie wydarzenia...');
     await this.http.getEventAdminById(this.data.getAccessToken(), id).subscribe(i => {
       this.event = i;
       this.map.markerMove(i.geographicCoordinate.latitude, i.geographicCoordinate.longitude);
@@ -91,6 +93,10 @@ export class EventComponent implements OnInit {
       this.endDate = {year: endDate.year, month: endDate.month, day: endDate.day};
       this.endTime = {hour: endDate.hour, minute: endDate.minute, second: endDate.second};
       this.loadEventImages(id);
+      this.messages.clearAll();
+    }, error => {
+      console.log(error);
+      this.messages.setError('Coś poszło nie tak!');
     });
   }
 
@@ -98,6 +104,8 @@ export class EventComponent implements OnInit {
     for (let i = 0; i < this.event.imagesNumber; i++) {
       this.http.getEventImage(this.data.getAccessToken(), id, i).subscribe(image => {
         this.createImageFromBlob(image, i);
+      }, error => {
+        console.log(error);
       });
     }
   }
@@ -123,17 +131,25 @@ export class EventComponent implements OnInit {
     this.data.error = this.data.checkSyntax(this.event); //  SPRAWDZANIE POPRAWNOSCI W INPUTACH
     if (this.data.error === '') {
       if (!(this.isNew)) { // jeśli true to edycja eventu
+        this.messages.setMessage('Trwa edytowanie wydarzenia...');
         this.http.postEventEdit(this.event.id, this.event, accessToken).subscribe(i => {
           window.open(window.location.origin + (!isDevMode() ? '/web' : '') + '/event/' + this.event.id, '_self');
         }, error => {
+          console.log(error);
+          this.messages.setError('Coś poszło nie tak!');
         });
       } else { //// jeśli false to nowy event
+        this.messages.setMessage('Trwa dodawanie wydarzenia...');
         this.http.postAddEventAdmin(this.event, accessToken).subscribe(i => {
           this.data.newEventId = i.newEventId;
           window.open(window.location.origin + (!isDevMode() ? '/web' : '') + '/event/' + i.newEventId, '_self');
         }, error => {
+          console.log(error);
+          this.messages.setError('Coś poszło nie tak!');
         });
       }
+    } else {
+      this.messages.setError(this.data.error);
     }
   }
 
@@ -142,9 +158,12 @@ export class EventComponent implements OnInit {
   }
 
   addImage() {
+    this.messages.setMessage('Trwa dodawanie zdjęcia...');
     this.http.addImageToEvent(this.data.getAccessToken(), this.event.id, this.selectedFile).subscribe(i => {
       window.open(window.location.origin + (!isDevMode() ? '/web' : '') + '/event/' + this.event.id, '_self');
     }, error => {
+      console.log(error);
+      this.messages.setError('Coś poszło nie tak!');
     });
   }
 
@@ -153,10 +172,13 @@ export class EventComponent implements OnInit {
   }
 
   deleteEvent() {
+    this.messages.setMessage('Trwa usuwanie wydarzenia...');
     const accessToken = this.data.getAccessToken();
     this.http.postEventDelete(this.event.id, accessToken).subscribe(i => {
       this.router.navigate(['/main'], {relativeTo: this.route});
     }, error => {
+      console.log(error);
+      this.messages.setError('Coś poszło nie tak!');
     });
   }
 

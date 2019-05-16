@@ -1,11 +1,12 @@
 import {Component, isDevMode, ViewChild} from '@angular/core';
-import { NgbTimepickerConfig } from '@ng-bootstrap/ng-bootstrap';
-import { ActivatedRoute, Router } from '@angular/router';
-import { DataService } from '../services/data.service';
-import { HttpService } from '../services/http.service';
+import {NgbTimepickerConfig} from '@ng-bootstrap/ng-bootstrap';
+import {ActivatedRoute, Router} from '@angular/router';
+import {DataService} from '../services/data.service';
+import {HttpService} from '../services/http.service';
 import {EventComponent} from '../event/event.component';
 import {MapComponent} from '../map/map.component';
-import { Post } from '../main/main.component';
+import {Post} from '../main/main.component';
+import {MessagesComponent} from '../messages/messages.component';
 
 @Component({
   selector: 'app-point',
@@ -18,6 +19,7 @@ export class PointComponent {
   eventId: number;
   pointId: string;
   isNew = false;
+  @ViewChild('messages') messages: MessagesComponent;
 
   public isCollapsed = true;
   selectedFile: File = null;
@@ -29,9 +31,9 @@ export class PointComponent {
   endTime = {'hour': this.currentDate.getHours(), 'minute': this.currentDate.getMinutes(), 'second': this.currentDate.getSeconds()};
 
   constructor(public data: DataService, private http: HttpService,
-    private router: Router, private route: ActivatedRoute, config: NgbTimepickerConfig) {
+              private router: Router, private route: ActivatedRoute, config: NgbTimepickerConfig) {
     if (!data.isLoggedIn()) {
-      this.router.navigate(['/login'], { relativeTo: this.route });
+      this.router.navigate(['/login'], {relativeTo: this.route});
     }
     /// 'point/:eventId/:pointId'
     config.seconds = true;
@@ -68,30 +70,40 @@ export class PointComponent {
     this.onePoint.eventId = this.eventId;
     this.data.error = this.data.checkSyntax(this.onePoint); //  SPRAWDZANIE POPRAWNOSCI W INPUTACH
     if (this.data.error === '') {
+      this.messages.setMessage('Trwa dodawanie punktu...');
       if (!(this.isNew)) { // jeśli true to edycja eventu /// 'point/:eventId/:pointId'
         this.http.postPointEdit(this.pointId, this.onePoint, accessToken).subscribe(i => {
           window.open(window.location.origin + (!isDevMode() ? '/web' : '') + '/point/' + this.eventId + '/' + this.pointId, '_self');
         }, error => {
+          console.log(error);
+          this.messages.setError('Coś poszło nie tak!');
         });
       } else { //// jeśli false to nowy event
         this.http.postAddPointAdmin(this.onePoint, accessToken).subscribe(i => {
           window.open(window.location.origin + (!isDevMode() ? '/web' : '') + '/point/' + this.eventId + '/' + i.newPointId, '_self');
         }, error => {
+          console.log(error);
+          this.messages.setError('Coś poszło nie tak!');
         });
       }
+    } else {
+      this.messages.setError(this.data.error);
     }
   }
 
   deletePoint() {
+    this.messages.setMessage('Trwa usuwanie punktu...');
     const accessToken = this.data.getAccessToken();
     this.http.postPointDelete(this.eventId, Number(this.pointId), accessToken).subscribe(i => {
-      this.router.navigate(['/points/' + this.eventId], { relativeTo: this.route });
+      this.router.navigate(['/points/' + this.eventId], {relativeTo: this.route});
     }, error => {
+      console.log(error);
+      this.messages.setError('Coś poszło nie tak!');
     });
   }
 
   back() {
-    this.router.navigate(['/points/' + this.eventId], { relativeTo: this.route });
+    this.router.navigate(['/points/' + this.eventId], {relativeTo: this.route});
   }
 
   async loadEventData() {
@@ -102,19 +114,23 @@ export class PointComponent {
   }
 
   async loadPointData() {
+    this.messages.setMessage('Trwa ładowanie punktu...');
     await this.http.getPointAdminById(this.eventId, Number(this.pointId), this.data.getAccessToken()).subscribe(i => {
       this.onePoint = i;
       const startDate = EventComponent.getDateFromMillis(i.startDate);
       const endDate = EventComponent.getDateFromMillis(i.endDate);
-      this.startDate = { year: startDate.year, month: startDate.month, day: startDate.day };
-      this.startTime = { hour: startDate.hour, minute: startDate.minute, second: startDate.second };
-      this.endDate = { year: endDate.year, month: endDate.month, day: endDate.day };
-      this.endTime = { hour: endDate.hour, minute: endDate.minute, second: endDate.second };
+      this.startDate = {year: startDate.year, month: startDate.month, day: startDate.day};
+      this.startTime = {hour: startDate.hour, minute: startDate.minute, second: startDate.second};
+      this.endDate = {year: endDate.year, month: endDate.month, day: endDate.day};
+      this.endTime = {hour: endDate.hour, minute: endDate.minute, second: endDate.second};
       this.loadPointImage();
       this.data.lat = i.geographicCoordinate.latitude;
       this.data.lng = i.geographicCoordinate.longitude;
       this.map.markerMove(this.onePoint.geographicCoordinate.latitude, this.onePoint.geographicCoordinate.longitude);
+      this.messages.clearAll();
     }, error => {
+      console.log(error);
+      this.messages.setError('Coś poszło nie tak!');
     });
   }
 
@@ -122,6 +138,8 @@ export class PointComponent {
     for (let i = 0; i < this.onePoint.imagesNumber; i++) {
       this.http.getPointImage(this.data.getAccessToken(), this.eventId, this.pointId, i).subscribe(image => {
         this.createImageFromBlob(image, i);
+      }, error => {
+        console.log(error);
       });
     }
   }
@@ -141,10 +159,13 @@ export class PointComponent {
   }
 
   addImage() {
+    this.messages.setMessage('Trwa dodawanie zdjęcia...');
     const accessToken = this.data.getAccessToken();
     this.http.addImageToPoint(accessToken, this.eventId, Number(this.pointId), this.selectedFile).subscribe(i => {
       window.open(window.location.origin + (!isDevMode() ? '/web' : '') + '/point/' + this.eventId + '/' + this.pointId, '_self');
     }, error => {
+      console.log(error);
+      this.messages.setError('Coś poszło nie tak!');
     });
   }
 

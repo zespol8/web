@@ -7,6 +7,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {MapComponent} from '../map/map.component';
 import {EventComponent} from '../event/event.component';
 import {EventsComponent} from '../events/events.component';
+import {MessagesComponent} from '../messages/messages.component';
 
 @Component({
   selector: 'app-points',
@@ -17,7 +18,7 @@ export class PointsComponent {
   eventId: number;
   pointsList: Array<Post>;
   eventPoint: Post;
-
+  @ViewChild('messages') messages: MessagesComponent;
 
   constructor(private data: DataService, private http: HttpService,
               private router: Router, private route: ActivatedRoute, config: NgbTimepickerConfig) {
@@ -33,6 +34,7 @@ export class PointsComponent {
   @ViewChild('map') map: MapComponent;
 
   async loadPoints() {
+    this.messages.setMessage('Trwa wczytawanie punktów...');
     await this.http.getEventAdminById(this.data.getAccessToken(), this.eventId).subscribe(i => {
       this.eventPoint = i;
       this.http.getEventsPointsAdmin(this.data.getAccessToken(), this.eventId).subscribe(j => {
@@ -53,9 +55,13 @@ export class PointsComponent {
   }
 
   deletePoint(id: number) {
+    this.messages.setMessage('Trwa usuwanie punktów...');
     this.http.postPointDelete(this.eventId, id, this.data.getAccessToken()).subscribe(i => {
       this.loadPoints();
+      this.messages.setSuccess('Usunięto punkt.');
     }, error => {
+      console.log(error);
+      this.messages.setError('Coś poszło nie tak!');
     });
   }
 

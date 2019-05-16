@@ -19,9 +19,9 @@
         <label class="pull-left checkbox-inline"><input type="checkbox"> Zapamiętaj mnie</label>
         <a href="resetPassword/start" class="pull-right color-red">Zapomniałeś hasła?</a>
       </div>
-      <div *ngIf="loginError" class="error">
-        {{this.loginError}}
-      </div>
+
+    <app-messages #messages></app-messages>
+
     </div>
     <p class="text-center"><a href="register" class="color-red">Utwórz konto</a></p>
   </div>
