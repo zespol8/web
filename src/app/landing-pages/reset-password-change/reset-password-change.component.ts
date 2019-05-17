@@ -42,7 +42,11 @@ export class ResetPasswordChangeComponent implements OnInit {
         this.messages.setSuccess('Hasło zostało zmienione.');
       }, error => {
         console.log(error);
-        this.messages.setError('Coś poszło nie tak!');
+        if (error === 'Password reset wasn\'t start!') {
+          this.messages.setError('Proces resetowania hasła nie został rozpoczęty!');
+        } else {
+          this.messages.setError('Coś poszło nie tak!');
+        }
       });
     }
   }

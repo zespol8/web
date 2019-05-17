@@ -34,7 +34,13 @@ export class RegisterComponent implements OnInit {
         this.router.navigate(['/register/confirm'], {relativeTo: this.route});
       }, error => {
         console.log(error);
-        this.messages.setError('Coś poszło nie tak!');
+        if (error === 'Email already exists!') {
+          this.messages.setError('Podany email jest już zajęty!');
+        } else if (error === 'Account is waiting for confirmation of registration, check the email!') {
+          this.messages.setError('Sprawdź maila, proces rejestracji już się rozpoczął!');
+        } else {
+          this.messages.setError('Coś poszło nie tak!');
+        }
       });
     } else {
       this.messages.setError(this.syntaxError);

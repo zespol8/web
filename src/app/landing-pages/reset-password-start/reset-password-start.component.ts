@@ -34,7 +34,13 @@ export class ResetPasswordStartComponent implements OnInit {
         this.messages.setSuccess('Sprawdź maila.');
       }, error => {
         console.log(error);
-        this.messages.setError('Coś poszło nie tak!');
+        if (error === 'Email doesn\'t exist!') {
+          this.messages.setError('Podany email nie posiada konta!');
+        } else if (error === 'Password reset already started, check the email!') {
+          this.messages.setError('Sprawdź maila, proces przypominania hasła już się rozpoczął!');
+        } else {
+          this.messages.setError('Coś poszło nie tak!');
+        }
       });
     }
   }

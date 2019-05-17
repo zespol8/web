@@ -36,7 +36,13 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/main'], {relativeTo: this.route});
     }, error => {
       console.log(error);
-      this.messages.setError('Coś poszło nie tak!');
+      if (error === 'Admin don\'t exist!') {
+        this.messages.setError('Niepoprawny email lub hasło!');
+      } else if (error === 'Credentials not valid!') {
+        this.messages.setError('Niepoprawny email lub hasło!');
+      } else {
+        this.messages.setError('Coś poszło nie tak!');
+      }
     });
   }
 }
