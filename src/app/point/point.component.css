@@ -94,17 +94,10 @@ Remove or comment-out the code block below to see how the browser will fall-back
   font-weight: bold;
 }
 
-.remove-image-button {
-  border: none;
-  width: 100%;
-}
-
-.remove-image-button:hover {
-  border-radius: 0;
-}
-
 .remove-image {
   width: 100%;
+  text-align: center;
+  margin-top: 10px;
 }
 
 .gallery-image-container {
