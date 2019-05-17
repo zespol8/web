@@ -175,5 +175,17 @@ export class PointComponent implements OnInit{
       }
     });
   }
+
+  deleteImage(index: number) {
+    this.messages.setMessage('Trwa usuwanie zdjęcia...');
+    const accessToken = this.data.getAccessToken();
+    this.http.deletePointImage(index, this.eventId, this.onePoint.id, accessToken).subscribe(i => {
+      this.imagesToShow.splice(index, 1);
+      this.messages.setSuccess('Zdjęcie zostało usunięte.');
+    }, error => {
+      console.log(error);
+      this.messages.setError('Coś poszło nie tak!');
+    });
+  }
 }
 

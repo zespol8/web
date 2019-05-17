@@ -130,8 +130,13 @@
       <h1>Galeria zdjęć</h1>
     </div>
     <div class="gallery">
-      <div class="gallery-item" *ngFor="let image of imagesToShow">
-        <img class="gallery-image" [src]="image | safe" alt="...">
+      <div *ngFor="let image of imagesToShow; let i = index;" class="gallery-image-container">
+        <div class="gallery-item">
+          <img class="gallery-image" [src]="image | safe" alt="...">
+        </div>
+        <div class="remove-image">
+          <button (click)="deleteImage(i)" class="btn btn-outline-danger remove-image-button">Usuń</button>
+        </div>
       </div>
     </div>
   </div>

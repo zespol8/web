@@ -39,7 +39,6 @@ li {
   margin: 1rem;
   box-shadow: 0.3rem 0.4rem 0.4rem rgba(0, 0, 0, 0.4);
   overflow: hidden;
-  max-width: 500px;
 }
 
 .gallery-image {
@@ -93,4 +92,21 @@ Remove or comment-out the code block below to see how the browser will fall-back
   margin-left: 2px;
   margin-right: 2px;
   font-weight: bold;
+}
+
+.remove-image-button {
+  border: none;
+  width: 100%;
+}
+
+.remove-image-button:hover {
+  border-radius: 0;
+}
+
+.remove-image {
+  width: 100%;
+}
+
+.gallery-image-container {
+  max-width: 500px;
 }

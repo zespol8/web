@@ -135,4 +135,11 @@ export class HttpService { // globalny servis do komunikacji z serverem
     return this.http.post<any>(this.url + 'admin/resetPassword', model);
   }
 
+  deleteEventImage(index: number, eventId: number, accessToken: string): Observable<any> {
+    return this.http.post<any>(this.url + 'admin/event/' + eventId + '/image/' + index + '/delete?accessToken=' + accessToken, null);
+  }
+
+  deletePointImage(index: number, eventId: number, pointId: number, accessToken: string): Observable<any> {
+    return this.http.post<any>(this.url + 'admin/' + eventId + '/point/' + pointId + '/image/' + index + '/delete?accessToken=' + accessToken, null);
+  }
 }

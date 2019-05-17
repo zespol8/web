@@ -189,4 +189,16 @@ export class EventComponent implements OnInit {
   getDate(date: { month: number; year: number; day: number }) {
     return date.year + '-' + EventComponent.addLeadingZero(date.month + 1) + '-' + EventComponent.addLeadingZero(date.day);
   }
+
+  deleteImage(index: number) {
+    this.messages.setMessage('Trwa usuwanie zdjęcia...');
+    const accessToken = this.data.getAccessToken();
+    this.http.deleteEventImage(index, this.event.id, accessToken).subscribe(i => {
+      this.imagesToShow.splice(index, 1);
+      this.messages.setSuccess('Zdjęcie zostało usunięte.');
+    }, error => {
+      console.log(error);
+      this.messages.setError('Coś poszło nie tak!');
+    });
+  }
 }
