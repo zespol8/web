@@ -13,7 +13,7 @@ import {MessagesComponent} from '../messages/messages.component';
   templateUrl: './point.component.html',
   styleUrls: ['../../../node_modules/bootstrap/dist/css/bootstrap.min.css', './point.component.css']
 })
-export class PointComponent implements OnInit{
+export class PointComponent implements OnInit {
   onePoint = this.data.resetData();
   eventData: Post; /// uzywany tylko do określania położenia eventu na mapie dla nowego punktu
   eventId: number;
@@ -61,14 +61,14 @@ export class PointComponent implements OnInit{
     this.data.error = this.data.checkSyntax(this.onePoint); //  SPRAWDZANIE POPRAWNOSCI W INPUTACH
     if (this.data.error === '') {
       this.messages.setMessage('Trwa dodawanie punktu...');
-      if (!(this.isNew)) { // jeśli true to edycja eventu /// 'point/:eventId/:pointId'
+      if (!(this.isNew)) { // jeśli true to edycja punkt /// 'point/:eventId/:pointId'
         this.http.postPointEdit(this.pointId, this.onePoint, accessToken).subscribe(i => {
           window.open(window.location.origin + (!isDevMode() ? '/web' : '') + '/point/' + this.eventId + '/' + this.pointId, '_self');
         }, error => {
           console.log(error);
           this.messages.setError('Coś poszło nie tak!');
         });
-      } else { //// jeśli false to nowy event
+      } else { //// jeśli false to nowy punkt
         this.http.postAddPointAdmin(this.onePoint, accessToken).subscribe(i => {
           window.open(window.location.origin + (!isDevMode() ? '/web' : '') + '/point/' + this.eventId + '/' + i.newPointId, '_self');
         }, error => {
@@ -99,6 +99,7 @@ export class PointComponent implements OnInit{
   async loadEventData() {
     await this.http.getEventAdminById(this.data.getAccessToken(), this.eventId).subscribe(i => {
       this.eventData = i;
+      this.onePoint.place = this.eventData.place;
       this.map.markerMove(this.eventData.geographicCoordinate.latitude, this.eventData.geographicCoordinate.longitude);
     });
   }
