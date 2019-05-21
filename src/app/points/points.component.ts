@@ -83,4 +83,8 @@ export class PointsComponent implements OnInit {
   ngOnInit(): void {
     this.loadPoints();
   }
+
+  isPast(date: Number) {
+    return date < new Date().getTime();
+  }
 }

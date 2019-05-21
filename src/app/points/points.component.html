@@ -21,8 +21,8 @@
         <p class="card-text">{{point.shortDescription}}</p>
       </div>
       <ul class="list-group list-group-flush">
-        <li class="list-group-item"><label>Data rozpoczęcia: </label> {{getDate(point.startDate)}}</li>
-        <li class="list-group-item"><label>Data zakończenia: </label> {{getDate(point.endDate)}}</li>
+        <li class="list-group-item"><label>Data rozpoczęcia: </label> <span [ngStyle]="{'color': isPast(point.startDate) && isPast(point.endDate) ? 'red' : isPast(point.startDate) ? 'blue' : ''}"> {{getDate(point.startDate)}}</span></li>
+        <li class="list-group-item"><label>Data zakończenia: </label> <span [ngStyle]="{'color': isPast(point.endDate) ? 'red' : ''}"> {{getDate(point.endDate)}}</span></li>
         <li class="list-group-item"><label>Miejsce: </label> {{point.place}}</li>
       </ul>
       <div class="card-body">

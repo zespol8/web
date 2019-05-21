@@ -8,8 +8,8 @@
       <p class="card-text">{{event.shortDescription}}</p>
     </div>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item"><label>Data rozpoczęcia: </label> {{getDate(event.startDate)}}</li>
-      <li class="list-group-item"><label>Data zakończenia: </label> {{getDate(event.endDate)}}</li>
+      <li class="list-group-item"><label>Data rozpoczęcia: </label> <span [ngStyle]="{'color': isPast(event.startDate) && isPast(event.endDate) ? 'red' : isPast(event.startDate) ? 'blue' : ''}"> {{getDate(event.startDate)}}</span></li>
+      <li class="list-group-item"><label>Data zakończenia: </label> <span [ngStyle]="{'color': isPast(event.endDate) ? 'red' : ''}"> {{getDate(event.endDate)}}</span></li>
       <li class="list-group-item"><label>Miejsce: </label> {{event.place}}</li>
     </ul>
     <div class="card-body">
