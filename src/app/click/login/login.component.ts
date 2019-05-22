@@ -21,8 +21,8 @@ export class LoginComponent implements OnInit {
     if (this.data.isLoggedIn()) {
       this.router.navigate(['/main'], {relativeTo: this.route});
     }
-    this.log.email = 'gruszkojados@gmail.com';
-    this.log.password = 'razdwatrzy12';
+    this.log.email = '';
+    this.log.password = '';
   }
 
   ngOnInit() {
